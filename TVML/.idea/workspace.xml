@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="02b5d77e-afd5-4c03-b90c-53ca53f1d22a" name="Default" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="application.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="102" column="152" lean-forward="false" selection-start-line="102" selection-start-column="68" selection-end-line="102" selection-end-column="152" />
+              <folding>
+                <element signature="e#5044#7510#0" expanded="false" />
+                <element signature="e#7623#9082#0" expanded="false" />
+                <element signature="e#9226#11007#0" expanded="false" />
+                <marker date="1508680415998" expanded="true" signature="6115:6740" ph="..." />
+                <marker date="1508680415998" expanded="true" signature="6226:6249" ph="..." />
+                <marker date="1508680415998" expanded="true" signature="6250:6434" ph="..." />
+                <marker date="1508680415998" expanded="true" signature="6251:6434" ph="..." />
+                <marker date="1508680415998" expanded="true" signature="6322:6387" ph="..." />
+                <marker date="1508680415998" expanded="true" signature="6510:6715" ph="..." />
+                <marker date="1508680415998" expanded="true" signature="6548:6570" ph="..." />
+                <marker date="1508680415998" expanded="true" signature="6690:6715" ph="..." />
+                <marker date="1508680415998" expanded="true" signature="6863:7016" ph="..." />
+                <marker date="1508680415998" expanded="true" signature="7107:7369" ph="..." />
+                <marker date="1508680415998" expanded="true" signature="7126:7357" ph="..." />
+                <marker date="1508680415998" expanded="true" signature="7141:7186" ph="..." />
+                <marker date="1508680415998" expanded="true" signature="7209:7337" ph="..." />
+                <marker date="1508680415998" expanded="true" signature="7225:7313" ph="..." />
+                <marker date="1508680415998" expanded="true" signature="7247:7296" ph="..." />
+                <marker date="1508680415998" expanded="true" signature="8304:8552" ph="..." />
+                <marker date="1508680415998" expanded="true" signature="9954:10460" ph="..." />
+                <marker date="1508680415998" expanded="true" signature="9984:10001" ph="..." />
+                <marker date="1508680415998" expanded="true" signature="10184:10433" ph="..." />
+                <marker date="1508680415998" expanded="true" signature="10208:10403" ph="..." />
+                <marker date="1508680415998" expanded="true" signature="10517:10911" ph="..." />
+                <marker date="1508680415998" expanded="true" signature="10532:10899" ph="..." />
+                <marker date="1508680415998" expanded="true" signature="10544:10601" ph="..." />
+                <marker date="1508680415998" expanded="true" signature="10611:10883" ph="..." />
+                <marker date="1508680415998" expanded="true" signature="10626:10819" ph="..." />
+                <marker date="1508680415998" expanded="true" signature="10736:10776" ph="..." />
+                <marker date="1508680415998" expanded="true" signature="10835:10872" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tvOS2.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tvOS2.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="615">
+              <caret line="36" column="1" lean-forward="true" selection-start-line="36" selection-start-column="1" selection-end-line="36" selection-end-column="1" />
+              <folding>
+                <element signature="n#tvOS_element#0" expanded="false" />
+                <element signature="n#!!block;n#push#0;n#tvOS_element#0" expanded="false" />
+                <element signature="n#tvOS_element_button#0" expanded="false" />
+                <element signature="n#!!block;n#constructor#0;n#tvOS_element_button#0" expanded="false" />
+                <element signature="e#2708#2876#0" expanded="false" />
+                <element signature="n#tvOS_element_buttonLockup#0" expanded="false" />
+                <element signature="n#tvOS_element_menuItem#0" expanded="false" />
+                <element signature="n#!!block;n#ArrayTemplateHelper#0" expanded="false" />
+                <element signature="n#tvOS_template_alert#0" expanded="false" />
+                <element signature="n#!!block;n#constructor#0;n#tvOS_template_alert#0" expanded="false" />
+                <element signature="n#tvOS_template_descriptiveAlert#0" expanded="false" />
+                <element signature="e#7510#7697#0" expanded="false" />
+                <element signature="n#tvOS_template_custom#0" expanded="false" />
+                <marker date="1508671841528" expanded="true" signature="3437:3459" ph="..." />
+                <marker date="1508671841528" expanded="true" signature="8020:8180" ph="..." />
+                <marker date="1508671841528" expanded="true" signature="8046:8169" ph="..." />
+                <marker date="1508671841528" expanded="true" signature="8793:8865" ph="..." />
+                <marker date="1508671841528" expanded="true" signature="8810:8854" ph="..." />
+                <marker date="1508671841528" expanded="true" signature="8819:8836" ph="..." />
+                <marker date="1508671841528" expanded="true" signature="9627:9740" ph="..." />
+                <marker date="1508671841528" expanded="true" signature="9644:9729" ph="..." />
+                <marker date="1508671841528" expanded="true" signature="9663:9671" ph="..." />
+                <marker date="1508671841528" expanded="true" signature="9663:9711" ph="..." />
+                <marker date="1508671841528" expanded="true" signature="11690:11822" ph="..." />
+                <marker date="1508671841528" expanded="true" signature="11852:12338" ph="..." />
+                <marker date="1508671841528" expanded="true" signature="11899:12326" ph="..." />
+                <marker date="1508671841528" expanded="true" signature="11912:12300" ph="..." />
+                <marker date="1508671841528" expanded="true" signature="11938:12144" ph="..." />
+                <marker date="1508671841528" expanded="true" signature="11963:12117" ph="..." />
+                <marker date="1508671841528" expanded="true" signature="12033:12091" ph="..." />
+                <marker date="1508671841528" expanded="true" signature="12236:12286" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>XMLHttpRequest</find>
+      <find>tvOS_view</find>
+      <find>load</find>
+      <find>my</find>
+      <find>MyPromise</find>
+      <find>ajax</find>
+      <find>compilation</find>
+      <find>buttonLockup</find>
+      <find>post</find>
+      <find>tvOS_element_menuItem</find>
+      <find>bor</find>
+      <find>setDocument</find>
+      <find>set</find>
+      <find>bar</find>
+      <find>testView</find>
+      <find>setD</find>
+      <find>NavigationDocument</find>
+      <find>myHome</find>
+      <find>width</find>
+      <find>menuItem</find>
+      <find>&lt;img src=&quot;https://static.hdslb.com/images/akari.jpg&quot; width=&quot;200&quot; height=&quot;200&quot; /&gt;</find>
+      <find>loadingBox</find>
+      <find>listView</find>
+      <find>uuid</find>
+      <find>ordinal</find>
+      <find>lockup</find>
+      <find>w</find>
+      <find>type</find>
+      <find>console</find>
+      <find>https</find>
+    </findStrings>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/tvOS2.js" />
+        <option value="$PROJECT_DIR$/application.js" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <annotation-enable>false</annotation-enable>
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="width" value="2560" />
+    <option name="height" value="1440" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>AngularJS</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="bilibili" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bilibili" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
+    <property name="JavaScriptPreferStrict" value="false" />
+    <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="02b5d77e-afd5-4c03-b90c-53ca53f1d22a" name="Default" comment="" />
+      <created>1508570315736</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1508570315736</updated>
+      <workItem from="1508570317125" duration="46487000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="46487000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.055996824" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="5" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/AJAX.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="86" column="0" lean-forward="false" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tvOS.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="204" column="4" lean-forward="false" selection-start-line="204" selection-start-column="4" selection-end-line="204" selection-end-column="4" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <marker date="1508569661889" expanded="true" signature="12290:12378" ph="..." />
+            <marker date="1508569661889" expanded="true" signature="18656:18785" ph="..." />
+            <marker date="1508569661889" expanded="true" signature="18677:18769" ph="..." />
+            <marker date="1508569661889" expanded="true" signature="28634:28814" ph="..." />
+            <marker date="1508569661889" expanded="true" signature="51176:51625" ph="..." />
+            <marker date="1508569661889" expanded="true" signature="51287:51591" ph="..." />
+            <marker date="1508569661889" expanded="true" signature="51316:51555" ph="..." />
+            <marker date="1508569661889" expanded="true" signature="52924:53167" ph="..." />
+            <marker date="1508569661889" expanded="true" signature="54438:54564" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="102" column="152" lean-forward="false" selection-start-line="102" selection-start-column="68" selection-end-line="102" selection-end-column="152" />
+          <folding>
+            <element signature="e#5044#7510#0" expanded="false" />
+            <element signature="e#7623#9082#0" expanded="false" />
+            <element signature="e#9226#11007#0" expanded="false" />
+            <marker date="1508680415998" expanded="true" signature="6115:6740" ph="..." />
+            <marker date="1508680415998" expanded="true" signature="6226:6249" ph="..." />
+            <marker date="1508680415998" expanded="true" signature="6250:6434" ph="..." />
+            <marker date="1508680415998" expanded="true" signature="6251:6434" ph="..." />
+            <marker date="1508680415998" expanded="true" signature="6322:6387" ph="..." />
+            <marker date="1508680415998" expanded="true" signature="6510:6715" ph="..." />
+            <marker date="1508680415998" expanded="true" signature="6548:6570" ph="..." />
+            <marker date="1508680415998" expanded="true" signature="6690:6715" ph="..." />
+            <marker date="1508680415998" expanded="true" signature="6863:7016" ph="..." />
+            <marker date="1508680415998" expanded="true" signature="7107:7369" ph="..." />
+            <marker date="1508680415998" expanded="true" signature="7126:7357" ph="..." />
+            <marker date="1508680415998" expanded="true" signature="7141:7186" ph="..." />
+            <marker date="1508680415998" expanded="true" signature="7209:7337" ph="..." />
+            <marker date="1508680415998" expanded="true" signature="7225:7313" ph="..." />
+            <marker date="1508680415998" expanded="true" signature="7247:7296" ph="..." />
+            <marker date="1508680415998" expanded="true" signature="8304:8552" ph="..." />
+            <marker date="1508680415998" expanded="true" signature="9954:10460" ph="..." />
+            <marker date="1508680415998" expanded="true" signature="9984:10001" ph="..." />
+            <marker date="1508680415998" expanded="true" signature="10184:10433" ph="..." />
+            <marker date="1508680415998" expanded="true" signature="10208:10403" ph="..." />
+            <marker date="1508680415998" expanded="true" signature="10517:10911" ph="..." />
+            <marker date="1508680415998" expanded="true" signature="10532:10899" ph="..." />
+            <marker date="1508680415998" expanded="true" signature="10544:10601" ph="..." />
+            <marker date="1508680415998" expanded="true" signature="10611:10883" ph="..." />
+            <marker date="1508680415998" expanded="true" signature="10626:10819" ph="..." />
+            <marker date="1508680415998" expanded="true" signature="10736:10776" ph="..." />
+            <marker date="1508680415998" expanded="true" signature="10835:10872" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tvOS2.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="36" column="1" lean-forward="true" selection-start-line="36" selection-start-column="1" selection-end-line="36" selection-end-column="1" />
+          <folding>
+            <element signature="n#tvOS_element#0" expanded="false" />
+            <element signature="n#!!block;n#push#0;n#tvOS_element#0" expanded="false" />
+            <element signature="n#tvOS_element_button#0" expanded="false" />
+            <element signature="n#!!block;n#constructor#0;n#tvOS_element_button#0" expanded="false" />
+            <element signature="e#2708#2876#0" expanded="false" />
+            <element signature="n#tvOS_element_buttonLockup#0" expanded="false" />
+            <element signature="n#tvOS_element_menuItem#0" expanded="false" />
+            <element signature="n#!!block;n#ArrayTemplateHelper#0" expanded="false" />
+            <element signature="n#tvOS_template_alert#0" expanded="false" />
+            <element signature="n#!!block;n#constructor#0;n#tvOS_template_alert#0" expanded="false" />
+            <element signature="n#tvOS_template_descriptiveAlert#0" expanded="false" />
+            <element signature="e#7510#7697#0" expanded="false" />
+            <element signature="n#tvOS_template_custom#0" expanded="false" />
+            <marker date="1508671841528" expanded="true" signature="3437:3459" ph="..." />
+            <marker date="1508671841528" expanded="true" signature="8020:8180" ph="..." />
+            <marker date="1508671841528" expanded="true" signature="8046:8169" ph="..." />
+            <marker date="1508671841528" expanded="true" signature="8793:8865" ph="..." />
+            <marker date="1508671841528" expanded="true" signature="8810:8854" ph="..." />
+            <marker date="1508671841528" expanded="true" signature="8819:8836" ph="..." />
+            <marker date="1508671841528" expanded="true" signature="9627:9740" ph="..." />
+            <marker date="1508671841528" expanded="true" signature="9644:9729" ph="..." />
+            <marker date="1508671841528" expanded="true" signature="9663:9671" ph="..." />
+            <marker date="1508671841528" expanded="true" signature="9663:9711" ph="..." />
+            <marker date="1508671841528" expanded="true" signature="11690:11822" ph="..." />
+            <marker date="1508671841528" expanded="true" signature="11852:12338" ph="..." />
+            <marker date="1508671841528" expanded="true" signature="11899:12326" ph="..." />
+            <marker date="1508671841528" expanded="true" signature="11912:12300" ph="..." />
+            <marker date="1508671841528" expanded="true" signature="11938:12144" ph="..." />
+            <marker date="1508671841528" expanded="true" signature="11963:12117" ph="..." />
+            <marker date="1508671841528" expanded="true" signature="12033:12091" ph="..." />
+            <marker date="1508671841528" expanded="true" signature="12236:12286" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
