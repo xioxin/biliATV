@@ -15,7 +15,7 @@ function callbackfunction(json) {
     playVideoWithModifiedHTTPHeader(json.durl[0].url,headers);
 }
 
-evaluateScripts(['http://127.0.0.1/appletv/bilibili/tvOS2.js'], function (success) {
+evaluateScripts(['https://raw.githubusercontent.com/xioxin/biliATV/master/TVML/tvOS2.js'], function (success) {
   if (success) {
 
 
