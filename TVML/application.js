@@ -512,7 +512,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                             tagData = JSON.parse(tagData);
                             console.log('tagData',tagData);
                             if(tagData.code == 0){
-                                let tagId  = tagData.data.id;
+                                let tagId  = tagData.data.tag_id;
                                 ajax.get(`https://api.bilibili.com/x/web-interface/tag/top?pn=1&ps=30&tid=${tagId}`,function (tagVideo) {
                                     tagVideo = JSON.parse(tagVideo);
                                     console.log('tagVideo',tagVideo);
