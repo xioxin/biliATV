@@ -516,9 +516,8 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                                 ajax.get(`https://api.bilibili.com/x/web-interface/tag/top?pn=1&ps=30&tid=${tagId}`,function (tagVideo) {
                                     tagVideo = JSON.parse(tagVideo);
                                     console.log('tagVideo',tagVideo);
-                                    tagVideo = tagVideo.data;
-                                    if(tagVideo.code == 1){
-                                        tagVideo = tagVideo.result;
+                                    if(tagVideo.code == 0){
+                                        tagVideo = tagVideo.data;
                                         var tagVideoSection = page.view.getElementById("tagVideo");
                                         tagVideoSection.dataItem = new DataItem();
                                         tagVideoSection.dataItem.setPropertyPath("tagVideo", tagVideo.map((av) => {
