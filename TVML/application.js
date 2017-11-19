@@ -529,6 +529,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                                             objectItem.onselect = function (e) {
                                                 openVideo(av.aid*1);
                                             };
+                                            console.log("objectItem",objectItem);
                                             return objectItem;
                                         }));
                                     }
