@@ -395,7 +395,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
             </header>
             <prototypes>
                 <lockup prototype="tuhao">
-                    <img binding="@src:{cover};" width="300" height="187"/>
+                    <img style="border-radius: circle;" binding="@src:{cover};" width="150" height="150"/>
                     <title style="font-size: 30;" binding="textContent:{title};" />
                     <description binding="textContent:{description};" style="text-align: center;font-size: 25;color:#fff" />
                 </lockup>
