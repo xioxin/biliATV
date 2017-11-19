@@ -497,7 +497,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                         bangumiSection.dataItem = new DataItem();
                         bangumiSection.dataItem.setPropertyPath("bangumi", result.episodes.map((av) => {
 
-                            let objectItem = new DataItem(type, av.av_id);
+                            let objectItem = new DataItem('bangumi', av.av_id);
                             objectItem.cover = av.cover;
                             objectItem.title = av.index_title;
                             objectItem.description = `第${av.index}话`;
