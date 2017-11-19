@@ -9,7 +9,6 @@ var nowPlayer = null;
  * https://space.bilibili.com/ajax/Bangumi/getList?mid=902845
  *
  * */
-var lestAid="0"
 evaluateScripts(['https://coding.net/u/xin/p/biliATV/git/raw/master/TVML/tvOS2.js'], function (success) {
                 if (success) {
                 
@@ -136,7 +135,6 @@ evaluateScripts(['https://coding.net/u/xin/p/biliATV/git/raw/master/TVML/tvOS2.j
                                                                        aid = d.archive.aid;
                                                                        if(aid){
                                                                        //getBiliPlayURL("https://www.bilibili.com/video/av"+aid);
-                                                                       lestAid=aid;
                                                                        openVideo(aid);
                                                                        }
                                                                        }else if(d.type == 1){
@@ -197,7 +195,6 @@ evaluateScripts(['https://coding.net/u/xin/p/biliATV/git/raw/master/TVML/tvOS2.j
                 
                 
                 }
-                
                 // test id 14356253
                 function getVideoData(id=14356253,page=1,_callback=function (data) {}) {
                 var loading = tvOS.template.loading(`加载 AV${id}`);
@@ -335,7 +332,7 @@ evaluateScripts(['https://coding.net/u/xin/p/biliATV/git/raw/master/TVML/tvOS2.j
                 } else {
                 console.log('Missing it all!')
                 }
-                })
+                });
 
 function playDMAV(id=14356253,page=1,data=null) {
     
@@ -400,4 +397,5 @@ function playDMAV(id=14356253,page=1,data=null) {
                          },1)
               });
     
+}
 
