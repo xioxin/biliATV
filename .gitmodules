@@ -1,0 +1,3 @@
+[submodule "DanMuPlayer"]
+	path = DanMuPlayer
+	url = https://github.com/fuzhuo/DanMuPlayer.git
