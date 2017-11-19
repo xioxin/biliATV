@@ -298,7 +298,16 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                     });
                 }
             }),
-            tvOS.element.menuItem('title2',function (e,menuItem) {
+            tvOS.element.menuItem('追番',function (e,menuItem) {
+                menuItem.setDocument(testView('22222'));
+            }),
+            tvOS.element.menuItem('热门',function (e,menuItem) {
+                menuItem.setDocument(testView('22222'));
+            }),
+            tvOS.element.menuItem('分区',function (e,menuItem) {
+                menuItem.setDocument(testView('22222'));
+            }),
+            tvOS.element.menuItem('搜索',function (e,menuItem) {
                 menuItem.setDocument(testView('22222'));
             })
         ]);

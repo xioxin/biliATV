@@ -38,7 +38,7 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
     static let tvBaseURL = "https://coding.net/u/xin/p/biliATV/git/raw/master/TVML"
 //    static let tvBaseURL = "http://192.168.1.5:80/biliATV/TVML"
     
-    static let tvBootURL = "\(AppDelegate.tvBaseURL)/application.js?v=2"
+    static let tvBootURL = "\(AppDelegate.tvBaseURL)/application.js"
 
     
 //
