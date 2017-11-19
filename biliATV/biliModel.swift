@@ -94,7 +94,7 @@ class biliModel{
         
         webview.stringByEvaluatingJavaScript(from: """
             window.MediaSource={isTypeSupported:function(){return !0}};
-            var ___iframes = document.getElementsByTagName('iframe')
+            var ___iframes = document.getElementsByTagName('iframe');
             for(var ___i=0;___i<___iframes.length;___i++){
               if(___iframes[___i] && ___iframes[___i].contentWindow){
                   ___iframes[___i].contentWindow.MediaSource={isTypeSupported:function(){return !0}};

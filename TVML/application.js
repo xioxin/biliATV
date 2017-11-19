@@ -201,6 +201,16 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
 
         }
 
+
+        function timeline(setDocument) {
+            setDocument(tvOS.template.loading("加载番剧信息..."));
+            ajax.get('https://bangumi.bilibili.com/anime/timeline',function (data) {
+                console.warn(data);
+            });
+        }
+
+
+
         // test id 14356253
         function getVideoData(id=14356253,page=1,_callback=function (data) {}) {
             var loading = tvOS.template.loading(`加载 AV${id}`);
@@ -299,7 +309,11 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                 }
             }),
             tvOS.element.menuItem('追番',function (e,menuItem) {
-                menuItem.setDocument(testView('22222'));
+                if(!menuItem.hasDocument){
+                    timeline(function (v) {
+                        menuItem.setDocument(v);
+                    });
+                }
             }),
             tvOS.element.menuItem('热门',function (e,menuItem) {
                 menuItem.setDocument(testView('22222'));
