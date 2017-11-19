@@ -304,7 +304,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                 });
                 console.log('view',view.getElementsByTagName("shelf")[6]);
                 test.s6 = view.getElementsByTagName("shelf")[6];
-
+                test.bb = view;
 
                 setDocument(listView);
 
