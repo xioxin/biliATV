@@ -494,10 +494,12 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
     </productTemplate>
 </document>`;
 
-                        page.view.addEventListener("select",function (e) {
-                            console.log(e);
+                        page.view.getElementById("description_more").addEventListener("select",function (e) {
+                            console.log('description_more',e);
                         });
-
+                        page.view.getElementById("play_button").addEventListener("select",function (e) {
+                            console.log('play_button',e);
+                        });
 
                        var bangumiSection = page.view.getElementById("bangumi")
                         bangumiSection.dataItem = new DataItem();
