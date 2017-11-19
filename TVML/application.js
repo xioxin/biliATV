@@ -231,17 +231,17 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
              <header><title>${day.is_today?"今天":day.date} ${week[day.day_of_week]}</title></header>
              <prototypes>
                 <lockup binding="@onSelect:{select};" prototype="bangumi">
-                    <imageStack>
+                    <imageStack width="200" height="300">
                         <img binding="@src:{cover};" width="200" height="300"/>
-                        <img src="resource://overlay-checkmark" />
+                        <img src="resource://overlay-checkmark" width="200" height="300" />
                     </imageStack>
                     <title binding="textContent:{title};" />
                     <description binding="textContent:{description};" />
                 </lockup>
                 <lockup binding="@onSelect:{select};" prototype="bangumi_published">
-                    <imageStack>
+                    <imageStack width="200" height="300">
                         <img binding="@src:{cover};" width="200" height="300"/>
-                        <img src="resource://overlay-checkmark" />
+                        <img src="resource://overlay-checkmark" width="200" height="300" />
                     </imageStack>
                     <title binding="textContent:{title};" style="color:#fb7299" />
                     <description binding="textContent:{description};" />
