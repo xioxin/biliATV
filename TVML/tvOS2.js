@@ -68,6 +68,8 @@ class tvOS_view extends tvOS_identification{
     removeDocument(view){
         try{
             navigationDocument.removeDocument(view||this.view);
+        }catch(error){
+            console.warn(error);
         }
     }
 

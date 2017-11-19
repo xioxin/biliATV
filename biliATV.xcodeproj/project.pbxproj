@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		16055A651F285264000F3AF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16055A641F285264000F3AF7 /* AppDelegate.swift */; };
 		16055A691F285264000F3AF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16055A681F285264000F3AF7 /* Assets.xcassets */; };
-		DC92A4921FC0F2080018A40D /* HackURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC92A4911FC0F2080018A40D /* HackURLProtocol.swift */; };
-		DC92A4941FC106290018A40D /* TVML in Resources */ = {isa = PBXBuildFile; fileRef = DC92A4931FC106290018A40D /* TVML */; };
 		DCC008111FC095DE005F223C /* DanMuPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC8A10751FC0841E0021FF00 /* DanMuPlayer.framework */; };
 		DCC008121FC095DE005F223C /* DanMuPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DC8A10751FC0841E0021FF00 /* DanMuPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DCE10F721FA725EC00DF6AAC /* biliModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE10F711FA725EC00DF6AAC /* biliModel.swift */; };
@@ -59,8 +57,6 @@
 		DC47692D1FBC31D600EC6FDD /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
 		DC47692F1FBC31DC00EC6FDD /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		DC8A106E1FC0841D0021FF00 /* DanMuPlayer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DanMuPlayer.xcodeproj; path = DanMuPlayer/DanMuPlayer.xcodeproj; sourceTree = SOURCE_ROOT; };
-		DC92A4911FC0F2080018A40D /* HackURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HackURLProtocol.swift; sourceTree = "<group>"; };
-		DC92A4931FC106290018A40D /* TVML */ = {isa = PBXFileReference; lastKnownFileType = folder; path = TVML; sourceTree = "<group>"; };
 		DCC007C21FC092A6005F223C /* SGPlatform.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SGPlatform.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCC007C31FC092A6005F223C /* SGPlatform.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SGPlatform.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCC007C41FC092A6005F223C /* SGPlatform.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SGPlatform.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,7 +90,6 @@
 		16055A581F285264000F3AF7 = {
 			isa = PBXGroup;
 			children = (
-				DC92A4931FC106290018A40D /* TVML */,
 				16055A631F285264000F3AF7 /* biliATV */,
 				16055A621F285264000F3AF7 /* Products */,
 				DC4769241FBC31AA00EC6FDD /* Frameworks */,
@@ -119,7 +114,6 @@
 				16055A6A1F285264000F3AF7 /* Info.plist */,
 				16055A661F285264000F3AF7 /* Supporting Files */,
 				DCFBE4F61FBF3F3B005B3CDA /* Bridging-Header.h */,
-				DC92A4911FC0F2080018A40D /* HackURLProtocol.swift */,
 			);
 			path = biliATV;
 			sourceTree = SOURCE_ROOT;
@@ -245,7 +239,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				16055A691F285264000F3AF7 /* Assets.xcassets in Resources */,
-				DC92A4941FC106290018A40D /* TVML in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,7 +250,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				16055A651F285264000F3AF7 /* AppDelegate.swift in Sources */,
-				DC92A4921FC0F2080018A40D /* HackURLProtocol.swift in Sources */,
 				DCE10F721FA725EC00DF6AAC /* biliModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
