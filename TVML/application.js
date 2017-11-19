@@ -289,6 +289,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
 
                         objectItem.onselect = function (e) {
                             console.warn(e,result);
+                            openBangumi(result.season_id);
                         };
                         return objectItem;
                     });
@@ -614,7 +615,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
             }),
             tvOS.element.menuItem('热门',function (e,menuItem) {
                 if(!menuItem.hasDocument){
-                    openBangumi();
+                    // openBangumi();
                 }
             }),
             tvOS.element.menuItem('分区',function (e,menuItem) {
