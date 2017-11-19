@@ -367,16 +367,8 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
             <prototypes>
                 <lockup prototype="bangumi">
                     <img binding="@src:{cover};" width="200" height="125"/>
-                    <title binding="textContent:{title};" />
-                    <description binding="textContent:{description};" style="font-size: 30;color:#fff" />
-                </lockup>
-                <lockup prototype="bangumi_new">
-                    <img binding="@src:{cover};" width="200" height="125"/>
-                    <title binding="textContent:{title};" />
-                    <description style="font-size: 30;color:#fff" >
-                        <textBadge>NEW</textBadge>
-                        <text binding="textContent:{description};"></text>
-                    </description>
+                    <title style="font-size: 30;" binding="textContent:{title};" />
+                    <description binding="textContent:{description};" style="text-align: center;font-size: 20;color:#fff" />
                 </lockup>
             </prototypes>
             <section id="bangumi" binding="items:{bangumi};" />
@@ -505,14 +497,13 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                         bangumiSection.dataItem = new DataItem();
                         bangumiSection.dataItem.setPropertyPath("bangumi", result.episodes.map((av) => {
 
-                            var type = "bangumi";
-                            if(av.is_new){
-                                type = "bangumi_new"
-                            }
                             let objectItem = new DataItem(type, av.av_id);
                             objectItem.cover = av.cover;
                             objectItem.title = av.index_title;
                             objectItem.description = `第${av.index}话`;
+                            if(av.is_new){
+                                objectItem.description = `NEW 第${av.index}话`;
+                            }
                             objectItem.onselect = function (e) {
                                 playDMAV(av.av_id*1,av.page*1)
                             };
