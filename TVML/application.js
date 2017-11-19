@@ -303,9 +303,15 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
         }
         
         function openBangumi(sid=6465) {
-            ajax.get(`https://bangumi.bilibili.com/jsonp/seasoninfo/${sid}.ver`,function (data) {
-                // data = JSON.parse(data)
-                console.log(data);
+            //更多推荐
+            //https://bangumi.bilibili.com/web_api/season/recommend/6465.json
+            https://bangumi.bilibili.com/jsonp/seasoninfo/6465.ver?callback=seasonListCallback&jsonp=jsonp&_=1511089954345
+            ajax.get(`https://bangumi.bilibili.com/jsonp/seasoninfo/${sid}.ver?callback=seasonListCallback&jsonp=jsonp`,function (data) {
+                function seasonListCallback(data) {
+                    data = JSON.parse(data)
+                    console.log(data);
+                }
+                eval(data);
             })
         }
 
