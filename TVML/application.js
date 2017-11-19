@@ -306,7 +306,17 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
         function openBangumi(sid=6465) {
             //更多推荐
             //https://bangumi.bilibili.com/web_api/season/recommend/6465.json
+
+            //详情
             //https://bangumi.bilibili.com/jsonp/seasoninfo/6465.ver?callback=seasonListCallback&jsonp=jsonp&_=1511089954345
+
+            //承包
+            //https://bangumi.bilibili.com/sponsor/rankweb/get_sponsor_week_list?season_id=6308&pagesize=7
+
+            //相关视频
+            //https://api.bilibili.com/x/web-interface/tag/top?pn=1&ps=30&callback=relate_video_callback&jsonp=jsonp&tid=4641922&_=1511098218419
+
+
             ajax.get(`https://bangumi.bilibili.com/jsonp/seasoninfo/${sid}.ver?callback=seasonListCallback&jsonp=jsonp`,function (data) {
                 function seasonListCallback(data) {
                     if(data.code == 0){
@@ -328,6 +338,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                         if(result.media && result.media.episode_index && result.media.episode_index.index_show){
                             index_show = result.media.episode_index.index_show
                         }
+
 
 
                         page.xml = `<document>
@@ -376,45 +387,16 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
         </shelf>
         <shelf>
             <header>
-                <title>Reviews & Ratings</title>
+                <title>相关视频</title>
             </header>
-            <section>
-                <ratingCard>
-                    <title>4.1 / 5</title>
-                    <ratingBadge value="0.7"></ratingBadge>
-                    <description>Average of 2,241 iTunes user ratings and reviews.</description>
-                </ratingCard>
-                <ratingCard>
-                    <title><badge src="resource://tomato-fresh" /> 99%</title>
-                    <text>Tomatometer</text>
-                    <infoTable>
-                        <info>
-                            <header>
-                                <title>175</title>
-                            </header>
-                            <text>Reviews</text>
-                        </info>
-                        <info>
-                            <header>
-                                <title>173</title>
-                            </header>
-                            <text>Fresh</text>
-                        </info>
-                        <info>
-                            <header>
-                                <title>2</title>
-                            </header>
-                            <text>Rotten</text>
-                        </info>
-                    </infoTable>
-                </ratingCard>
-                <reviewCard>
-                    <badge src="resource://tomato-fresh-m" />
-                    <title>WWDC Review</title>
-                    <description>Brief review here</description>
-                    <text>Ravi Patel June, 8 2015</text>
-                </reviewCard>
-            </section>
+            <prototypes>
+                <lockup prototype="tagVideo">
+                    <img binding="@src:{cover};" width="300" height="187"/>
+                    <title style="font-size: 30;" binding="textContent:{title};" />
+                    <description binding="textContent:{description};" style="text-align: center;font-size: 25;color:#fff" />
+                </lockup>
+            </prototypes>
+            <section id="tagVideo" binding="items:{tagVideo};" />
         </shelf>
         <shelf>
             <header>
@@ -495,8 +477,6 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
 </document>`;
 
                         page.view.getElementById("description_more").addEventListener("select",function (e) {
-
-
                             let desc = tvOS.template.descriptiveAlert([result.bangumi_title,result.jp_title],'',`${index_show}\r\n\r\n${result.evaluate}\r\n\r\n${result.staff}`);
                             // desc.background = result.cover;
                             desc.presentModal();
@@ -508,7 +488,6 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                        var bangumiSection = page.view.getElementById("bangumi")
                         bangumiSection.dataItem = new DataItem();
                         bangumiSection.dataItem.setPropertyPath("bangumi", result.episodes.map((av) => {
-
                             let objectItem = new DataItem('bangumi', av.av_id);
                             objectItem.cover = av.cover;
                             objectItem.title = av.index_title;
@@ -525,6 +504,37 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
 
 
                         page.display();
+
+
+
+                        //加载相关视频
+                        ajax.get("https://api.bilibili.com/x/tag/info?tag_name="+result.title,function (tagData) {
+                            tagData = JSON.parse(tagData)
+                            if(tagData.code == 0){
+                                let tagId  = tagData.data.id;
+                                ajax.get(`https://api.bilibili.com/x/web-interface/tag/top?pn=1&ps=30&tid=${tagId}`,function (tagVideo) {
+                                    tagVideo = JSON.parse(tagVideo);
+                                    if(tagVideo.code == 1){
+                                        tagVideo = tagVideo.result;
+                                        var tagVideoSection = page.view.getElementById("tagVideo");
+                                        tagVideoSection.dataItem = new DataItem();
+                                        tagVideoSection.dataItem.setPropertyPath("tagVideo", tagVideo.map((av) => {
+                                            let objectItem = new DataItem('tagVideo', av.av_id);
+                                            objectItem.cover = av.pic;
+                                            objectItem.title = av.title;
+                                            objectItem.description = av.tname;
+                                            objectItem.onselect = function (e) {
+                                                openVideo(av.av_id*1,av.page*1);
+                                            };
+                                            return objectItem;
+                                        }));
+                                    }
+                                })
+                            }
+                        })
+
+
+
 
                     }
                 }
