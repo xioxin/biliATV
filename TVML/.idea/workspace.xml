@@ -14,8 +14,8 @@
       <file leaf-file-name="application.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="193">
-              <caret line="413" column="25" lean-forward="true" selection-start-line="413" selection-start-column="25" selection-end-line="413" selection-end-column="25" />
+            <state relative-caret-position="376">
+              <caret line="403" column="16" lean-forward="true" selection-start-line="391" selection-start-column="8" selection-end-line="403" selection-end-column="16" />
               <folding>
                 <element signature="e#270#3040#0" expanded="false" />
                 <element signature="e#8061#12197#0" expanded="false" />
@@ -287,12 +287,12 @@
       <workItem from="1508570317125" duration="46487000" />
       <workItem from="1511054487921" duration="20000" />
       <workItem from="1511054519698" duration="8000" />
-      <workItem from="1511054542437" duration="14061000" />
+      <workItem from="1511054542437" duration="14105000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60576000" />
+    <option name="totallyTimeSpent" value="60620000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -716,8 +716,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="413" column="25" lean-forward="true" selection-start-line="413" selection-start-column="25" selection-end-line="413" selection-end-column="25" />
+        <state relative-caret-position="376">
+          <caret line="403" column="16" lean-forward="true" selection-start-line="391" selection-start-column="8" selection-end-line="403" selection-end-column="16" />
           <folding>
             <element signature="e#270#3040#0" expanded="false" />
             <element signature="e#8061#12197#0" expanded="false" />
