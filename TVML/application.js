@@ -226,7 +226,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                 ];
 
 
-                listView.forEach(function (day) {
+                tilelineData.forEach(function (day) {
                     dayShelf+=`<shelf id="day-${day.date}">
              <header><title>${day.is_today?"今天":day.date} ${week[day.day_of_week]}</title></header>
              <prototypes>
