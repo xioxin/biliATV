@@ -216,6 +216,7 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
     //call this method once after setting up your appController.
     func appController(_ appController: TVApplicationController, evaluateAppJavaScriptIn jsContext: JSContext){
         self.tvJsContext = jsContext;
+        //print("appController TVApplicationController")
  
 //        DMPlayer
         DMPlayer.setup(jsContext, controller: appController.navigationController)
@@ -240,6 +241,7 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
         
         self.tvJsContext.evaluateScript("var ua = '\(ua)';");
         self.tvJsContext.evaluateScript("var tvBaseURL = '\(AppDelegate.tvBaseURL)'");
+        self.tvJsContext.evaluateScript("run();");
         
 //        let d = DMMediaItem();
 //        d.options
