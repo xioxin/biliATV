@@ -345,11 +345,8 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
             <stack>
                 <title>${result.bangumi_title}</title>
                 <row>
-                    <text><badge src="resource://tomato-fresh"/> 99%</text>
-                    <text>1hr 54min</text>
                     <text>${result.pub_time}</text>
                     <text>${result.media.episode_index.index_show}</text>
-                    <text>播放:${(result.play_count/10000).toFixed(1)}万</text>
                     ${tags}
                 </row>
                 <description allowsZooming="true" moreLabel="more">${result.evaluate}
