@@ -209,6 +209,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                 console.warn(data);
                 var tilelineData = data.result;
                 var listView = tvOS.template.custom('');
+
                 listView.xml = `<document>
    <stackTemplate>
       <banner>
@@ -216,94 +217,42 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
       </banner>
       <collectionList>
          <shelf>
-         <header><title>Movie 4</title></header>
-            <section>
-               <lockup>
-                  <img src="path to images on your server/Car_Movie_250x375_A.png" width="182" height="274" />
-                  <title>Movie 1</title>
-               </lockup>
-               <lockup>
-                  <img src="path to images on your server/Car_Movie_250x375_B.png" width="182" height="274" />
-                  <title>Movie 2</title>
-               </lockup>
-               <lockup>
-                  <img src="path to images on your server/Car_Movie_250x375_C.png" width="182" height="274" />
-                  <title>Movie 3</title>
-               </lockup>
-            </section>
-         </shelf>
-         <shelf>
-         <header><title>Movie 4</title></header>
-            <section>
-               <lockup>
-                  <img src="path to images on your servers/Space_Movie/Space_Movie_250x375_B.png" width="182" height="274"></img>
-                  <title>Movie 4</title>
-               </lockup>
-               <lockup>
-                  <img src="path to images on your server/Space_Movie/Space_Movie_250x375_A.png" width="182" height="274"></img>
-                  <title>Movie 5</title>
-               </lockup>
-               <lockup>
-                  <img src="path to images on your server/Space_Movie/Space_Movie_250x375_C.png" width="182" height="274"></img>
-                  <title>Movie 6</title>
-               </lockup>
-               <lockup>
-                  <img src="path to images on your servers/Space_Movie/Space_Movie_250x375_B.png" width="182" height="274"></img>
-                  <title>Movie 4</title>
-               </lockup>
-               <lockup>
-                  <img src="path to images on your server/Space_Movie/Space_Movie_250x375_A.png" width="182" height="274"></img>
-                  <title>Movie 5</title>
-               </lockup>
-               <lockup>
-                  <img src="path to images on your server/Space_Movie/Space_Movie_250x375_C.png" width="182" height="274"></img>
-                  <title>Movie 6</title>
-               </lockup>
-               <lockup>
-                  <img src="path to images on your servers/Space_Movie/Space_Movie_250x375_B.png" width="182" height="274"></img>
-                  <title>Movie 4</title>
-               </lockup>
-               <lockup>
-                  <img src="path to images on your server/Space_Movie/Space_Movie_250x375_A.png" width="182" height="274"></img>
-                  <title>Movie 5</title>
-               </lockup>
-               <lockup>
-                  <img src="path to images on your server/Space_Movie/Space_Movie_250x375_C.png" width="182" height="274"></img>
-                  <title>Movie 6</title>
-               </lockup>
-               <lockup>
-                  <img src="path to images on your servers/Space_Movie/Space_Movie_250x375_B.png" width="182" height="274"></img>
-                  <title>Movie 4</title>
-               </lockup>
-               <lockup>
-                  <img src="path to images on your server/Space_Movie/Space_Movie_250x375_A.png" width="182" height="274"></img>
-                  <title>Movie 5</title>
-               </lockup>
-               <lockup>
-                  <img src="path to images on your server/Space_Movie/Space_Movie_250x375_C.png" width="182" height="274"></img>
-                  <title>Movie 6</title>
-               </lockup>
-               <lockup>
-                  <img src="path to images on your servers/Space_Movie/Space_Movie_250x375_B.png" width="182" height="274"></img>
-                  <title>Movie 4</title>
-               </lockup>
-               <lockup>
-                  <img src="path to images on your server/Space_Movie/Space_Movie_250x375_A.png" width="182" height="274"></img>
-                  <title>Movie 5</title>
-               </lockup>
-               <lockup>
-                  <img src="path to images on your server/Space_Movie/Space_Movie_250x375_C.png" width="182" height="274"></img>
-                  <title>Movie 6</title>
-               </lockup>
-               
-            </section>
+             <header><title>Movie 4</title></header>
+             <prototypes>
+                <lockup binding="@onselect:{select};" prototype="bangumi">
+                    <img binding="@src:{cover};" width="200" height="300"/>
+                    <title binding="textContent:{title};" />
+                </lockup>
+            </prototypes>
+            <section binding="items:{timeline};" />
          </shelf>
       </collectionList>
    </stackTemplate>
 </document>
-`
+`;
 
-                setDocument(listView);
+                var view = listView.view();
+                let shelf = view.getElementsByTagName("shelf").item(0);
+                let section = shelf.getElementsByTagName("section").item(0);
+
+                section.dataItem = new DataItem()
+
+                //create data items from objects
+                let newItems = tilelineData[0].seasons.map((result) => {
+                    let objectItem = new DataItem('bangumi', result.season_id);
+                    objectItem.cover = result.cover;
+                    objectItem.title = result.title;
+                    objectItem.pub_index = result.pub_index;
+                    objectItem.pub_time = result.pub_time;
+                    objectItem.select = function () {
+                        console.warn('objectItem.click',result);
+                    };
+                    return objectItem;
+                });
+                section.dataItem.setPropertyPath("timeline", newItems);
+
+
+                setDocument(view);
 
 
 
