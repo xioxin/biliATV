@@ -228,11 +228,10 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
 
                 tilelineData.forEach(function (day) {
                     dayShelf+=`<shelf id="day-${day.date}">
-             <header><title>${day.is_today?"今天":day.date} ${week[day.day_of_week]}</title></header>
+             <header><title>${day.is_today?"今天":day.date}  ${week[day.day_of_week]}</title></header>
              <prototypes>
                 <lockup binding="@onSelect:{select};" prototype="bangumi">
                     <img binding="@src:{cover};" width="200" height="300"/>
-                    <overlay><img src="resource://overlay-checkmark" width="50" height="50" /></overlay>
                     <title binding="textContent:{title};" />
                     <description binding="textContent:{description};" />
                 </lockup>
@@ -292,6 +291,9 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                         }
                         objectItem.pub_index = result.pub_index;
                         objectItem.pub_time = result.pub_time;
+
+                        objectItem.description = `${result.pub_index} ${result.pub_time}`;
+
                         objectItem.onselect = function (e) {
                             console.warn(e,result);
                         };
