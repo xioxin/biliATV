@@ -240,7 +240,7 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
         
         
         self.tvJsContext.evaluateScript("var ua = '\(ua)';");
-        self.tvJsContext.evaluateScript("var tvBaseURL = '\(AppDelegate.tvBaseURL)'");
+        self.tvJsContext.evaluateScript("var tvBaseURL = '\(AppDelegate.tvBaseURL)';");
 //        self.tvJsContext.evaluateScript("run();");
         
 //        let d = DMMediaItem();
@@ -252,4 +252,5 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
         
     }
 }
+
 

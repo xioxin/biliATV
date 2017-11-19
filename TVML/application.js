@@ -13,8 +13,6 @@ var lestAid="0"
 evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                 if (success) {
                 
-                
-                
                 function myHome(setDocument) {
                 ajax.get('https://api.bilibili.com/x/web-interface/nav',function (data) {
                          console.warn(data);
@@ -274,24 +272,6 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                              </document>
                              `;
                              loading.replaceDocument(info);
-                             
-                             document.getElementsByTagName('iframe').forEach(function(iframe){
-                                                                             if(iframe && iframe.contentWindow){
-                                                                             iframe.contentWindow.MediaSource={isTypeSupported:function(){return !0}};
-                                                                             }
-                                                                             })
-                             
-                             
-                             var ___iframes = document.getElementsByTagName('iframe')
-                             for(var ___i=0;___i<___iframes.length;___i++){
-                             if(___iframes[___i] && ___iframes[___i].contentWindow){
-                             ___iframes[___i].contentWindow.MediaSource={isTypeSupported:function(){return !0}};
-                             }
-                             }
-                             
-                             
-                             
-                             
                              });
                 
                 }
@@ -337,7 +317,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                                                      // var alert3 = new tvOS.template.alert('333333'||'测试标题',['描述1','description2'],[button,button2],['footTexts1','footTexts2']);
                                                      // alert3.presentModal();
                                                      
-                                                     playDMAV();
+                                                     // playDMAV();
                                                      
                                                      
                                                      });
@@ -421,4 +401,3 @@ function playDMAV(id=14356253,page=1,data=null) {
               });
     
 }
-
