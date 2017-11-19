@@ -297,7 +297,8 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
 
                 });
                 // console.log('view',view.getElementsByTagName("shelf").item(6));
-                // view.getElementsByTagName("shelf").item(6).getElementsByTagName("lockup").item(0).attributes.item().autoHighlight = 'autoHighlight'
+                view.getElementsByTagName("shelf").item(6).attributes.item().autoHighlight = true;
+                view.getElementsByTagName("shelf").item(6).getElementsByTagName("lockup").item(0).attributes.item().autoHighlight = true;
                 test.bb = view;
                 setDocument(listView);
             });
