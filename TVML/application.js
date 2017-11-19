@@ -366,9 +366,9 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
             </header>
             <prototypes>
                 <lockup prototype="bangumi">
-                    <img binding="@src:{cover};" width="200" height="125"/>
+                    <img binding="@src:{cover};" width="300" height="187"/>
                     <title style="font-size: 30;" binding="textContent:{title};" />
-                    <description binding="textContent:{description};" style="text-align: center;font-size: 20;color:#fff" />
+                    <description binding="textContent:{description};" style="text-align: center;font-size: 25;color:#fff" />
                 </lockup>
             </prototypes>
             <section id="bangumi" binding="items:{bangumi};" />
