@@ -216,7 +216,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
       </banner>
       <collectionList>
          <shelf>
-         <title>Movie 4</title>
+         <header><title>Movie 4</title></header>
             <section>
                <lockup>
                   <img src="path to images on your server/Car_Movie_250x375_A.png" width="182" height="274" />
@@ -233,7 +233,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
             </section>
          </shelf>
          <shelf>
-         <title>Movie 4</title>
+         <header><title>Movie 4</title></header>
             <section>
                <lockup>
                   <img src="path to images on your servers/Space_Movie/Space_Movie_250x375_B.png" width="182" height="274"></img>
