@@ -252,7 +252,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                 section.dataItem.setPropertyPath("timeline", newItems);
 
 
-                setDocument(view);
+                setDocument(listView);
 
 
 
