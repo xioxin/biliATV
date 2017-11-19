@@ -313,6 +313,14 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                         var result = data.result;
                         console.log(result);
                         var page = tvOS.template.custom('');
+
+                        var tags = "";
+
+                        result.tags.forEach(function (tag) {
+                            tags+=`<textBadge>${tag.tag_name}</textBadge>`
+                        });
+
+
                         page.xml = `<document>
     <productTemplate>
         <background>
@@ -327,7 +335,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                 </info>
                 <info>
                     <header>
-                        <title>Actors</title>
+                        <title>Staff</title>
                     </header>
                     <text>Anne Johnson</text>
                     <text>Tom Clark</text>
@@ -339,13 +347,14 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                 <row>
                     <text><badge src="resource://tomato-fresh"/> 99%</text>
                     <text>1hr 54min</text>
-                    <text>Comedy</text>
-                    <text>2015</text>
-                    <badge src="resource://mpaa-pg" class="badge" />
-                    <badge src="resource://cc" class="badge" />
+                    <text>${result.pub_time}</text>
+                    <text>${result.media.episode_index.index_show}</text>
+                    <text>播放:${(result.play_count/10000).toFixed(1)}万</text>
+                    ${tags}
                 </row>
-                <description allowsZooming="true" moreLabel="more">${result.evaluate}</description>
-                <text>Language information can go here</text>
+                <description allowsZooming="true" moreLabel="more">${result.evaluate}
+                ${result.staff}</description>
+                <text>copyright:${result.copyright}</text>
                 <row>
                     <buttonLockup>
                         <badge src="resource://button-preview" />
