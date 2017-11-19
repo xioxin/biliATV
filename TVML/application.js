@@ -10,7 +10,7 @@ var nowPlayer = null;
 *
 * */
 
-evaluateScripts(['http://127.0.0.1:80/biliATV/TVML/tvOS2.js'], function (success) {
+evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
 
   if (success) {
 
