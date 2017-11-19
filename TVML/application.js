@@ -524,7 +524,12 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                                             let objectItem = new DataItem('tagVideo', av.aid);
                                             objectItem.cover = av.pic;
                                             objectItem.title = av.title;
-                                            objectItem.description = av.tname;
+                                            var up = '';
+                                            if(av.owner && av.owner.name){
+                                                up = av.owner.name;
+                                            }
+
+                                            objectItem.description = `UP:${up}  T:${av.tname}`;
                                             objectItem.onselect = function (e) {
                                                 openVideo(av.aid*1);
                                             };
