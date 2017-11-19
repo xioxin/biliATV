@@ -232,6 +232,10 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
 `;
 
                 var view = listView.view;
+
+                view.addEventListener('select', function (e) {
+                    console.warn('select',e);
+                })
                 let shelf = view.getElementsByTagName("shelf").item(0);
                 let section = shelf.getElementsByTagName("section").item(0);
 
@@ -244,9 +248,6 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                     objectItem.title = result.title;
                     objectItem.pub_index = result.pub_index;
                     objectItem.pub_time = result.pub_time;
-                    objectItem.select = function () {
-                        console.warn('objectItem.click',result);
-                    };
                     return objectItem;
                 });
                 section.dataItem.setPropertyPath("timeline", newItems);
