@@ -233,7 +233,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
 
                 var view = listView.view;
 
-                
+
                 let shelf = view.getElementsByTagName("shelf").item(0);
                 let section = shelf.getElementsByTagName("section").item(0);
 
@@ -246,9 +246,13 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                     objectItem.title = result.title;
                     objectItem.pub_index = result.pub_index;
                     objectItem.pub_time = result.pub_time;
+                    objectItem.onselect = function (e) {
+                        console.warn(e,result);
+                    };
                     return objectItem;
                 });
                 section.dataItem.setPropertyPath("timeline", newItems);
+
 
 
                 setDocument(listView);
