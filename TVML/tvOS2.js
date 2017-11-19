@@ -23,7 +23,7 @@ class tvOS_view extends tvOS_identification{
             tvOS.parser = new DOMParser()
         }
         var parser = new DOMParser();
-        console.log(this.xml);
+        // console.log(this.xml);
         var parsed = parser.parseFromString(this.xml.replace(new RegExp('&', 'g'), '&amp;'), "application/xml");
         this.eventBinding(parsed);
         this.parsed = parsed;

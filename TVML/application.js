@@ -509,11 +509,13 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
 
                         //加载相关视频
                         ajax.get("https://api.bilibili.com/x/tag/info?tag_name="+encodeURI(result.title),function (tagData) {
-                            tagData = JSON.parse(tagData)
+                            tagData = JSON.parse(tagData);
+                            console.log('tagData',tagData);
                             if(tagData.code == 0){
                                 let tagId  = tagData.data.id;
                                 ajax.get(`https://api.bilibili.com/x/web-interface/tag/top?pn=1&ps=30&tid=${tagId}`,function (tagVideo) {
                                     tagVideo = JSON.parse(tagVideo);
+                                    console.log('tagVideo',tagVideo);
                                     if(tagVideo.code == 1){
                                         tagVideo = tagVideo.result;
                                         var tagVideoSection = page.view.getElementById("tagVideo");
