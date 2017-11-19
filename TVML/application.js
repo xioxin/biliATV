@@ -10,7 +10,7 @@ var nowPlayer = null;
  *
  * */
 var lestAid="0"
-evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
+evaluateScripts(['https://coding.net/u/xin/p/biliATV/git/raw/master/TVML/tvOS2.js'], function (success) {
                 if (success) {
                 
                 function myHome(setDocument) {
