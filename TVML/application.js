@@ -302,8 +302,11 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
             });
         }
         
-        function openBangumi() {
-            
+        function openBangumi(sid=6465) {
+            ajax.get(`https://bangumi.bilibili.com/jsonp/seasoninfo/${sid}.ver`,function (data) {
+                data = JSON.parse(data)
+                console.log(data);
+            })
         }
 
 
@@ -413,7 +416,9 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                 }
             }),
             tvOS.element.menuItem('热门',function (e,menuItem) {
-                menuItem.setDocument(testView('22222'));
+                if(!menuItem.hasDocument){
+                    openBangumi();
+                }
             }),
             tvOS.element.menuItem('分区',function (e,menuItem) {
                 menuItem.setDocument(testView('22222'));
