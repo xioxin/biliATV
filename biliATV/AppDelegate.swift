@@ -35,7 +35,9 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
     
     
     // tvBaseURL points to a server on your local machine. To create a local server for testing purposes, use the following command inside your project folder from the Terminal app: ruby -run -ehttpd . -p9001. See NSAppTransportSecurity for information on using a non-secure server.
-    static let tvBaseURL = "https://raw.githubusercontent.com/xioxin/biliATV/master/TVML"
+//    static let tvBaseURL = "https://raw.githubusercontent.com/xioxin/biliATV/master/TVML"
+    static let tvBaseURL = "https://coding.net/u/xin/p/biliATV/git/raw/master/TVML"
+    
     static let tvBootURL = "\(AppDelegate.tvBaseURL)/application.js"
 
     
@@ -67,6 +69,14 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
         let appControllerContext = TVApplicationControllerContext()
 
         // The JavaScript URL is used to create the JavaScript context for your TVMLKit application. Although it is possible to separate your JavaScript into separate files, to help reduce the launch time of your application we recommend creating minified and compressed version of this resource. This will allow for the resource to be retrieved and UI presented to the user quickly.
+        
+
+        let homeDir = NSHomeDirectory()
+        print("=======");
+        print(homeDir);
+//        URL.init(fileURLWithPath: <#T##String#>)
+//        Bundle.main.
+        
         if let javaScriptURL = URL(string: AppDelegate.tvBootURL) {
             appControllerContext.javaScriptApplicationURL = javaScriptURL
         }
@@ -228,7 +238,8 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
         
         
         
-        self.tvJsContext.evaluateScript("var ua = \'\(ua)\';")
+        self.tvJsContext.evaluateScript("var ua = '\(ua)';");
+        self.tvJsContext.evaluateScript("var tvBaseURL = '\(tvBaseURL)'");
         
 //        let d = DMMediaItem();
 //        d.options
