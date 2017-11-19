@@ -404,6 +404,19 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
         </shelf>
         <shelf>
             <header>
+                <title>更多推荐</title>
+            </header>
+            <prototypes>
+                <lockup prototype="moreVideo">
+                    <img binding="@src:{cover};" width="300" height="187"/>
+                    <title style="font-size: 30;" binding="textContent:{title};" />
+                    <description binding="textContent:{description};" style="text-align: center;font-size: 25;color:#fff" />
+                </lockup>
+            </prototypes>
+            <section id="moreVideo" binding="items:{moreVideo};" />
+        </shelf>
+        <shelf>
+            <header>
                 <title>相关视频</title>
             </header>
             <prototypes>
@@ -415,59 +428,6 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
             </prototypes>
             <section id="tagVideo" binding="items:{tagVideo};" />
         </shelf>
-        <productInfo>
-            <infoTable>
-                <header>
-                    <title>Information</title>
-                </header>
-                <info>
-                    <header>
-                        <title>Studio</title>
-                    </header>
-                    <text>Apple</text>
-                </info>
-                <info>
-                    <header>
-                        <title>Runtime</title>
-                    </header>
-                    <text>1:54</text>
-                </info>
-                <info>
-                    <header>
-                        <title>Format</title>
-                    </header>
-                    <text>Widescreen</text>
-                </info>
-            </infoTable>
-            <infoTable>
-                <header>
-                    <title>Languages</title>
-                </header>
-                <info>
-                    <header>
-                        <title>Primary</title>
-                    </header>
-                    <text>English (Dolby 5.1), Subtitles, CC</text>
-                </info>
-                <info>
-                    <header>
-                        <title>Additional</title>
-                    </header>
-                    <text>Cantonese (Subtitles)</text>
-                </info>
-            </infoTable>
-            <infoTable style="tv-line-spacing:10;">
-                <header>
-                    <title>Accessibility</title>
-                </header>
-                <info>
-                    <header>
-                        <textBadge>SDH</textBadge>
-                    </header>
-                    <text>Subtitles for the deaf and Hard of Hearing (SDH) refer to subtitles in the original lanuage with the addition of relevant non-dialog information.</text>
-                </info>
-            </infoTable>
-        </productInfo>
     </productTemplate>
 </document>`;
 
@@ -535,7 +495,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                             }
                         })
 
-                        //加载承包商
+                        //加载土豪
                         ajax.get(`https://bangumi.bilibili.com/sponsor/rankweb/get_sponsor_week_list?season_id=${sid}&pagesize=7`,function (tuhao) {
                             tuhao = JSON.parse(tuhao);
                             if(tuhao.code == 0){
@@ -555,10 +515,26 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                                     return objectItem;
                                 }));
                             }
-
-
                         })
-
+                        //加载更多推荐
+                        ajax.get(`https://bangumi.bilibili.com/web_api/season/recommend/${sid}.json`,function (more) {
+                            more = JSON.parse(more);
+                            if(more.code == 0){
+                                console.log("tuhao",more);
+                                more = more.result.list;
+                                var moreSection = page.view.getElementById("moreVideo");
+                                moreSection.dataItem = new DataItem();
+                                moreSection.dataItem.setPropertyPath("moreVideo", more.map((video) => {
+                                    let objectItem = new DataItem('moreVideo', video.season_id);
+                                    objectItem.cover = video.cover;
+                                    objectItem.title = video.title;
+                                    objectItem.onselect = function (e) {
+                                        openBangumi(video.season_id);
+                                    };
+                                    return objectItem;
+                                }));
+                            }
+                        })
 
                     }
                 }
