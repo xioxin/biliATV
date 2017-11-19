@@ -219,7 +219,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
          <shelf>
              <header><title>Movie 4</title></header>
              <prototypes>
-                <lockup binding="@onselect:{select};" prototype="bangumi">
+                <lockup binding="@onSelect:{select};" prototype="bangumi">
                     <img binding="@src:{cover};" width="200" height="300"/>
                     <title binding="textContent:{title};" />
                 </lockup>
