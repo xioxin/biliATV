@@ -346,17 +346,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                 </row>
                 <description allowsZooming="true" moreLabel="more">${result.evaluate}
                 ${result.staff}</description>
-                <text>CopyRight:${result.copyright}</text>
-                <row>
-                    <buttonLockup>
-                        <badge src="resource://button-preview" />
-                        <title>Preview</title>
-                    </buttonLockup>
-                    <buttonLockup type="buy">
-                        <text>$9.99</text>
-                        <title>Buy</title>
-                    </buttonLockup>
-                </row>
+                
             </stack>
             <heroImg src="${result.cover}" />
         </banner>
