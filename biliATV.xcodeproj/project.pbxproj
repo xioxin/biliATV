@@ -9,15 +9,72 @@
 /* Begin PBXBuildFile section */
 		16055A651F285264000F3AF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16055A641F285264000F3AF7 /* AppDelegate.swift */; };
 		16055A691F285264000F3AF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16055A681F285264000F3AF7 /* Assets.xcassets */; };
+		DC92A4921FC0F2080018A40D /* HackURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC92A4911FC0F2080018A40D /* HackURLProtocol.swift */; };
+		DCC008111FC095DE005F223C /* DanMuPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC8A10751FC0841E0021FF00 /* DanMuPlayer.framework */; };
+		DCC008121FC095DE005F223C /* DanMuPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DC8A10751FC0841E0021FF00 /* DanMuPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DCE10F721FA725EC00DF6AAC /* biliModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE10F711FA725EC00DF6AAC /* biliModel.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DC8A10741FC0841E0021FF00 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC8A106E1FC0841D0021FF00 /* DanMuPlayer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E90F09FC1EFA3CF800BC3EAD;
+			remoteInfo = DanMuPlayer;
+		};
+		DCC008131FC095DE005F223C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC8A106E1FC0841D0021FF00 /* DanMuPlayer.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = E90F09FB1EFA3CF800BC3EAD;
+			remoteInfo = DanMuPlayer;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DCC008151FC095DE005F223C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				DCC008121FC095DE005F223C /* DanMuPlayer.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		16055A611F285264000F3AF7 /* biliATV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = biliATV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16055A641F285264000F3AF7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		16055A681F285264000F3AF7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		16055A6A1F285264000F3AF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC4769251FBC31AA00EC6FDD /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		DC4769271FBC31B500EC6FDD /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		DC4769291FBC31C400EC6FDD /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
+		DC47692B1FBC31CF00EC6FDD /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		DC47692D1FBC31D600EC6FDD /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
+		DC47692F1FBC31DC00EC6FDD /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		DC8A106E1FC0841D0021FF00 /* DanMuPlayer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DanMuPlayer.xcodeproj; path = DanMuPlayer/DanMuPlayer.xcodeproj; sourceTree = SOURCE_ROOT; };
+		DC92A4911FC0F2080018A40D /* HackURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HackURLProtocol.swift; sourceTree = "<group>"; };
+		DCC007C21FC092A6005F223C /* SGPlatform.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SGPlatform.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCC007C31FC092A6005F223C /* SGPlatform.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SGPlatform.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCC007C41FC092A6005F223C /* SGPlatform.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SGPlatform.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCC007C51FC092A6005F223C /* SGPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SGPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCC007C61FC092A6005F223C /* SGPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SGPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCC007C71FC092A6005F223C /* SGPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SGPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCE10F711FA725EC00DF6AAC /* biliModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = biliModel.swift; sourceTree = "<group>"; };
+		DCEDB1041FBF48AF006DA75A /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		DCEDB1061FBF48BA006DA75A /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		DCEDB1081FBF48C4006DA75A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		DCEDB10A1FBF48CD006DA75A /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		DCEDB10C1FBF48D9006DA75A /* libiconv.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.tbd; path = usr/lib/libiconv.2.tbd; sourceTree = SDKROOT; };
+		DCEDB10E1FBF48E4006DA75A /* libc++.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.1.tbd"; path = "usr/lib/libc++.1.tbd"; sourceTree = SDKROOT; };
+		DCEDB1101FBF48EB006DA75A /* libz.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.tbd; path = usr/lib/libz.1.tbd; sourceTree = SDKROOT; };
+		DCEDB1121FBF48F2006DA75A /* libbz2.1.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.1.0.tbd; path = usr/lib/libbz2.1.0.tbd; sourceTree = SDKROOT; };
+		DCFBE4F61FBF3F3B005B3CDA /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -25,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCC008111FC095DE005F223C /* DanMuPlayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -36,6 +94,7 @@
 			children = (
 				16055A631F285264000F3AF7 /* biliATV */,
 				16055A621F285264000F3AF7 /* Products */,
+				DC4769241FBC31AA00EC6FDD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -50,11 +109,14 @@
 		16055A631F285264000F3AF7 /* biliATV */ = {
 			isa = PBXGroup;
 			children = (
+				DC8A106E1FC0841D0021FF00 /* DanMuPlayer.xcodeproj */,
 				16055A641F285264000F3AF7 /* AppDelegate.swift */,
 				DCE10F711FA725EC00DF6AAC /* biliModel.swift */,
 				16055A681F285264000F3AF7 /* Assets.xcassets */,
 				16055A6A1F285264000F3AF7 /* Info.plist */,
 				16055A661F285264000F3AF7 /* Supporting Files */,
+				DCFBE4F61FBF3F3B005B3CDA /* Bridging-Header.h */,
+				DC92A4911FC0F2080018A40D /* HackURLProtocol.swift */,
 			);
 			path = biliATV;
 			sourceTree = SOURCE_ROOT;
@@ -64,6 +126,41 @@
 			children = (
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DC4769241FBC31AA00EC6FDD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DCC007C21FC092A6005F223C /* SGPlatform.framework */,
+				DCC007C31FC092A6005F223C /* SGPlatform.framework */,
+				DCC007C41FC092A6005F223C /* SGPlatform.framework */,
+				DCC007C51FC092A6005F223C /* SGPlayer.framework */,
+				DCC007C61FC092A6005F223C /* SGPlayer.framework */,
+				DCC007C71FC092A6005F223C /* SGPlayer.framework */,
+				DCEDB1121FBF48F2006DA75A /* libbz2.1.0.tbd */,
+				DCEDB1101FBF48EB006DA75A /* libz.1.tbd */,
+				DCEDB10E1FBF48E4006DA75A /* libc++.1.tbd */,
+				DCEDB10C1FBF48D9006DA75A /* libiconv.2.tbd */,
+				DCEDB10A1FBF48CD006DA75A /* MediaPlayer.framework */,
+				DCEDB1081FBF48C4006DA75A /* AVFoundation.framework */,
+				DCEDB1061FBF48BA006DA75A /* CoreAudio.framework */,
+				DCEDB1041FBF48AF006DA75A /* CoreVideo.framework */,
+				DC47692F1FBC31DC00EC6FDD /* libz.tbd */,
+				DC47692D1FBC31D600EC6FDD /* libbz2.tbd */,
+				DC47692B1FBC31CF00EC6FDD /* libiconv.tbd */,
+				DC4769291FBC31C400EC6FDD /* VideoToolbox.framework */,
+				DC4769271FBC31B500EC6FDD /* AudioToolbox.framework */,
+				DC4769251FBC31AA00EC6FDD /* CoreMedia.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DC8A106F1FC0841D0021FF00 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DC8A10751FC0841E0021FF00 /* DanMuPlayer.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -76,10 +173,12 @@
 				16055A5D1F285264000F3AF7 /* Sources */,
 				16055A5E1F285264000F3AF7 /* Frameworks */,
 				16055A5F1F285264000F3AF7 /* Resources */,
+				DCC008151FC095DE005F223C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				DCC008141FC095DE005F223C /* PBXTargetDependency */,
 			);
 			name = biliATV;
 			productName = BiliBite;
@@ -93,8 +192,8 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0830;
-				ORGANIZATIONNAME = "Xia Zhongyang";
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = xioxin;
 				TargetAttributes = {
 					16055A601F285264000F3AF7 = {
 						CreatedOnToolsVersion = 8.3.3;
@@ -114,12 +213,28 @@
 			mainGroup = 16055A581F285264000F3AF7;
 			productRefGroup = 16055A621F285264000F3AF7 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = DC8A106F1FC0841D0021FF00 /* Products */;
+					ProjectRef = DC8A106E1FC0841D0021FF00 /* DanMuPlayer.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				16055A601F285264000F3AF7 /* biliATV */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		DC8A10751FC0841E0021FF00 /* DanMuPlayer.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = DanMuPlayer.framework;
+			remoteRef = DC8A10741FC0841E0021FF00 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		16055A5F1F285264000F3AF7 /* Resources */ = {
@@ -138,11 +253,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				16055A651F285264000F3AF7 /* AppDelegate.swift in Sources */,
+				DC92A4921FC0F2080018A40D /* HackURLProtocol.swift in Sources */,
 				DCE10F721FA725EC00DF6AAC /* biliModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DCC008141FC095DE005F223C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = DanMuPlayer;
+			targetProxy = DCC008131FC095DE005F223C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		16055A6B1F285264000F3AF7 /* Debug */ = {
@@ -155,7 +279,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -163,7 +289,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -205,7 +335,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -213,7 +345,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -245,11 +381,16 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = J8HDJ8AK6D;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/biliATV",
+				);
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/DanMuPlayer/DanMuPlayer\"";
 				INFOPLIST_FILE = "$(SRCROOT)/biliATV/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.SuiBianGaiGai.biliATV;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/zhaoxin/Documents/项目/biliATV/biliATV/Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -262,11 +403,16 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = J8HDJ8AK6D;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/biliATV",
+				);
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/DanMuPlayer/DanMuPlayer\"";
 				INFOPLIST_FILE = "$(SRCROOT)/biliATV/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.SuiBianGaiGai.biliATV;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/zhaoxin/Documents/项目/biliATV/biliATV/Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

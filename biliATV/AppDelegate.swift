@@ -1,26 +1,18 @@
 //
 //  AppDelegate.swift
-//  BiliBite
+//  BiliATV
 //
 
-//  Copyright (c) 2017年 Xia Zhongyang. All rights reserved.
+//  Copyright (c) 2017 xioxin. All rights reserved.
 //
 
 import UIKit
 import AVKit
 import TVMLKit
 import AVFoundation
+//import SGPlayer
 
-//var playUrlData = Dictionary<String, Any>()
-//var videoData = Dictionary<String, Any>()
-//var seasonList = Dictionary<String, Any>()
-//var biliCardrich = Dictionary<String, Any>()
-//var aid2cid = Dictionary<String, String>()
-//var jsCallback = Dictionary<String,(String)->Void>();
-//var videoDataCallback = Dictionary<String,(Dictionary<String, Any>)->Void>();
-//
-
-var ua = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.18 Safari/537.36"
+var ua = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3260.2 Safari/537.36"
 
 @UIApplicationMain
 class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControllerDelegate,UIWebViewDelegate {
@@ -28,16 +20,28 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
     var window: UIWindow?
     var appController: TVApplicationController?
     var webview:UIWebView!
+    var webviewJSContext:JSContext!
+//    var player:SGPlayer!
+
+//    var vlc = VLCVideoView();
+    
+    
+    
+    
     
     var bili:biliModel!
     var tvJsContext: JSContext!
-    
-    
+
     
     
     // tvBaseURL points to a server on your local machine. To create a local server for testing purposes, use the following command inside your project folder from the Terminal app: ruby -run -ehttpd . -p9001. See NSAppTransportSecurity for information on using a non-secure server.
     static let tvBaseURL = "https://raw.githubusercontent.com/xioxin/biliATV/master/TVML"
     static let tvBootURL = "\(AppDelegate.tvBaseURL)/application.js"
+
+    
+//    static let tvBaseURL = "http://192.168.1.5:80/biliATV/TVML/"
+//    static let tvBootURL = "\(AppDelegate.tvBaseURL)/application.js"
+//
 
     // MARK: Javascript Execution Helper
     
@@ -76,27 +80,23 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
         }
 
         appController = TVApplicationController(context: appControllerContext, window: window, delegate: self)
-
         
-        
-       
-        
-        
-        UserDefaults.standard.register(defaults: ["UserAgent": ua]);
-        
-        
+        UserDefaults.standard.register(defaults: ["UserAgent": ua])
+        UserDefaults.standard.synchronize()
         
         let webViewClass : AnyObject.Type = NSClassFromString("UIWebView")!
         let webViewObject : NSObject.Type = webViewClass as! NSObject.Type
     
-        webview = webViewObject.init() as! UIWebView;
+        
+        webview = webViewObject.init() as! UIWebView
 //        webview.bounds = UIScreen.main.bounds;
 
         
+
         
-        bili = biliModel(webview);
-        let cacheHack:urlCacheHack = urlCacheHack.init();
-        cacheHack.setModel(bili);
+        bili = biliModel(webview)
+        let cacheHack:urlCacheHack = urlCacheHack.init()
+        cacheHack.setModel(bili)
         URLCache.shared  = cacheHack
         
         webview.delegate = self;
@@ -110,7 +110,20 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
         
         self.view.addSubview(webview as! UIView)
 
-
+        
+//        self.player = SGPlayer.init()
+//
+//        self.player.view.frame = self.view.frame
+//        self.player.replaceVideo(with: URL(string: "http://www.sample-videos.com/video/flv/720/big_buck_bunny_720p_1mb.flv"));
+//        self.player.play()
+   
+        
+        //self.player.decoder = SGPlayerDecoder.byFFmpeg()
+//        self.player.view.frame = self.view.frame
+        
+//        self.player.tap
+        //UIViewController
+//        appController?.navigationController.pushViewController(UIViewController, animated: <#T##Bool#>)(self.player., animated: true)
         
         return true
     }
@@ -194,7 +207,9 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
     func appController(_ appController: TVApplicationController, evaluateAppJavaScriptIn jsContext: JSContext){
         self.tvJsContext = jsContext;
  
-        
+//        DMPlayer
+        DMPlayer.setup(jsContext, controller: appController.navigationController)
+      
         let getAvData : @convention(block) (Int,Int,JSValue ) -> Void = {
             (aid : Int,page:Int, callback: JSValue ) -> Void in
             
@@ -204,48 +219,19 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
                     data in
                 let _data = data;
                 let dataDic = _data._dic;
-                callback.call(withArguments: [dataDic]);
-
-//                data.part
+                callback.context.objectForKeyedSubscript("setTimeout").call(withArguments: [
+                    callback,0,dataDic])
                 }
             }
-        
-        let playAv : @convention(block) (Int,Int) -> Void = {
-            (aid : Int,page:Int) -> Void in
-            self.bili.getAvData(aid,page: page){
-                data in
-                
-                var pageIndex = page
-                if pageIndex < 1 { pageIndex = 1}
-                pageIndex = pageIndex-1
-                
-                let pageData = data.part[pageIndex]
-                
-                if let playData = pageData.playData{
-                    let url = URL.init(string: playData.durl[0].url)
-                    let header:[String:String] = [
-                        "User-Agent": ua,
-                            "referer": data.wb_full_url
-                        ]
-                    let options = ["AVURLAssetHTTPHeaderFieldsKey": header]
-                    let asset: AVURLAsset = AVURLAsset.init(url: url!, options: options)
-                    let playerItem = AVPlayerItem.init(asset: asset)
-                    let player: AVPlayer = AVPlayer.init(playerItem: playerItem)
-                    let playerController = AVPlayerViewController()
-                    playerController.player = player
-                    self.addChildViewController(playerController)
-                    self.view.addSubview(playerController.view)
-                    playerController.view.frame = self.view.frame
-                    appController.navigationController.pushViewController(playerController, animated: true)
-                    player.play()
-                }
-            }
-        }
-        
-        
+       
          self.tvJsContext.setObject(unsafeBitCast(getAvData, to: AnyObject.self), forKeyedSubscript: "getAvData" as (NSCopying & NSObjectProtocol))
-        self.tvJsContext.setObject(unsafeBitCast(playAv, to: AnyObject.self), forKeyedSubscript: "playAv" as (NSCopying & NSObjectProtocol))
         
+        
+        
+        self.tvJsContext.evaluateScript("var ua = \'\(ua)\';")
+        
+//        let d = DMMediaItem();
+//        d.options
 //        unsafeBitCast(<#T##x: T##T#>, to: <#T##U.Type#>)
         
         //jsContext.setObject(getAvData, forKeyedSubscript: <#(NSCopying & NSObjectProtocol)!#>);

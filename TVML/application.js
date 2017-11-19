@@ -1,6 +1,7 @@
 var dom;
 var test = {};
 var videoTest = {};
+var nowPlayer = null;
 
 /*
 *
@@ -231,14 +232,22 @@ evaluateScripts(['https://raw.githubusercontent.com/xioxin/biliATV/master/TVML/t
       function openVideo(aid,type=0) {
 
           getVideoData(aid,1,function (data,loading) {
+
               videoTest[aid] = data;
+
+              if(data.part.length == 1){
+                  loading.removeDocument();
+                  playDMAV(data.aid,1,data);
+                  return;
+              }
+
               console.warn(aid,data);
               var info = tvOS.template.custom();
 
               var buttons = "";
               data.part.forEach(function (p) {
                   let uuid = info.buttonSelect(function (e) {
-                      playAv(data.aid,p.page);
+                      playDMAV(data.aid,p.page);
                   });
                   buttons+=`<listItemLockup data-identifier-uuid="${uuid}">
             <ordinal style="tv-position:left;" minLength="4">P${p.page}</ordinal>
@@ -272,12 +281,24 @@ evaluateScripts(['https://raw.githubusercontent.com/xioxin/biliATV/master/TVML/t
 `;
               loading.replaceDocument(info);
 
+              document.getElementsByTagName('iframe').forEach(function(iframe){
+                  if(iframe && iframe.contentWindow){
+                      iframe.contentWindow.MediaSource={isTypeSupported:function(){return !0}};
+                  }
+              })
+
+
+              var ___iframes = document.getElementsByTagName('iframe')
+              for(var ___i=0;___i<___iframes.length;___i++){
+                  if(___iframes[___i] && ___iframes[___i].contentWindow){
+                      ___iframes[___i].contentWindow.MediaSource={isTypeSupported:function(){return !0}};
+                  }
+              }
+
+
+
 
           });
-
-
-
-
 
       }
       function openSeason(sid) {
@@ -319,8 +340,12 @@ evaluateScripts(['https://raw.githubusercontent.com/xioxin/biliATV/master/TVML/t
 
     function testView (testInfo){
         let button = new tvOS.element.button('测试',function () {
-            var alert3 = new tvOS.template.alert('333333'||'测试标题',['描述1','description2'],[button,button2],['footTexts1','footTexts2']);
-            alert3.presentModal();
+            // var alert3 = new tvOS.template.alert('333333'||'测试标题',['描述1','description2'],[button,button2],['footTexts1','footTexts2']);
+            // alert3.presentModal();
+
+            playDMAV();
+
+
         });
         let button2 = new tvOS.element.button('测试',function () {
             console.warn('测试按钮2')
@@ -331,8 +356,75 @@ evaluateScripts(['https://raw.githubusercontent.com/xioxin/biliATV/master/TVML/t
 
 
 
+
+
   } else {
     console.log('Missing it all!')
   }
 })
 
+
+function playDMAV(id=14356253,page=1,data=null) {
+
+
+    var _play = function (data,page) {
+        let part = data.part[page-1];
+        if(part){
+            // let timeMap = [];
+            var video_url = '';
+
+            if(part.playData.durl.length>1){
+                part.playData.durl.forEach(function (durl) {
+                    if(video_url)video_url+=";";
+                    video_url += `%${durl.length/1000}%${durl.url}`;
+                });
+                video_url = 'edl://'+video_url;
+            }else{
+                video_url = part.playData.durl[0].url;
+            }
+
+
+            let videoList = new DMPlaylist();
+            let video = new DMMediaItem('video', video_url);
+            video.url = video_url;
+            video.artworkImageURL = data.wb_img;
+            video.options = {headers:{
+                "User-Agent": ua,
+                "referer": data.wb_full_url
+            }};
+            video.title = `P${part.page}:${part.name} - ${data.wb_desc}`;
+            video.description = data.wb_summary;
+            videoList.push(video);
+            console.log(videoList);
+            if(nowPlayer)nowPlayer.stop();
+            let myPlayer = new DMPlayer();
+            nowPlayer = myPlayer;
+            console.log(myPlayer);
+            myPlayer.playlist = videoList;
+            // myPlayer.addEventListener('timeBoundaryDidCross', (listener, extraInfo) => {
+            //     console.log("bound: " + listener.boundary);
+            // }, {});
+
+            // myPlayer.addEventListener('timeDidChange', function(listener,extraInfo) {
+            //     console.log("time: " + listener.time);
+            // },{interval: 1});
+            // myPlayer.addEventListener('stateDidChange', function(listener, extraInfo) {
+            //     console.log("state: " + listener.state);
+            // },{});
+            // myPlayer.addDanMu(msg="This is a test", color=0xFF0000, fontSize=25, style=0);
+            myPlayer.play()
+        }
+    }
+    if(data && data.part && data.part[page-1] && data.part[page-1].playData){
+        _play(data,page);
+        return;
+    }
+
+    getAvData(id,page,function (data) {
+        setTimeout(function () {
+            console.log(data);
+            _play(data,page);
+        },1)
+    });
+
+}

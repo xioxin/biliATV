@@ -66,7 +66,9 @@ class tvOS_view extends tvOS_identification{
         navigationDocument.presentModal(view||this.view);
     }
     removeDocument(view){
-        navigationDocument.removeDocument(view||this.view);
+        try{
+            navigationDocument.removeDocument(view||this.view);
+        }
     }
 
 }

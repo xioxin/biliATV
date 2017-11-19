@@ -12,6 +12,8 @@ class biliModel{
     var biliCardrich = Dictionary<String, biliCardrichModel>()
 //    var jsCallback = Dictionary<String,(String)->Void>();
     var videoDataCallback = Dictionary<String,(biliVideoModel)->Void>();
+    var cid2AidAndPage = Dictionary<Int,Array<Int>>();
+    
     
     var webView:UIWebView!
 
@@ -24,12 +26,15 @@ class biliModel{
         if(pageIndex<1){ pageIndex = 1 }
         pageIndex = pageIndex - 1;
         
-        if let video = videoData["\(aid)"] {
-            if let _ = video.part[pageIndex].playData{
-                callback(video)
-                return
-            }
-        }
+//        if let video = videoData["\(aid)"] {
+//            if video.part.count > pageIndex{
+//                if let _ = video.part[pageIndex].playData{
+//                    callback(video)
+//                    return
+//                }
+//            }
+//        }
+//
 
         var href = "https://www.bilibili.com/video/av\(aid)/";
         self.videoDataCallback["\(aid)#\(page)"] = {
@@ -50,16 +55,79 @@ class biliModel{
     
     
     
-    public func webViewDidStartLoad(_ webView: UIWebView){
+    public func webViewDidStartLoad(_ webview: UIWebView){
+        print("👉 WEB START ");
+        webview.stringByEvaluatingJavaScript(from: """
+            window.MediaSource={isTypeSupported:function(){return !0}};
+            var ___iframes = document.getElementsByTagName('iframe')
+            for(var ___i=0;___i<___iframes.length;___i++){
+              if(___iframes[___i] && ___iframes[___i].contentWindow){
+                  ___iframes[___i].contentWindow.MediaSource={isTypeSupported:function(){return !0}};
+              }
+            }
+""");
+        
+        
         print("webViewDidStartLoad🔥");
     }
     
+    public func sLink (_ link:String) -> String{
+        if link.count > 3{
+            if let index = link.range(of: "//"){
+                if index.lowerBound.encodedOffset == 0 {
+                    return "https:\(link)"
+                }
+            }
+        }
+        
+        return link
+    }
+    
     public func webViewDidFinishLoad(_ webview: UIWebView){
+
+        
         
         if (webview.isLoading) {
             print("🈲️ 301");
             return;
         }
+        
+        webview.stringByEvaluatingJavaScript(from: """
+            window.MediaSource={isTypeSupported:function(){return !0}};
+            var ___iframes = document.getElementsByTagName('iframe')
+            for(var ___i=0;___i<___iframes.length;___i++){
+              if(___iframes[___i] && ___iframes[___i].contentWindow){
+                  ___iframes[___i].contentWindow.MediaSource={isTypeSupported:function(){return !0}};
+              }
+            }
+""");
+        
+        let videoQuality = 80
+        let setQualityCode = """
+        window.localStorage.setItem('bilibili_player_settings',JSON.stringify((function(s){
+        if(!s){
+        s = {setting_config:{defquality:'\(videoQuality)'}};
+        console.log('setconfig',s);
+        return ;
+        }else{
+        s = JSON.parse(s);
+        if(typeof s != "object") s = {};
+        if(!s.setting_config)s.setting_config = {};
+        s.setting_config.defquality = '\(videoQuality)';
+        console.log('setconfig',s);
+        return s;
+        }
+        })(window.localStorage.getItem('bilibili_player_settings'))));
+        """;
+        
+        //设置清晰度;
+        webview.stringByEvaluatingJavaScript(from: setQualityCode);
+        //强制html播放器
+        
+        webview.stringByEvaluatingJavaScript(from: "window.localStorage.getItem('defaulth5',1);window.sessionStorage.setItem('defaulth5',1);");
+        
+        
+        
         
         var videoM = biliVideoModel()
         
@@ -74,15 +142,26 @@ class biliModel{
         let cid = webview.stringByEvaluatingJavaScript(from: "window.cid") ?? "";
         let mid = webview.stringByEvaluatingJavaScript(from: "window.mid") ?? "";
         
+        
+        
+        
         videoM.aid = Int(aid) ?? 0
         videoM.mid = Int(mid) ?? 0
+        
+        
+  
         
         
         let nowPage = webview.stringByEvaluatingJavaScript(from: "window.pageno") ?? "";
         
         videoM.pageno = Int(nowPage) ?? 0
         
-    
+        //创建一个cid 到 aid 和page 的字典 方便反查
+        
+        print("cid2AidAndPage: \(cid)=> \(aid)#\(nowPage)")
+        cid2AidAndPage[Int(cid) ?? 0] = [Int(aid) ?? 0,Int(nowPage) ?? 0]
+        
+        
         videoM.typeid = Int( webview.stringByEvaluatingJavaScript(from: "window.typeid") ?? "" ) ?? 0
         videoM.totalpage = Int( webview.stringByEvaluatingJavaScript(from: "window.totalpage") ?? "" ) ?? 0
         
@@ -92,9 +171,9 @@ class biliModel{
         videoM.season_long_title = webview.stringByEvaluatingJavaScript(from: "window.season_long_title") ?? ""
         videoM.allow_bp = webview.stringByEvaluatingJavaScript(from: "window.allow_bp") ?? ""
         videoM.gift_id = webview.stringByEvaluatingJavaScript(from: "window.gift_id") ?? ""
-        videoM.gift_url = webview.stringByEvaluatingJavaScript(from: "window.gift_url") ?? ""
+        videoM.gift_url = sLink(webview.stringByEvaluatingJavaScript(from: "window.gift_url") ?? "")
         videoM.first_ep_id = webview.stringByEvaluatingJavaScript(from: "window.first_ep_id") ?? ""
-        videoM.wb_url = webview.stringByEvaluatingJavaScript(from: "window.wb_url") ?? ""
+        videoM.wb_url = sLink(webview.stringByEvaluatingJavaScript(from: "window.wb_url") ?? "")
         videoM.first_ep_id = webview.stringByEvaluatingJavaScript(from: "window.wb_full_url") ?? ""
  
         //通用
@@ -102,15 +181,18 @@ class biliModel{
         videoM.wb_desc = webview.stringByEvaluatingJavaScript(from: "window.wb_desc") ?? ""
         videoM.wb_info = webview.stringByEvaluatingJavaScript(from: "window.wb_info") ?? ""
         videoM.wb_url = webview.stringByEvaluatingJavaScript(from: "window.wb_url") ?? ""
-        videoM.wb_full_url = webview.stringByEvaluatingJavaScript(from: "window.wb_full_url") ?? ""
-        videoM.wb_img = webview.stringByEvaluatingJavaScript(from: "window.wb_img") ?? ""
+        videoM.wb_full_url = sLink(webview.stringByEvaluatingJavaScript(from: "window.wb_full_url") ?? "")
+        videoM.wb_img = sLink(webview.stringByEvaluatingJavaScript(from: "window.wb_img") ?? "")
         videoM.wb_summary = webview.stringByEvaluatingJavaScript(from: "window.wb_summary") ?? ""
+        
         
         if(biliCardrich[mid] != nil){
             videoM.cardrich = biliCardrich[mid]!
         }
         
         let videoPartString = webview.stringByEvaluatingJavaScript(from: "JSON.stringify(window.VideoPart.nodedata)");
+        
+        print(videoPartString);
         
         var videoPart:Array<Dictionary<String,Any>> = [];
         
@@ -137,40 +219,74 @@ class biliModel{
                 }
             }
             
-            if(videoM.part.count == 0){
-                var p = biliPartModel()
-                p.page = 1
-                p.name = videoM.wb_title
-                p.href = "/video/av\(aid)/index_\(1).html"
-                p.cid = Int(cid) ?? 0
-                if(playUrlData[cid] != nil){
-                    p.playData = playUrlData[cid];
-                }
-                videoM.part.append(p);
-            }
+           
             
             
         }catch{
             print("Error: (videoPart)")
         }
+        
+        if(videoM.part.count == 0){
+            var p = biliPartModel()
+            p.page = 1
+            p.name = videoM.wb_title
+            p.href = "/video/av\(aid)/index_\(1).html"
+            p.cid = Int(cid) ?? 0
+            if(playUrlData[cid] != nil){
+                p.playData = playUrlData[cid];
+            }
+            videoM.part.append(p);
+        }
         //        print("videoPart:");
         //        print(videoPart);
         
+        print(videoM);
         if(videoM.aid != 0){
             videoData[aid] = videoM;
             print("成功");
-            print(videoM);
-            if(videoDataCallback["\(aid)#\(nowPage)"] != nil){
-                //                if (!JSONSerialization.isValidJSONObject(thisVideData)) {
-                //                    print("无法解析出JSONString");
-                //                }
-                //                let data : Data! = try? JSONSerialization.data(withJSONObject: thisVideData, options: []) as Data!
-                //                let JSONString = String(data:data as Data,encoding: String.Encoding.utf8)
-                videoDataCallback["\(aid)#\(nowPage)"]!(videoM)
-            }
+//            print(videoM);
+            checkCompleted(videoM.aid,nowPage: Int(nowPage) ?? 1)
         }
         //防止网页中的视频资源加载 销毁播放器
         webview.stringByEvaluatingJavaScript(from: "window.player.destroy()");
+    }
+    
+    func processingBiliModel(_ videoM:biliVideoModel) -> biliVideoModel {
+        var video = videoM;
+        for (index,part) in video.part.enumerated() {
+            if let playData = playUrlData["\(part.cid)"]{
+                video.part[index].playData = playData
+            }
+        }
+        return video
+    }
+    
+    func checkCompleted(_ aid:Int,nowPage:Int ){
+        print("======checkCompleted======== \(aid)#\(nowPage)");
+        if(videoDataCallback["\(aid)#\(nowPage)"] != nil){
+            if var videoM = videoData["\(aid)"]{
+                print("has Data part.count:\(videoM.part.count)");
+                videoM = processingBiliModel(videoM)
+                if videoM.part.count >= nowPage{
+                    let part = videoM.part[nowPage-1]
+                    print("has Page \(nowPage)");
+                    if part.playData != nil{
+                        print("has playData");
+                        videoDataCallback["\(aid)#\(nowPage)"]!(videoM);
+                    }
+                }
+            }
+        }
+    }
+    
+    func checkCompleted(_ cid:Int){
+        print("======checkCompleted==cid====== \(cid)");
+        if let ap = cid2AidAndPage[cid]{
+            print(ap);
+            if ap.count == 2{
+                checkCompleted(ap[0], nowPage: ap[1])
+            }
+        }
     }
 }
 
@@ -357,7 +473,8 @@ class urlCacheHack : URLCache {
         }
         
         
-        if((url.range(of: "bilibili.com/playurl")) != nil){
+        if((url.range(of: "/playurl")) != nil){
+            print(url);
             let cid = query["cid"] ?? ""
             var data = String.init(data: cachedResponse.data, encoding: String.Encoding.utf8)!;
             if((data.range(of: "callbackfunction(")) != nil){
@@ -371,6 +488,7 @@ class urlCacheHack : URLCache {
             let jsonData = data.data(using: String.Encoding.utf8)!;
             do{
                 let playDataRew = try JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)
+                print(playDataRew);
                 
                 var playData = biliPlayDataModel()
                 
@@ -399,9 +517,13 @@ class urlCacheHack : URLCache {
                             playData.durl.append(durl)
                         }
                     }
+                    
                 }
                 
                 self.bili.playUrlData[cid] = playData
+                
+                bili.checkCompleted(playData.cid);
+                
                 
             }catch {
                 print("Error: (playUrlData)")

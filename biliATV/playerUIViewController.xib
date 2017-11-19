@@ -1,13 +1,18 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="13142" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="13770" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="appleTV" orientation="landscape">
+        <adaptation id="light"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12042"/>
+        <deployment identifier="tvOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13770"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="playerUIViewController" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="playerUIViewController" customModule="biliATV" customModuleProvider="target">
             <connections>
+                <outlet property="videoView" destination="oZ0-dN-Dvy" id="AnA-DD-9w7"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Eym-vH-oyN"/>
             </connections>
         </placeholder>
@@ -15,7 +20,25 @@
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oZ0-dN-Dvy" userLabel="videoView">
+                    <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="RTT-k9-Y8d">
+                    <rect key="frame" x="120" y="980" width="1680" height="10"/>
+                </progressView>
+            </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="RTT-k9-Y8d" firstAttribute="leading" secondItem="nkI-NY-t1X" secondAttribute="leading" constant="30" id="JUF-BC-LOR"/>
+                <constraint firstAttribute="bottom" secondItem="oZ0-dN-Dvy" secondAttribute="bottom" id="Oga-SB-I81"/>
+                <constraint firstItem="oZ0-dN-Dvy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="bHb-ca-Zzd"/>
+                <constraint firstAttribute="trailing" secondItem="oZ0-dN-Dvy" secondAttribute="trailing" id="iYW-fX-sd6"/>
+                <constraint firstItem="nkI-NY-t1X" firstAttribute="bottom" secondItem="RTT-k9-Y8d" secondAttribute="bottom" constant="30" id="mNr-12-qdw"/>
+                <constraint firstItem="nkI-NY-t1X" firstAttribute="trailing" secondItem="RTT-k9-Y8d" secondAttribute="trailing" constant="30" id="zEn-RC-sDg"/>
+                <constraint firstItem="oZ0-dN-Dvy" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="zhQ-IO-B3B"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="nkI-NY-t1X"/>
         </view>
     </objects>

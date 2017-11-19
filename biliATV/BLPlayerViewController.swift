@@ -7,13 +7,20 @@
 //
 
 import UIKit
+import AVKit
+import AVFoundation
 
-class BLPlayerViewController: AVPlayerViewController {
+class BLPlayerViewController: AVPlayerViewController{
 
+//    override var isViewLoaded: Bool = true
+//    override isViewLoaded = true
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    override var isViewLoaded: Bool{
+        return true
     }
 
     override func didReceiveMemoryWarning() {
