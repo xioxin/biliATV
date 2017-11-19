@@ -315,11 +315,14 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                         var page = tvOS.template.custom('');
 
                         var tags = "";
+                        var actor = "";
 
                         result.tags.forEach(function (tag) {
                             tags+=`<textBadge>${tag.tag_name}</textBadge>`
                         });
-
+                        result.actor.forEach(function (a) {
+                            actor+=`<text>${a.actor}</text>`
+                        });
 
                         page.xml = `<document>
     <productTemplate>
@@ -329,17 +332,9 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
             <infoList>
                 <info>
                     <header>
-                        <title>Director</title>
+                        <title>Actor</title>
                     </header>
-                    <text>John Appleseed</text>
-                </info>
-                <info>
-                    <header>
-                        <title>Staff</title>
-                    </header>
-                    <text>Anne Johnson</text>
-                    <text>Tom Clark</text>
-                    <text>Maria Ruiz</text>
+                    ${actor};
                 </info>
             </infoList>
             <stack>
@@ -351,7 +346,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                 </row>
                 <description allowsZooming="true" moreLabel="more">${result.evaluate}
                 ${result.staff}</description>
-                <text>copyright:${result.copyright}</text>
+                <text>CopyRight:${result.copyright}</text>
                 <row>
                     <buttonLockup>
                         <badge src="resource://button-preview" />
@@ -367,22 +362,24 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
         </banner>
         <shelf>
             <header>
-                <title>Viewers Also Watched</title>
+                <title>剧集</title>
             </header>
-            <section>
-                <lockup>
-                    <img src="path to images on your server/Car_Movie_250x375_A.png" width="150" height="226" />
-                    <title>Turn</title>
+            <prototypes>
+                <lockup prototype="bangumi">
+                    <img binding="@src:{cover};" width="200" height="125"/>
+                    <title binding="textContent:{title};" />
+                    <description binding="textContent:{description};" style="font-size: 30;color:#fff" />
                 </lockup>
-                <lockup>
-                    <img src="path to images on your server/Car_Movie_250x375_B.png" width="150" height="226" />
-                    <title>Road</title>
+                <lockup prototype="bangumi_new">
+                    <img binding="@src:{cover};" width="200" height="125"/>
+                    <title binding="textContent:{title};" />
+                    <description style="font-size: 30;color:#fff" >
+                        <textBadge>NEW</textBadge>
+                        <text binding="textContent:{description};"></text>
+                    </description>
                 </lockup>
-                <lockup>
-                    <img src="path to images on your server/Car_Movie_250x375_C.png" width="150" height="226" />
-                    <title>Helicopter</title>
-                </lockup>
-            </section>
+            </prototypes>
+            <section id="bangumi" binding="items:{bangumi};" />
         </shelf>
         <shelf>
             <header>
@@ -503,6 +500,27 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
         </productInfo>
     </productTemplate>
 </document>`;
+
+                       var bangumiSection = page.view.getElementById("bangumi")
+                        bangumiSection.dataItem = new DataItem();
+                        bangumiSection.dataItem.setPropertyPath("bangumi", result.episodes.map((av) => {
+
+                            var type = "bangumi";
+                            if(av.is_new){
+                                type = "bangumi_new"
+                            }
+                            let objectItem = new DataItem(type, av.av_id);
+                            objectItem.cover = av.cover;
+                            objectItem.title = av.index_title;
+                            objectItem.description = `第${av.index}话`;
+                            objectItem.onselect = function (e) {
+                                playDMAV(av.av_id*1,av.page*1)
+                            };
+                            return objectItem;
+                        }));
+
+
+
                         page.display();
 
                     }
