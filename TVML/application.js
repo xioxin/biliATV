@@ -522,12 +522,12 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                                         var tagVideoSection = page.view.getElementById("tagVideo");
                                         tagVideoSection.dataItem = new DataItem();
                                         tagVideoSection.dataItem.setPropertyPath("tagVideo", tagVideo.map((av) => {
-                                            let objectItem = new DataItem('tagVideo', av.av_id);
+                                            let objectItem = new DataItem('tagVideo', av.aid);
                                             objectItem.cover = av.pic;
                                             objectItem.title = av.title;
                                             objectItem.description = av.tname;
                                             objectItem.onselect = function (e) {
-                                                openVideo(av.av_id*1,av.page*1);
+                                                openVideo(av.aid*1);
                                             };
                                             return objectItem;
                                         }));
