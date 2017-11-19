@@ -35,8 +35,8 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
     
     // tvBaseURL points to a server on your local machine. To create a local server for testing purposes, use the following command inside your project folder from the Terminal app: ruby -run -ehttpd . -p9001. See NSAppTransportSecurity for information on using a non-secure server.
 //    static let tvBaseURL = "https://raw.githubusercontent.com/xioxin/biliATV/master/TVML"
-//    static let tvBaseURL = "https://coding.net/u/xin/p/biliATV/git/raw/master/TVML"
-    static let tvBaseURL = "http://192.168.1.5:80/biliATV/TVML"
+    static let tvBaseURL = "https://coding.net/u/xin/p/biliATV/git/raw/master/TVML"
+//    static let tvBaseURL = "http://192.168.1.5:80/biliATV/TVML"
     
     static let tvBootURL = "\(AppDelegate.tvBaseURL)/application.js"
 
