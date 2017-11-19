@@ -357,7 +357,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                     </buttonLockup>
                 </row>
             </stack>
-            <heroImg src="path to images on your server/Car_Movie_720x1080.png" />
+            <heroImg src="${result.cover}" />
         </banner>
         <shelf>
             <header>
