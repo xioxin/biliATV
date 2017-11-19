@@ -238,7 +238,10 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                 <lockup binding="@onSelect:{select};" prototype="bangumi_published">
                     <img binding="@src:{cover};" width="200" height="300"/>
                     <title binding="textContent:{title};" style="color:#fb7299" />
-                    <description binding="textContent:{description};" />
+                    <description>
+                        <span binding="textContent:{description};">111</span>
+                        <span>222</span>
+                    </description>
                 </lockup>
                 <lockup binding="@onSelect:{select};" prototype="bangumi_delay">
                     <img binding="@src:{cover};" width="200" height="300"/>
