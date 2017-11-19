@@ -227,20 +227,20 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
 
 
                 tilelineData.forEach(function (day) {
-                    dayShelf+=`<shelf  id="day-${day.date}">
-             <header><title>${day.is_today?"今天":day.date}  ${week[day.day_of_week]}</title></header>
+                    dayShelf+=`<shelf ${day.is_today?"autoHighlight='autoHighlight'":''} id="day-${day.date}">
+             <header><title>${day.is_today?"今天":day.date} ${week[day.day_of_week]}</title></header>
              <prototypes>
-                <lockup binding="@onSelect:{select};" prototype="bangumi">
+                <lockup binding="@autoHighlight:{autoHighlight};" prototype="bangumi">
                     <img binding="@src:{cover};" width="200" height="300"/>
                     <title binding="textContent:{title};" />
                     <description  binding="textContent:{description};" style="font-size: 30;color:#fff" />
                 </lockup>
-                <lockup binding="@onSelect:{select};" prototype="bangumi_published">
+                <lockup binding="@autoHighlight:{autoHighlight};" prototype="bangumi_published">
                     <img binding="@src:{cover};" width="200" height="300"/>
                     <title binding="textContent:{title};" style="color:#fb7299" />
                     <description  binding="textContent:{description};" style="font-size: 30;color:#fff" />
                 </lockup>
-                <lockup binding="@onSelect:{select};" prototype="bangumi_delay">
+                <lockup binding="@autoHighlight:{autoHighlight};" prototype="bangumi_delay">
                     <img binding="@src:{cover};" width="200" height="300"/>
                     <title binding="textContent:{title};" />
                     <description  binding="textContent:{description};" style="font-size: 30;color:#fff" />
@@ -268,7 +268,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                     let shelf = view.getElementById("day-"+day.date);
                     let section = shelf.getElementsByTagName("section").item(0);
                     section.dataItem = new DataItem()
-                    let newItems = day.seasons.map((result) => {
+                    let newItems = day.seasons.map((result,index) => {
                         var type = "bangumi";
                         if(result.delay){
                             type = "bangumi_delay"
@@ -284,6 +284,12 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                         }
                         objectItem.pub_index = result.pub_index;
                         objectItem.pub_time = result.pub_time;
+                        objectItem.autoHighlight = false;
+                        if(day.is_today && index==0){
+                            objectItem.autoHighlight = true;
+
+                        }
+
 
                         objectItem.description = `${result.pub_index} ${result.pub_time}`;
 
@@ -297,8 +303,8 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
 
                 });
                 // console.log('view',view.getElementsByTagName("shelf").item(6));
-                view.getElementsByTagName("shelf").item(6).attributes.item().autoHighlight = true;
-                view.getElementsByTagName("shelf").item(6).getElementsByTagName("lockup").item(0).attributes.item().autoHighlight = true;
+                // view.getElementsByTagName("shelf").item(6).attributes.item().autoHighlight = true;
+                // view.getElementsByTagName("shelf").item(6).getElementsByTagName("lockup").item(0).attributes.item().autoHighlight = true;
                 test.bb = view;
                 setDocument(listView);
             });
