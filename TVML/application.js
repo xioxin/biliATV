@@ -302,6 +302,10 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                 setDocument(listView);
             });
         }
+
+        function openUser(uid=0) {
+
+        }
         
         function openBangumi(sid=6465) {
             //更多推荐
@@ -387,6 +391,19 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
         </shelf>
         <shelf>
             <header>
+                <title>承包榜 7日</title>
+            </header>
+            <prototypes>
+                <lockup prototype="tuhao">
+                    <img binding="@src:{cover};" width="300" height="187"/>
+                    <title style="font-size: 30;" binding="textContent:{title};" />
+                    <description binding="textContent:{description};" style="text-align: center;font-size: 25;color:#fff" />
+                </lockup>
+            </prototypes>
+            <section id="tuhao" binding="items:{tuhao};" />
+        </shelf>
+        <shelf>
+            <header>
                 <title>相关视频</title>
             </header>
             <prototypes>
@@ -397,28 +414,6 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                 </lockup>
             </prototypes>
             <section id="tagVideo" binding="items:{tagVideo};" />
-        </shelf>
-        <shelf>
-            <header>
-                <title>Cast and Crew</title>
-            </header>
-            <section>
-                <monogramLockup>
-                    <monogram firstName="Anne" lastName="Johnson"/>
-                    <title>Anne Johnson</title>
-                    <subtitle>Actor</subtitle>
-                </monogramLockup>
-                <monogramLockup>
-                    <monogram firstName="Tom" lastName="Clark"/>
-                    <title>Tom Clark</title>
-                    <subtitle>Actor</subtitle>
-                </monogramLockup>
-                <monogramLockup>
-                    <monogram firstName="Maria" lastName="Ruiz"/>
-                    <title>Maria Ruiz</title>
-                    <subtitle>Actor</subtitle>
-                </monogramLockup>
-            </section>
         </shelf>
         <productInfo>
             <infoTable>
@@ -533,7 +528,6 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                                             objectItem.onselect = function (e) {
                                                 openVideo(av.aid*1);
                                             };
-                                            console.log("objectItem",objectItem);
                                             return objectItem;
                                         }));
                                     }
@@ -541,7 +535,29 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                             }
                         })
 
+                        //加载承包商
+                        ajax.get(`https://bangumi.bilibili.com/sponsor/rankweb/get_sponsor_week_list?season_id=${sid}&pagesize=7`,function (tuhao) {
+                            tuhao = JSON.parse(tuhao);
+                            if(tuhao.code == 0){
+                                console.log("tuhao",tuhao);
+                                tuhao = tuhao.result;
+                                var tuhaoList = tuhao.list;
 
+                                var tuhaoSection = page.view.getElementById("tuhao");
+                                tuhaoSection.dataItem = new DataItem();
+                                tuhaoSection.dataItem.setPropertyPath("tuhao", tuhaoList.map((tuhao) => {
+                                    let objectItem = new DataItem('tuhao', tuhao.uid);
+                                    objectItem.cover = tuhao.face;
+                                    objectItem.title = tuhao.uname;
+                                    objectItem.onselect = function (e) {
+                                        openUser(tuhao.uid);
+                                    };
+                                    return objectItem;
+                                }));
+                            }
+
+
+                        })
 
 
                     }
