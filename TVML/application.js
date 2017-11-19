@@ -495,7 +495,10 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
 </document>`;
 
                         page.view.getElementById("description_more").addEventListener("select",function (e) {
-                            tvOS.template.compilation(result.bangumi_title,result.jp_title,`${result.evaluate}\r\n${result.staff}`).display();
+
+
+                            tvOS.template.descriptiveAlert([result.bangumi_title,result.jp_title],'',`${result.evaluate}\r\n${result.staff}`).display();
+                            // tvOS.template.compilation(result.bangumi_title,result.jp_title,`${result.evaluate}\r\n${result.staff}`).display();
                         });
                         page.view.getElementById("play_button").addEventListener("select",function (e) {
                             playDMAV(result.episodes[0].av_id*1,result.episodes[0].page*1)
