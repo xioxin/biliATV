@@ -497,8 +497,8 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
       </productInfo>
    </productTemplate>
 </document>
-`
-                        page.pushDocument();
+`;
+                        page.display();
 
                     }
                 }
