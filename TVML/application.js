@@ -227,7 +227,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
 
 
                 tilelineData.forEach(function (day) {
-                    dayShelf+=`<shelf autoHighlight="autoHighlight" id="day-${day.date}">
+                    dayShelf+=`<shelf  id="day-${day.date}">
              <header><title>${day.is_today?"今天":day.date}  ${week[day.day_of_week]}</title></header>
              <prototypes>
                 <lockup binding="@onSelect:{select};" prototype="bangumi">
