@@ -206,6 +206,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
             setDocument(tvOS.template.loading("加载番剧信息..."));
             ajax.get('https://bangumi.bilibili.com/web_api/timeline_global',function (data) {
                 data = JSON.parse(data);
+                console.warn(data);
             });
         }
 
