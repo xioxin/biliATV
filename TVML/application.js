@@ -508,7 +508,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
 
 
                         //加载相关视频
-                        ajax.get("https://api.bilibili.com/x/tag/info?tag_name="+result.title,function (tagData) {
+                        ajax.get("https://api.bilibili.com/x/tag/info?tag_name="+encodeURI(result.title),function (tagData) {
                             tagData = JSON.parse(tagData)
                             if(tagData.code == 0){
                                 let tagId  = tagData.data.id;
