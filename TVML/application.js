@@ -210,22 +210,58 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                 var tilelineData = data.result;
                 var listView = tvOS.template.custom('');
 
+
+
+                var dayShelf = "";
+
+                var week = [
+                    '',
+                    "周一",
+                    "周二",
+                    "周三",
+                    "周四",
+                    "周五",
+                    "周六",
+                    "周日",
+                ];
+
+
+                listView.forEach(function (day) {
+                    dayShelf+=`<shelf id="day-${day.date}">
+             <header><title>${day.is_today?"今天":day.date} ${week[day.day_of_week]}</title></header>
+             <prototypes>
+                <lockup binding="@onSelect:{select};" prototype="bangumi">
+                    <img binding="@src:{cover};" width="200" height="300"/>
+                    <title binding="textContent:{title};" />
+                    <description binding="textContent:{description};" />
+                </lockup>
+                <lockup binding="@onSelect:{select};" prototype="bangumi_published">
+                    <img binding="@src:{cover};" width="200" height="300"/>
+                    <title binding="textContent:{title};" style="color:#fb7299" />
+                    <description binding="textContent:{description};" />
+                </lockup>
+                <lockup binding="@onSelect:{select};" prototype="bangumi_delay">
+                    <img binding="@src:{cover};" width="200" height="300"/>
+                    <title binding="textContent:{title};" />
+                    <description binding="textContent:{description};" />
+                </lockup>
+            </prototypes>
+            <section binding="items:{timeline};" />
+         </shelf>`
+                });
+
+
+
+
+
+
                 listView.xml = `<document>
    <stackTemplate>
       <banner>
          <title>Available Action Movies</title>
       </banner>
       <collectionList>
-         <shelf>
-             <header><title>Movie 4</title></header>
-             <prototypes>
-                <lockup binding="@onSelect:{select};" prototype="bangumi">
-                    <img binding="@src:{cover};" width="200" height="300"/>
-                    <title binding="textContent:{title};" />
-                </lockup>
-            </prototypes>
-            <section binding="items:{timeline};" />
-         </shelf>
+         ${dayShelf}
       </collectionList>
    </stackTemplate>
 </document>
@@ -233,26 +269,33 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
 
                 var view = listView.view;
 
+                tilelineData.forEach(function (day) {
+                    let shelf = view.getElementById("day-"+day.date);
+                    let section = shelf.getElementsByTagName("section").item(0);
+                    section.dataItem = new DataItem()
+                    let newItems = day.seasons.map((result) => {
+                        var type = "bangumi";
+                        if(result.delay){
+                            type = "bangumi_delay"
+                        }
+                        if(result.is_published){
+                            type = "bangumi_published"
+                        }
 
-                let shelf = view.getElementsByTagName("shelf").item(0);
-                let section = shelf.getElementsByTagName("section").item(0);
 
-                section.dataItem = new DataItem()
+                        let objectItem = new DataItem(type, result.season_id);
+                        objectItem.cover = result.cover;
+                        objectItem.title = result.title;
+                        objectItem.pub_index = result.pub_index;
+                        objectItem.pub_time = result.pub_time;
+                        objectItem.onselect = function (e) {
+                            console.warn(e,result);
+                        };
+                        return objectItem;
+                    });
+                    section.dataItem.setPropertyPath("timeline", newItems);
 
-                //create data items from objects
-                let newItems = tilelineData[0].seasons.map((result) => {
-                    let objectItem = new DataItem('bangumi', result.season_id);
-                    objectItem.cover = result.cover;
-                    objectItem.title = result.title;
-                    objectItem.pub_index = result.pub_index;
-                    objectItem.pub_time = result.pub_time;
-                    objectItem.onselect = function (e) {
-                        console.warn(e,result);
-                    };
-                    return objectItem;
                 });
-                section.dataItem.setPropertyPath("timeline", newItems);
-
 
 
                 setDocument(listView);
