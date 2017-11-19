@@ -287,7 +287,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                         objectItem.cover = result.cover;
                         objectItem.title = result.title;
                         if(result.delay){
-                            objectItem.title = "[推迟] "+ result.title;
+                            objectItem.title = "[本周停更] "+ result.title;
                         }
                         objectItem.pub_index = result.pub_index;
                         objectItem.pub_time = result.pub_time;
