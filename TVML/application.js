@@ -297,7 +297,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
 
                 });
                 console.log('view',view.getElementsByTagName("shelf").item(6));
-                // test.s6 = view.getElementsByTagName("shelf").item(6).getElementsByTagName("lockup").item(0).attributes("autoHighlight",'autoHighlight');
+                view.getElementsByTagName("shelf").item(6).getElementsByTagName("lockup").item(0).attributes.item().autoHighlight = 'autoHighlight'
                 test.bb = view;
                 setDocument(listView);
             });
