@@ -344,9 +344,14 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                     <text>${result.media.episode_index.index_show}</text>
                     ${tags}
                 </row>
-                <description allowsZooming="true" moreLabel="more">${result.evaluate}
+                <description  moreLabel="more">${result.evaluate}
                 ${result.staff}</description>
-                
+                <!--<row>
+                    <buttonLockup>
+                        <badge src="resource://button-preview" />
+                        <title>播放</title>
+                    </buttonLockup>
+                </row>-->
             </stack>
             <heroImg src="${result.cover}" />
         </banner>
