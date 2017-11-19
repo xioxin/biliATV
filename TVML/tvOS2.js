@@ -41,6 +41,16 @@ class tvOS_view extends tvOS_identification{
                 }
             })
         }
+
+        parsed.addEventListener('select', function (e) {
+            if(e.target && e.target.dataItem){
+                if(e.target.dataItem.onselect){
+                    e.target.dataItem.onselect(e,e.target.dataItem);
+                }
+            }
+
+        })
+
     }
 
     addEvent(type,uuid,handle,element){
