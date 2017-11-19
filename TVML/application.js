@@ -250,11 +250,6 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
          </shelf>`
                 });
 
-
-
-
-
-
                 listView.xml = `<document>
    <stackTemplate>
       <banner>
@@ -281,8 +276,6 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                         if(result.is_published){
                             type = "bangumi_published"
                         }
-
-
                         let objectItem = new DataItem(type, result.season_id);
                         objectItem.cover = result.cover;
                         objectItem.title = result.title;
@@ -302,15 +295,15 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                     section.dataItem.setPropertyPath("timeline", newItems);
 
                 });
-                console.log('view',view.getElementsByTagName("shelf")[6]);
-                test.s6 = view.getElementsByTagName("shelf")[6];
+                console.log('view',view.getElementsByTagName("shelf").item(6));
+                test.s6 = view.getElementsByTagName("shelf").item(6);
                 test.bb = view;
-
                 setDocument(listView);
-
-
-
             });
+        }
+        
+        function openBangumi() {
+            
         }
 
 
