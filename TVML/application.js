@@ -494,6 +494,11 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
     </productTemplate>
 </document>`;
 
+                        page.view.addEventListener("select",function (e) {
+                            console.log(e);
+                        });
+
+
                        var bangumiSection = page.view.getElementById("bangumi")
                         bangumiSection.dataItem = new DataItem();
                         bangumiSection.dataItem.setPropertyPath("bangumi", result.episodes.map((av) => {
