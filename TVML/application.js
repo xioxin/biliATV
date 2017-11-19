@@ -304,7 +304,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
         
         function openBangumi(sid=6465) {
             ajax.get(`https://bangumi.bilibili.com/jsonp/seasoninfo/${sid}.ver`,function (data) {
-                data = JSON.parse(data)
+                // data = JSON.parse(data)
                 console.log(data);
             })
         }
