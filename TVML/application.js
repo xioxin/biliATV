@@ -268,7 +268,8 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                     let shelf = view.getElementById("day-"+day.date);
                     let section = shelf.getElementsByTagName("section").item(0);
                     section.dataItem = new DataItem()
-                    let newItems = day.seasons.map((result,index) => {
+                    var index = 0;
+                    let newItems = day.seasons.map((result) => {
                         var type = "bangumi";
                         if(result.delay){
                             type = "bangumi_delay"
@@ -297,6 +298,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                             console.warn(e,result);
                             openBangumi(result.season_id);
                         };
+                        index++;
                         return objectItem;
                     });
                     section.dataItem.setPropertyPath("timeline", newItems);
