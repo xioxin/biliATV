@@ -231,7 +231,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
 </document>
 `;
 
-                var view = listView.view();
+                var view = listView.view;
                 let shelf = view.getElementsByTagName("shelf").item(0);
                 let section = shelf.getElementsByTagName("section").item(0);
 
