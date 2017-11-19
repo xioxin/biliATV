@@ -308,7 +308,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
             https://bangumi.bilibili.com/jsonp/seasoninfo/6465.ver?callback=seasonListCallback&jsonp=jsonp&_=1511089954345
             ajax.get(`https://bangumi.bilibili.com/jsonp/seasoninfo/${sid}.ver?callback=seasonListCallback&jsonp=jsonp`,function (data) {
                 function seasonListCallback(data) {
-                    data = JSON.parse(data)
+                    // data = JSON.parse(data)
                     console.log(data);
                 }
                 eval(data);
