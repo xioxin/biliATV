@@ -495,12 +495,11 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
 </document>`;
 
                         page.view.getElementById("description_more").addEventListener("select",function (e) {
-                            console.log('description_more',e);
+                            tvOS.template.compilation(result.bangumi_title,result.jp_title,`${result.evaluate}\r\n${result.staff}`).display();
                         });
                         page.view.getElementById("play_button").addEventListener("select",function (e) {
-                            console.log('play_button',e);
+                            playDMAV(result.episodes[0].av_id*1,result.episodes[0].page*1)
                         });
-
                        var bangumiSection = page.view.getElementById("bangumi")
                         bangumiSection.dataItem = new DataItem();
                         bangumiSection.dataItem.setPropertyPath("bangumi", result.episodes.map((av) => {
