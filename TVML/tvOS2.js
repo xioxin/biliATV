@@ -343,7 +343,6 @@ class tvOS_template_compilation extends tvOS_view{
         this.description = description;
         this.theme = '';//light
         this.heroImg =heroImg;
-        this.description = '';
         this.buttons = buttons;
         this.listItemLockup = listItemLockup;
         this.customHeader = "";
