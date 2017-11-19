@@ -207,6 +207,55 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
             ajax.get('https://bangumi.bilibili.com/web_api/timeline_global',function (data) {
                 data = JSON.parse(data);
                 console.warn(data);
+                var tilelineData = data.result;
+                var listView = tvOS.template.custom('');
+                listView.xml = `<document>
+   <stackTemplate>
+      <banner>
+         <title>Available Action Movies</title>
+      </banner>
+      <collectionList>
+         <shelf>
+            <section>
+               <lockup>
+                  <img src="path to images on your server/Car_Movie_250x375_A.png" width="182" height="274" />
+                  <title>Movie 1</title>
+               </lockup>
+               <lockup>
+                  <img src="path to images on your server/Car_Movie_250x375_B.png" width="182" height="274" />
+                  <title>Movie 2</title>
+               </lockup>
+               <lockup>
+                  <img src="path to images on your server/Car_Movie_250x375_C.png" width="182" height="274" />
+                  <title>Movie 3</title>
+               </lockup>
+            </section>
+         </shelf>
+         <shelf>
+            <section>
+               <lockup>
+                  <img src="path to images on your servers/Space_Movie/Space_Movie_250x375_B.png" width="182" height="274"></img>
+                  <title>Movie 4</title>
+               </lockup>
+               <lockup>
+                  <img src="path to images on your server/Space_Movie/Space_Movie_250x375_A.png" width="182" height="274"></img>
+                  <title>Movie 5</title>
+               </lockup>
+               <lockup>
+                  <img src="path to images on your server/Space_Movie/Space_Movie_250x375_C.png" width="182" height="274"></img>
+                  <title>Movie 6</title>
+               </lockup>
+            </section>
+         </shelf>
+      </collectionList>
+   </stackTemplate>
+</document>
+`
+
+                setDocument(listView);
+
+
+
             });
         }
 
