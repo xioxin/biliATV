@@ -408,7 +408,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
             </header>
             <prototypes>
                 <lockup prototype="moreVideo">
-                    <img binding="@src:{cover};" width="300" height="187"/>
+                    <img binding="@src:{cover};" width="250" height="333"/>
                     <title style="font-size: 30;" binding="textContent:{title};" />
                     <description binding="textContent:{description};" style="text-align: center;font-size: 25;color:#fff" />
                 </lockup>
@@ -520,7 +520,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                         ajax.get(`https://bangumi.bilibili.com/web_api/season/recommend/${sid}.json`,function (more) {
                             more = JSON.parse(more);
                             if(more.code == 0){
-                                console.log("tuhao",more);
+                                // console.log("tuhao",more);
                                 more = more.result.list;
                                 var moreSection = page.view.getElementById("moreVideo");
                                 moreSection.dataItem = new DataItem();
