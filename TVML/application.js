@@ -335,7 +335,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                 </info>
             </infoList>
             <stack>
-                <title>WWDC Road Trip</title>
+                <title>${result.bangumi_title}</title>
                 <row>
                     <text><badge src="resource://tomato-fresh"/> 99%</text>
                     <text>1hr 54min</text>
@@ -344,7 +344,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                     <badge src="resource://mpaa-pg" class="badge" />
                     <badge src="resource://cc" class="badge" />
                 </row>
-                <description allowsZooming="true" moreLabel="more">An aspiring developer gets a ticket to WWDC, but can't afford to fly there. Now he needs to get across country in time for the keynote, and the only person who can help him is his slacker roommate.</description>
+                <description allowsZooming="true" moreLabel="more">${result.evaluate}</description>
                 <text>Language information can go here</text>
                 <row>
                     <buttonLockup>
