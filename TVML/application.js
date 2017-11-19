@@ -324,6 +324,12 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                             actor+=`<text>${a.actor}</text>`
                         });
 
+                        var index_show = "";
+                        if(result.media && result.media.episode_index && result.media.episode_index.index_show){
+                            index_show = result.media.episode_index.index_show
+                        }
+
+
                         page.xml = `<document>
     <productTemplate>
         <background>
@@ -341,17 +347,17 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                 <title>${result.bangumi_title}</title>
                 <row>
                     <text>${result.pub_time}</text>
-                    <text>${result.media.episode_index.index_show}</text>
+                    <text>${index_show}</text>
                     ${tags}
                 </row>
-                <description  moreLabel="more">${result.evaluate}
+                <description id="description_more" allowsZooming="true" moreLabel="more">${result.evaluate}
                 ${result.staff}</description>
-                <!--<row>
-                    <buttonLockup>
+                <row>
+                    <buttonLockup id="play_button">
                         <badge src="resource://button-preview" />
                         <title>播放</title>
                     </buttonLockup>
-                </row>-->
+                </row>
             </stack>
             <heroImg src="${result.cover}" />
         </banner>

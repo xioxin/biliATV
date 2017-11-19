@@ -61,7 +61,6 @@ class tvOS_view extends tvOS_identification{
         this.element[uuid] = element;
         this.event[type][uuid] = handle;
     }
-
     display(view=false){
         navigationDocument.pushDocument(view||this.view);
     }

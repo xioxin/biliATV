@@ -520,7 +520,15 @@ class urlCacheHack : URLCache {
                     
                 }
                 
-                self.bili.playUrlData[cid] = playData
+                if let old = self.bili.playUrlData[cid]{
+                    if old.quality <= playData.quality{
+                        self.bili.playUrlData[cid] = playData
+                    }
+                }else{
+                    self.bili.playUrlData[cid] = playData
+                }
+                
+                
                 
                 bili.checkCompleted(playData.cid);
                 
