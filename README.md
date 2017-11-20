@@ -48,6 +48,8 @@ Availability.h 在AppleTV模拟器位于： Xcode > Contents > Developer > Platf
 ```
 
 # Thanks
+
 [DanMuPlayer](https://github.com/fuzhuo/DanMuPlayer)
+
 [tvOSBrowser](https://github.com/steventroughtonsmith/tvOSBrowser)
 
