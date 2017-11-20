@@ -1,6 +1,6 @@
 #  biliATV
 
-####todo:
+#### todo:
 * 个人中心
     * [x] 登录
     * [x] 我的动态
@@ -26,7 +26,7 @@
     * [ ] 加载弹幕
 
 
-###关于私有API
+### 关于私有API
 项目使用了UIWebView在tvOS中UIWebView是私有API
 需要手动修改Xcode文件来解锁,否则无法编译
 参考: [tvOSBrowser](https://github.com/steventroughtonsmith/tvOSBrowser)
