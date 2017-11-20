@@ -47,7 +47,7 @@ Availability.h 在AppleTV模拟器位于： Xcode > Contents > Developer > Platf
 #define __TVOS_PROHIBITED_NOTQUITE                     __OS_AVAILABILITY(tvos,unavailable)
 ```
 
-##Thanks to
+# Thanks
 [DanMuPlayer](https://github.com/fuzhuo/DanMuPlayer)
 [tvOSBrowser](https://github.com/steventroughtonsmith/tvOSBrowser)
 
