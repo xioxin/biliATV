@@ -16,13 +16,14 @@
     * [ ] UP主页面
     * [ ] 热门视频(B站首页)
     * [ ] 搜索
+    * [ ] 设置界面
     
 * 视频解析与播放
     * [x] 解析视频地址
     * [x] 播放视频(使用 [DanMuPlayer](https://github.com/fuzhuo/DanMuPlayer))
-    * [ ] 地址过期重新获取
+    * [ ] 视频地址过期重新获取视频地址并继续播放
     * [ ] 剧集连播
-    * [ ] 记录播放位置
+    * [ ] 记录播放位置 再次打开提示还原
     * [ ] 将播放位置提交到B站的历史记录中 方便其他设备继续播放
     * [ ] 加载弹幕
 
@@ -48,7 +49,15 @@ Availability.h 在AppleTV模拟器位于： Xcode > Contents > Developer > Platf
 #define __TVOS_PROHIBITED_NOTQUITE                     __OS_AVAILABILITY(tvos,unavailable)
 ```
 
-# Thanks
+##安装方法
+由于使用了submodule所以请不要直接下载zip
+```
+git clone https://github.com/xioxin/biliATV.git
+cd biliATV && sh build.sh
+```
+
+
+# 感谢
 
 * [DanMuPlayer](https://github.com/fuzhuo/DanMuPlayer)
 * [tvOSBrowser](https://github.com/steventroughtonsmith/tvOSBrowser)
