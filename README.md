@@ -49,7 +49,7 @@ Availability.h 在AppleTV模拟器位于： Xcode > Contents > Developer > Platf
 #define __TVOS_PROHIBITED_NOTQUITE                     __OS_AVAILABILITY(tvos,unavailable)
 ```
 
-##安装方法
+## 安装方法
 由于使用了submodule所以请不要直接下载zip
 ```
 git clone https://github.com/xioxin/biliATV.git
