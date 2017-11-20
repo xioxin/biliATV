@@ -10,6 +10,7 @@ import UIKit
 import AVKit
 import TVMLKit
 import AVFoundation
+
 //import SGPlayer
 
 var ua = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3260.2 Safari/537.36"
@@ -119,6 +120,8 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
         
         
         self.view.addSubview(webview as! UIView)
+
+        
 
         
 //        self.player = SGPlayer.init()

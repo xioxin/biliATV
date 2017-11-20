@@ -288,9 +288,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                         objectItem.autoHighlight = false;
                         if(day.is_today && index==0){
                             objectItem.autoHighlight = 'autoHighlight';
-
                         }
-
 
                         objectItem.description = `${result.pub_index} ${result.pub_time}`;
 

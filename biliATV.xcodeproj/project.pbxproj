@@ -72,6 +72,7 @@
 		DCEDB10E1FBF48E4006DA75A /* libc++.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.1.tbd"; path = "usr/lib/libc++.1.tbd"; sourceTree = SDKROOT; };
 		DCEDB1101FBF48EB006DA75A /* libz.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.tbd; path = usr/lib/libz.1.tbd; sourceTree = SDKROOT; };
 		DCEDB1121FBF48F2006DA75A /* libbz2.1.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.1.0.tbd; path = usr/lib/libbz2.1.0.tbd; sourceTree = SDKROOT; };
+		DCF7B9FB1FC27E1C00FA6AA0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		DCFBE4F61FBF3F3B005B3CDA /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -90,6 +91,7 @@
 		16055A581F285264000F3AF7 = {
 			isa = PBXGroup;
 			children = (
+				DCF7B9FB1FC27E1C00FA6AA0 /* README.md */,
 				16055A631F285264000F3AF7 /* biliATV */,
 				16055A621F285264000F3AF7 /* Products */,
 				DC4769241FBC31AA00EC6FDD /* Frameworks */,
