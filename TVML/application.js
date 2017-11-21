@@ -420,6 +420,8 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
         </shelf>
     </productTemplate>
 </document>`;
+
+                    test.uv = page.view;
                     page.display();
 
                     //填充公告
@@ -430,7 +432,6 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                             var notice = data.data.notice;
                             page.view.getElementById("description_more").textContent = notice;
                         }
-
                     })
 
 
