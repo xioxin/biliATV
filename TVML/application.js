@@ -441,15 +441,15 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                         data = JSON.parse(data);
                         if(data.status){
                             shelfKey++;
-                            var notice = data.data.notice;
                             var list = data.data.vlist;
+                            var title = "TA的投稿";
 
                             var listKey = `list_${shelfKey}`;
 
                             var shelf = page.view.createElement('shelf');
                             shelf.innerHTML = `<shelf>
             <header>
-                <title>剧集</title>
+                <title>${title}</title>
             </header>
             <prototypes>
                 <lockup prototype="video">
