@@ -327,6 +327,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
         function openUser(uid=11336264) {
             ajax.post("https://space.bilibili.com/ajax/member/GetInfo",{"mid":uid},function (data) {
                 data = JSON.parse(data);
+                console.warn("user",data);
                 if(data.status){
                     data = data.data;
 
