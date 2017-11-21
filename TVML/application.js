@@ -475,7 +475,13 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
 
                             section.dataItem.setPropertyPath(listKey,datalist );
                             console.warn(section.dataItem);
-                            productTemplate.appendChild(shelf);
+
+                            let shelf = productTemplate.getElementsByTagName("shelf");
+                            if(shelf.length == 0){
+                                productTemplate.appendChild(shelf);
+                            }else{
+                                shelf.item(0).insertBefore(shelf);
+                            }
                         }
                     });
 
