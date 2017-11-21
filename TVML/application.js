@@ -481,7 +481,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
 
 
                     //获取up的首页版块
-                    ajax.get(`https://space.bilibili.com/ajax/member/getSubmitVideos?mid=${mid}&page=1&pagesize=25`,function (data){
+                    ajax.get(`https://api.bilibili.com/x/space/channel/index?mid=${mid}&guest=false`,function (data){
                         data = JSON.parse(data);
                         console.warn('index',data);
                         if(data.code == 0){
