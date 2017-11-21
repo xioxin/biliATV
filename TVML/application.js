@@ -447,7 +447,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                             var listKey = `list_${shelfKey}`;
 
                             var shelf = page.view.createElement('shelf');
-                            shelf.innerHTML = `<shelf>
+                            shelf.innerHTML = `
             <header>
                 <title>${title}</title>
             </header>
@@ -458,8 +458,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                     <description binding="textContent:{description};" style="text-align: center;font-size: 25;color:#fff" />
                 </lockup>
             </prototypes>
-            <section id="${listKey}" binding="items:{${listKey}};" />
-        </shelf>`;
+            <section id="${listKey}" binding="items:{${listKey}};" />`;
                             // test.shelf = shelf;
                             var section =  shelf.getElementsByTagName("section").item(0);
                             section.dataItem = new DataItem();
