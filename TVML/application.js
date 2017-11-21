@@ -435,21 +435,22 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                         }
                     })
 
-                    var t = `<shelf>
-            <header>
-                <title>剧集</title>
-            </header>
-            <prototypes>
-                <lockup prototype="bangumi">
-                    <img binding="@src:{cover};" width="300" height="187"/>
-                    <title style="font-size: 30;" binding="textContent:{title};" />
-                    <description binding="textContent:{description};" style="text-align: center;font-size: 25;color:#fff" />
-                </lockup>
-            </prototypes>
-            <section id="bangumi" binding="items:{bangumi};" />
-        </shelf>`;
-                    productTemplate.appendChild(tvOS.template.custom(t).view.childNodes.item(0));
 
+                    var shelf = page.view.createElement('shelf');
+
+                    shelf.innerHTML = `<header>
+                <title>测试</title>
+            </header>
+            <section>
+            <lockup>
+                <img src="" width="300" height="187"/>
+                <title style="font-size: 30;">测试标题</title>
+                <description style="text-align: center;font-size: 25;color:#fff" >测试简介</description>
+            </lockup>
+</section>`;
+                    productTemplate.appendChild(shelf);
+
+                    // test.uv.appendChild(test.uv.createElement('shelf'))
 
                 }
             })
