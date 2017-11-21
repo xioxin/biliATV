@@ -431,7 +431,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                             data = JSON.parse(data);
                             if(data.code == 0){
                                 let channels = data.data;
-
+                                console.warn('channels',channels);
                                 channels.forEach(function (channel) {
                                     let title = `${channel.name} (${channel.count})`;
                                     let cid = channel.cid;
@@ -482,8 +482,6 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                                     console.warn(section.dataItem);
                                     productTemplate.appendChild(shelf);
                                 })
-
-
                             }
 
                         });
