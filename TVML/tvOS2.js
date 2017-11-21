@@ -534,6 +534,13 @@ ajax.get = function (url, callback) {
     ajax(url, "GET", {}, callback);
 };
 
+function autoUrl2Https(url) {
+    if(url.substr(0,2) ="//"){
+        return "https:"+url;
+    }
+    return url;
+}
+
 
 function toTime(time) {
     var a = parseInt(time/60);

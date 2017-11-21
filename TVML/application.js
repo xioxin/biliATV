@@ -464,7 +464,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                             section.dataItem = new DataItem();
                             section.dataItem.setPropertyPath(listKey, list.map((av) => {
                                 let objectItem = new DataItem('video', av.aid);
-                                objectItem.cover = av.pic;
+                                objectItem.cover = autoUrl2Https(av.pic);
                                 objectItem.title = av.title;
                                 objectItem.description = av.description;
                                 objectItem.onselect = function (e) {
