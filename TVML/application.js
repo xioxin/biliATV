@@ -445,11 +445,12 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                     <title style="font-size: 30;" binding="textContent:{title};" />
                     <description binding="textContent:{description};" style="text-align: center;font-size: 25;color:#fff" />
                 </lockup>
-                <menuItem prototype="video-more">
-               <title>Item title</title>
-            </menuItem>
-
-             
+                <lockup prototype="video-more">
+                    <badge src="resource://button-more" alt="more" accessibility="" />
+                    <!--<img style="background-color:rgba(255,255,255,1)" src="resource://button-more" width="187" height="187"/>-->
+                    <title style="font-size: 30;" binding="textContent:{title};" />
+                    <description binding="textContent:{description};" style="text-align: center;font-size: 25;color:#fff" />
+                </lockup>
             </prototypes>
             <section id="${listKey}" binding="items:{${listKey}};" />`;
                             // test.shelf = shelf;
