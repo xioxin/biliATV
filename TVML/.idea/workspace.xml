@@ -11,11 +11,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="application.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="application.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="532">
-              <caret line="329" column="0" lean-forward="false" selection-start-line="329" selection-start-column="0" selection-end-line="329" selection-end-column="0" />
+            <state relative-caret-position="488">
+              <caret line="327" column="19" lean-forward="false" selection-start-line="327" selection-start-column="19" selection-end-line="327" selection-end-column="19" />
               <folding>
                 <element signature="e#914#3684#0" expanded="false" />
                 <element signature="e#3737#5926#0" expanded="false" />
@@ -147,11 +147,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tvOS2.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="tvOS2.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tvOS2.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="845">
-              <caret line="526" column="27" lean-forward="true" selection-start-line="526" selection-start-column="27" selection-end-line="526" selection-end-column="27" />
+            <state relative-caret-position="735">
+              <caret line="505" column="64" lean-forward="false" selection-start-line="505" selection-start-column="64" selection-end-line="505" selection-end-column="64" />
               <folding>
                 <element signature="n#tvOS_view#0" expanded="false" />
                 <element signature="n#!!block;n#constructor#0;n#tvOS_view#0" expanded="false" />
@@ -170,15 +170,15 @@
                 <element signature="n#tvOS_template_custom#0" expanded="false" />
                 <element signature="e#13056#14615#0" expanded="false" />
                 <element signature="n#!!block;n#toTime#0" expanded="false" />
-                <marker date="1511245847913" expanded="true" signature="8372:8532" ph="..." />
-                <marker date="1511245847913" expanded="true" signature="8398:8521" ph="..." />
-                <marker date="1511245847913" expanded="true" signature="12173:12659" ph="..." />
-                <marker date="1511245847913" expanded="true" signature="12220:12647" ph="..." />
-                <marker date="1511245847913" expanded="true" signature="12233:12621" ph="..." />
-                <marker date="1511245847913" expanded="true" signature="12259:12465" ph="..." />
-                <marker date="1511245847913" expanded="true" signature="12284:12438" ph="..." />
-                <marker date="1511245847913" expanded="true" signature="12354:12412" ph="..." />
-                <marker date="1511245847913" expanded="true" signature="12557:12607" ph="..." />
+                <marker date="1511248700439" expanded="true" signature="8372:8532" ph="..." />
+                <marker date="1511248700439" expanded="true" signature="8398:8521" ph="..." />
+                <marker date="1511248700439" expanded="true" signature="12173:12659" ph="..." />
+                <marker date="1511248700439" expanded="true" signature="12220:12647" ph="..." />
+                <marker date="1511248700439" expanded="true" signature="12233:12621" ph="..." />
+                <marker date="1511248700439" expanded="true" signature="12259:12465" ph="..." />
+                <marker date="1511248700439" expanded="true" signature="12284:12438" ph="..." />
+                <marker date="1511248700439" expanded="true" signature="12354:12412" ph="..." />
+                <marker date="1511248700439" expanded="true" signature="12557:12607" ph="..." />
               </folding>
             </state>
           </provider>
@@ -231,8 +231,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/test.html" />
-        <option value="$PROJECT_DIR$/tvOS2.js" />
         <option value="$PROJECT_DIR$/application.js" />
+        <option value="$PROJECT_DIR$/tvOS2.js" />
       </list>
     </option>
   </component>
@@ -335,12 +335,12 @@
       <workItem from="1511054487921" duration="20000" />
       <workItem from="1511054519698" duration="8000" />
       <workItem from="1511054542437" duration="15671000" />
-      <workItem from="1511230604843" duration="6369000" />
+      <workItem from="1511230604843" duration="6496000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="68555000" />
+    <option name="totallyTimeSpent" value="68682000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="2560" height="1339" extended-state="6" />
@@ -532,15 +532,15 @@
             <element signature="n#tvOS_template_custom#0" expanded="false" />
             <element signature="e#13056#14615#0" expanded="false" />
             <element signature="n#!!block;n#toTime#0" expanded="false" />
-            <marker date="1511245847913" expanded="true" signature="8372:8532" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="8398:8521" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="12173:12659" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="12220:12647" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="12233:12621" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="12259:12465" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="12284:12438" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="12354:12412" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="12557:12607" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="8372:8532" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="8398:8521" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="12173:12659" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="12220:12647" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="12233:12621" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="12259:12465" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="12284:12438" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="12354:12412" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="12557:12607" ph="..." />
           </folding>
         </state>
       </provider>
@@ -688,15 +688,15 @@
             <element signature="n#tvOS_template_custom#0" expanded="false" />
             <element signature="e#13056#14615#0" expanded="false" />
             <element signature="n#!!block;n#toTime#0" expanded="false" />
-            <marker date="1511245847913" expanded="true" signature="8372:8532" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="8398:8521" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="12173:12659" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="12220:12647" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="12233:12621" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="12259:12465" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="12284:12438" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="12354:12412" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="12557:12607" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="8372:8532" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="8398:8521" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="12173:12659" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="12220:12647" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="12233:12621" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="12259:12465" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="12284:12438" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="12354:12412" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="12557:12607" ph="..." />
           </folding>
         </state>
       </provider>
@@ -844,15 +844,15 @@
             <element signature="n#tvOS_template_custom#0" expanded="false" />
             <element signature="e#13056#14615#0" expanded="false" />
             <element signature="n#!!block;n#toTime#0" expanded="false" />
-            <marker date="1511245847913" expanded="true" signature="8372:8532" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="8398:8521" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="12173:12659" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="12220:12647" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="12233:12621" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="12259:12465" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="12284:12438" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="12354:12412" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="12557:12607" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="8372:8532" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="8398:8521" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="12173:12659" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="12220:12647" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="12233:12621" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="12259:12465" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="12284:12438" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="12354:12412" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="12557:12607" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1000,15 +1000,15 @@
             <element signature="n#tvOS_template_custom#0" expanded="false" />
             <element signature="e#13056#14615#0" expanded="false" />
             <element signature="n#!!block;n#toTime#0" expanded="false" />
-            <marker date="1511245847913" expanded="true" signature="8372:8532" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="8398:8521" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="12173:12659" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="12220:12647" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="12233:12621" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="12259:12465" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="12284:12438" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="12354:12412" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="12557:12607" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="8372:8532" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="8398:8521" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="12173:12659" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="12220:12647" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="12233:12621" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="12259:12465" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="12284:12438" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="12354:12412" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="12557:12607" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1039,41 +1039,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tvOS2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="845">
-          <caret line="526" column="27" lean-forward="true" selection-start-line="526" selection-start-column="27" selection-end-line="526" selection-end-column="27" />
-          <folding>
-            <element signature="n#tvOS_view#0" expanded="false" />
-            <element signature="n#!!block;n#constructor#0;n#tvOS_view#0" expanded="false" />
-            <element signature="n#!!block;n#xml#0;n#tvOS_view#0" expanded="false" />
-            <element signature="n#tvOS_element#0" expanded="false" />
-            <element signature="n#tvOS_element_button#0" expanded="false" />
-            <element signature="n#tvOS_element_buttonLockup#0" expanded="false" />
-            <element signature="n#tvOS_element_menuItem#0" expanded="false" />
-            <element signature="n#tvOS_element_listItemLockup#0" expanded="false" />
-            <element signature="n#!!block;n#ArrayTemplateHelper#0" expanded="false" />
-            <element signature="n#tvOS_template_alert#0" expanded="false" />
-            <element signature="n#tvOS_template_descriptiveAlert#0" expanded="false" />
-            <element signature="n#tvOS_template_menuBar#0" expanded="false" />
-            <element signature="n#tvOS_template_loading#0" expanded="false" />
-            <element signature="n#tvOS_template_compilation#0" expanded="false" />
-            <element signature="n#tvOS_template_custom#0" expanded="false" />
-            <element signature="e#13056#14615#0" expanded="false" />
-            <element signature="n#!!block;n#toTime#0" expanded="false" />
-            <marker date="1511245847913" expanded="true" signature="8372:8532" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="8398:8521" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="12173:12659" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="12220:12647" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="12233:12621" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="12259:12465" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="12284:12438" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="12354:12412" ph="..." />
-            <marker date="1511245847913" expanded="true" signature="12557:12607" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3542">
@@ -1087,8 +1052,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="329" column="0" lean-forward="false" selection-start-line="329" selection-start-column="0" selection-end-line="329" selection-end-column="0" />
+        <state relative-caret-position="488">
+          <caret line="327" column="19" lean-forward="false" selection-start-line="327" selection-start-column="19" selection-end-line="327" selection-end-column="19" />
           <folding>
             <element signature="e#914#3684#0" expanded="false" />
             <element signature="e#3737#5926#0" expanded="false" />
@@ -1202,6 +1167,41 @@
             <marker date="1511248572027" expanded="true" signature="30179:30378" ph="..." />
             <marker date="1511248572027" expanded="true" signature="30292:30332" ph="..." />
             <marker date="1511248572027" expanded="true" signature="30394:30431" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tvOS2.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="735">
+          <caret line="505" column="64" lean-forward="false" selection-start-line="505" selection-start-column="64" selection-end-line="505" selection-end-column="64" />
+          <folding>
+            <element signature="n#tvOS_view#0" expanded="false" />
+            <element signature="n#!!block;n#constructor#0;n#tvOS_view#0" expanded="false" />
+            <element signature="n#!!block;n#xml#0;n#tvOS_view#0" expanded="false" />
+            <element signature="n#tvOS_element#0" expanded="false" />
+            <element signature="n#tvOS_element_button#0" expanded="false" />
+            <element signature="n#tvOS_element_buttonLockup#0" expanded="false" />
+            <element signature="n#tvOS_element_menuItem#0" expanded="false" />
+            <element signature="n#tvOS_element_listItemLockup#0" expanded="false" />
+            <element signature="n#!!block;n#ArrayTemplateHelper#0" expanded="false" />
+            <element signature="n#tvOS_template_alert#0" expanded="false" />
+            <element signature="n#tvOS_template_descriptiveAlert#0" expanded="false" />
+            <element signature="n#tvOS_template_menuBar#0" expanded="false" />
+            <element signature="n#tvOS_template_loading#0" expanded="false" />
+            <element signature="n#tvOS_template_compilation#0" expanded="false" />
+            <element signature="n#tvOS_template_custom#0" expanded="false" />
+            <element signature="e#13056#14615#0" expanded="false" />
+            <element signature="n#!!block;n#toTime#0" expanded="false" />
+            <marker date="1511248700439" expanded="true" signature="8372:8532" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="8398:8521" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="12173:12659" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="12220:12647" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="12233:12621" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="12259:12465" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="12284:12438" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="12354:12412" ph="..." />
+            <marker date="1511248700439" expanded="true" signature="12557:12607" ph="..." />
           </folding>
         </state>
       </provider>
