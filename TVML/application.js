@@ -359,13 +359,13 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                     <header>
                         <title>UID</title>
                     </header>
-                    <text>${data.sex}</text>
+                    <text>${data.mid}</text>
                 </info>
                 <info>
                     <header>
                         <title>性别</title>
                     </header>
-                    <text>${data.place}</text>
+                    <text>${data.sex}</text>
                 </info>
                 <info>
                     <header>
@@ -394,8 +394,13 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                 <description id="description_more"></description>
                 <row>
                     <buttonLockup id="play_button">
-                        <badge src="resource://button-preview" />
-                        <title>播放</title>
+                        <badge src="resource://button-rate" />
+                        <title>关注</title>
+                    </buttonLockup>
+                    
+                    <buttonLockup id="play_button">
+                        <badge src="resource://button-rated" />
+                        <title>已关注</title>
                     </buttonLockup>
                 </row>
             </stack>
