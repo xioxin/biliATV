@@ -569,10 +569,18 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
 
                             test.follow_button_badge = follow_button_badge;
                             if(up.following){
+
+                                follow_button.removeChild(follow_button_badge);
+                                follow_button_badge = page.view.createElement('badge');
                                 follow_button_badge.src = "resource://button-rated";
+                                follow_button_title.insertBefore(follow_button_badge);
+
                                 follow_button_title.textContent = "已关注";
                             }else{
+                                follow_button.removeChild(follow_button_badge);
+                                follow_button_badge = page.view.createElement('badge');
                                 follow_button_badge.src = "resource://button-rate";
+                                follow_button_title.insertBefore(follow_button_badge);
                                 follow_button_title.textContent = "未关注";
                             }
                         }
