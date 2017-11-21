@@ -503,7 +503,7 @@ function ajax (url, method,data, callback) {
                     callback(xmlhttp.responseText)
                 }
             } else {
-                console.warn('http err',xmlhttp.status,xmlhttp);
+                console.warn('http err',xmlhttp.status,xmlhttp.response);
                 return false
             }
         }
