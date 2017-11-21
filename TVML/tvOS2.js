@@ -50,6 +50,11 @@ class tvOS_view extends tvOS_identification{
             }
 
         })
+        parsed.addEventListener('focus', function (e) {
+            console.log("focus",e);
+
+        })
+
 
     }
 
