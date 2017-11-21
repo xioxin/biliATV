@@ -535,6 +535,7 @@ ajax.get = function (url, callback) {
 };
 
 function autoUrl2Https(url) {
+    if(!url)return "";
     if(url.substr(0,2) ="//"){
         return "https:"+url;
     }
