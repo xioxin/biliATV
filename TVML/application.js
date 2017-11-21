@@ -277,7 +277,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                 listView.xml = `<document>
    <stackTemplate>
       <banner>
-         <title>Available Action Movies</title>
+         <title>番剧</title>
       </banner>
       <collectionList>
          ${dayShelf}
@@ -450,6 +450,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                             var title = "TA的投稿";
                             if(!list)return;
                             var listKey = `list_up`;
+                            up.archiveCount = data.data.count;
 
                             var shelf = page.view.createElement('shelf');
                             shelf.innerHTML = `
@@ -485,11 +486,9 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                             let moreButtonItem = new DataItem('video-more', up.mid);
                             moreButtonItem.title="更多";
                             moreButtonItem.onselect = function (e) {
-                                // openVideo(av.aid)
+                                openUserVideo(up.mid,`${up.name}的投稿 (${up.archiveCount})`);
                             };
-                            // moreButtonItem.description="更多";
                             datalist.push(moreButtonItem);
-
 
                             section.dataItem.setPropertyPath(listKey,datalist );
                             console.warn(section.dataItem);
@@ -502,7 +501,6 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                             }
                         }
                     });
-
 
                     //获取up的首页版块
                     ajax.get(`https://api.bilibili.com/x/space/channel/index?mid=${mid}&guest=false`,function (data){
@@ -609,6 +607,34 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                 }
             })
         }
+        function openUserVideo(mid,title) {
+            openVideoList(title,function (page,callback) {
+                ajax.get(`https://space.bilibili.com/ajax/member/getSubmitVideos?mid=${mid}&page=${page}&pagesize=25`,function (data) {
+                    data = JSON.parse(data);
+                    if(data.status){
+                        var list = data.data.vlist;
+                        if(!list){
+                            callback(false);
+                        }
+                        var datalist = list.map((av) => {
+                            item = {};
+                            item.cover = autoUrl2Https(av.pic);
+                            item.title = av.title;
+                            item.description = av.description;
+                            item.onselect = function (e) {
+                                openVideo(av.aid)
+                            };
+                            return item;
+                        });
+                        callback(datalist);
+                    }else{
+                        return false;
+                    }
+                })
+            })
+        }
+
+
         function openBangumi(sid=6465) {
             //更多推荐
             //https://bangumi.bilibili.com/web_api/season/recommend/6465.json
@@ -841,8 +867,59 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                 eval(data);
             })
         }
+        function openVideoList(title,pageProcessing) {
+            var listView = tvOS.template.custom(`<document>
+   <stackTemplate>
+      <banner>
+         <title>${title}</title>
+      </banner>
+      <collectionList>
+         <grid>
+            <prototypes>
+                <lockup prototype="video">
+                    <img binding="@src:{cover};" width="200" height="300"/>
+                    <title binding="textContent:{title};" />
+                    <description  binding="textContent:{description};" style="font-size: 30;color:#fff" />
+                </lockup>
+            </prototypes>
+            <section id="video" binding="items:{video};" />
+         </grid>
+      </collectionList>
+   </stackTemplate>
+</document>
+`);
+            let section = listView.view.getElementById("video");
 
+            let loding = tvOS.template.loading(title+",加载中...");
+            loding.display();
 
+            section.dataItem = new DataItem();
+
+            var nowPage = 0;
+            var end = false;
+
+            function getNextPage() {
+                nowPage++;
+                pageProcessing(nowPage,function (list) {
+                    if(list){
+                        list.forEach(function (v) {
+                            let objectItem = new DataItem('video', v.id);
+                            for(var i in v){
+                                objectItem[i] = v[i];
+                            }
+                            section.dataItem.push(objectItem);
+                        })
+                    }else{
+                        end = true;
+                    }
+                })
+                if(loding){
+                    loding.replaceDocument(listView)
+                    loding = null;
+                }
+            }
+            getNextPage();
+        }
 
         // test id 14356253
         function getVideoData(id=14356253,page=1,_callback=function (data) {}) {
@@ -926,6 +1003,11 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
         }
 
         test.openVideo = openVideo;
+        test.openUser = openUser;
+        test.openBangumi = openBangumi;
+
+
+
         test.open2 = function () {
             // getAvData(14356253,1,function(data){console.warn(data)})
             openUser();
