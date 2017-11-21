@@ -62,3 +62,10 @@ cd biliATV && sh build.sh
 * [DanMuPlayer](https://github.com/fuzhuo/DanMuPlayer)
 * [tvOSBrowser](https://github.com/steventroughtonsmith/tvOSBrowser)
 
+
+# 截图
+![](https://user-images.githubusercontent.com/5716100/33050348-65c4a9a2-ce9f-11e7-91a0-3b219b08ce05.png)
+![](https://user-images.githubusercontent.com/5716100/33050369-86917f7a-ce9f-11e7-9d47-e5936b2107bd.png)
+![](https://user-images.githubusercontent.com/5716100/33050453-f0046422-ce9f-11e7-9726-7128e7a5ba73.png)
+![](https://user-images.githubusercontent.com/5716100/33050440-e706b460-ce9f-11e7-8241-fff6a41d397b.png)
+
