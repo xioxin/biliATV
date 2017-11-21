@@ -473,6 +473,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                                 };
                                 return objectItem;
                             }));
+                            console.warn(section.dataItem);
                             productTemplate.appendChild(shelf);
                         }
                     });
