@@ -399,6 +399,23 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                         <badge src="resource://button-rated" />
                         <title>大概没关注</title>
                     </buttonLockup>
+                    
+                    <buttonLockup>
+                        <badge src="resource://button-preview" />
+                        <title>视频</title>
+                    </buttonLockup>
+                    <buttonLockup>
+                        <!--<badge src="resource://button-rated" />-->
+                        <title>专栏</title>
+                    </buttonLockup>
+                    <buttonLockup>
+                        <!--<badge src="resource://button-rated" />-->
+                        <title>收藏</title>
+                    </buttonLockup>
+                    <buttonLockup>
+                        <!--<badge src="resource://button-rated" />-->
+                        <title>订阅</title>
+                    </buttonLockup>
                 </row>
             </stack>
             <heroImg src="${data.face}" />
