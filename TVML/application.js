@@ -448,7 +448,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                         if(data.status){
                             var list = data.data.vlist;
                             var title = "TA的投稿";
-
+                            if(!list)return;
                             var listKey = `list_up`;
 
                             var shelf = page.view.createElement('shelf');
@@ -472,7 +472,6 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                             // test.shelf = shelf;
                             var section =  shelf.getElementsByTagName("section").item(0);
                             section.dataItem = new DataItem();
-
                             var datalist = list.map((av) => {
                                 let objectItem = new DataItem('video', av.aid);
                                 objectItem.cover = autoUrl2Https(av.pic);
@@ -517,7 +516,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                                 let cid = channel.cid;
                                 let listKey = "userChannel_"+cid;
                                 let list = channel.archives;
-
+                                if(!list)return
                                 var shelf = page.view.createElement('shelf');
                                 shelf.innerHTML = `
             <header>
