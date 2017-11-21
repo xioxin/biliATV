@@ -347,7 +347,6 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                         //image_small
                     }
 
-
                     var page = tvOS.template.custom('');
                     page.xml = `<document>
     <productTemplate>
@@ -422,6 +421,22 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
     </productTemplate>
 </document>`;
                     page.display();
+
+                    //填充公告
+                    // https://space.bilibili.com/ajax/settings/getNotice?mid=11336264
+                    ajax.get(`https://space.bilibili.com/ajax/settings/getNotice?mid=${mid}`,function (data) {
+                        data = JSON.parse(data);
+                        if(data.status){
+                            var notice = data.data.notice;
+                            page.view.getElementById("description_more").textContent = notice;
+                        }
+
+                    })
+
+
+
+
+
                 }
             })
         }
