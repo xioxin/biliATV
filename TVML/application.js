@@ -424,6 +424,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                     test.uv = page.view;
                     page.display();
 
+                    var productTemplate = page.view.getElementsByTagName('productTemplate').item(0);
                     //填充公告
                     // https://space.bilibili.com/ajax/settings/getNotice?mid=11336264
                     ajax.get(`https://space.bilibili.com/ajax/settings/getNotice?mid=${mid}`,function (data) {
@@ -434,8 +435,20 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                         }
                     })
 
-
-
+                    var t = `<shelf>
+            <header>
+                <title>剧集</title>
+            </header>
+            <prototypes>
+                <lockup prototype="bangumi">
+                    <img binding="@src:{cover};" width="300" height="187"/>
+                    <title style="font-size: 30;" binding="textContent:{title};" />
+                    <description binding="textContent:{description};" style="text-align: center;font-size: 25;color:#fff" />
+                </lockup>
+            </prototypes>
+            <section id="bangumi" binding="items:{bangumi};" />
+        </shelf>`;
+                    productTemplate.appendChild(tvOS.template.custom(t).view.childNodes.item(0));
 
 
                 }
