@@ -456,10 +456,9 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                 </lockup>
             </prototypes>
             <section id="${listKey}" binding="items:{${listKey}};" />`;
-                                    var section =  shelf.getElementsByTagName("section").item(0);
+                                    let section =  shelf.getElementsByTagName("section").item(0);
                                     section.dataItem = new DataItem();
-
-                                    var datalist = list.map((av) => {
+                                    let datalist = list.map((av) => {
                                         let objectItem = new DataItem('video', av.aid);
                                         objectItem.cover = autoUrl2Https(av.pic);
                                         objectItem.title = av.title;
@@ -476,10 +475,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                                     };
                                     // moreButtonItem.description="更多";
                                     datalist.push(moreButtonItem);
-
-
-                                    section.dataItem.setPropertyPath(listKey,datalist );
-                                    console.warn(section.dataItem);
+                                    section.dataItem.setPropertyPath(listKey,datalist);
                                     productTemplate.appendChild(shelf);
                                 })
                             }
