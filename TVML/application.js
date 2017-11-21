@@ -397,7 +397,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                 <row>
                     <buttonLockup id="follow_button">
                         <badge src="resource://button-rate" />
-                        <title>关注</title>
+                        <title>未关注</title>
                     </buttonLockup>
                     
                     <!--<buttonLockup id="play_button">-->
@@ -566,13 +566,14 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                             if(archiveCountBox){
                                 archiveCountBox.textContent = ` (${up.archiveCount})`
                             }
-                            
+
+                            test.follow_button_badge = follow_button_badge;
                             if(up.following){
                                 follow_button_badge.src = "resource://button-rated";
-                                follow_button_title.textContent = "未关注";
+                                follow_button_title.textContent = "已关注";
                             }else{
                                 follow_button_badge.src = "resource://button-rate";
-                                follow_button_title.textContent = "已关注";
+                                follow_button_title.textContent = "未关注";
                             }
                         }
                     })
