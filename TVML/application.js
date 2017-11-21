@@ -433,21 +433,56 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                             var notice = data.data.notice;
                             page.view.getElementById("description_more").textContent = notice;
                         }
-                    })
+                    });
 
 
-                    var shelf = page.view.createElement('shelf');
+                    var shelfKey = 0;
+                    ajax.get(`https://space.bilibili.com/ajax/member/getSubmitVideos?mid=${mid}&page=1&pagesize=25`,function (data) {
+                        data = JSON.parse(data);
+                        if(data.status){
+                            shelfKey++;
+                            var notice = data.data.notice;
+                            var list = data.data.vlist;
 
-                    shelf.innerHTML = `<header>
-                <title>测试</title>
+                            var listKey = `list_${shelfKey}`;
+
+                            var shelf = page.view.createElement('shelf');
+                            shelf.innerHTML = `<shelf>
+            <header>
+                <title>剧集</title>
             </header>
-            <section>
-            <lockup>
-                <img src="" width="300" height="187"/>
-                <title style="font-size: 30;">测试标题</title>
-                <description style="text-align: center;font-size: 25;color:#fff" >测试简介</description>
-            </lockup>
-</section>`;
+            <prototypes>
+                <lockup prototype="video">
+                    <img binding="@src:{cover};" width="300" height="187"/>
+                    <title style="font-size: 30;" binding="textContent:{title};" />
+                    <description binding="textContent:{description};" style="text-align: center;font-size: 25;color:#fff" />
+                </lockup>
+            </prototypes>
+            <section id="${listKey}" binding="items:{${listKey}};" />
+        </shelf>`;
+                            var section =  shelf.getElementById(`${listKey}`);
+                            section.dataItem = new DataItem();
+                            section.dataItem.setPropertyPath(listKey, result.episodes.map((av) => {
+                                let objectItem = new DataItem('video', av.aid);
+                                objectItem.cover = av.pic;
+                                objectItem.title = av.title;
+                                objectItem.description = av.description;
+                                objectItem.onselect = function (e) {
+                                    openVideo(av.aid)
+                                };
+                                return objectItem;
+                            }));
+
+                        }
+                    });
+
+
+
+
+
+
+
+
                     productTemplate.appendChild(shelf);
 
                     // test.uv.appendChild(test.uv.createElement('shelf'))
