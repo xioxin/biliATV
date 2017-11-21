@@ -475,7 +475,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                             datalist.push(moreButtonItem);
 
 
-                            section.dataItem.setPropertyPath(listKey, );
+                            section.dataItem.setPropertyPath(listKey,datalist );
                             console.warn(section.dataItem);
                             productTemplate.appendChild(shelf);
                         }
