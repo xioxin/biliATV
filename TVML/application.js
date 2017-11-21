@@ -333,6 +333,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                 console.warn("user",data);
                 if(data.code == 0){
                     data = data.data.card;
+                    var up = data;
 
                     var regtime = new Date();
                     regtime.setTime(data.regtime*1000);
@@ -405,19 +406,6 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
             </stack>
             <heroImg src="${data.face}" />
         </banner>
-        <shelf>
-            <header>
-                <title>剧集</title>
-            </header>
-            <prototypes>
-                <lockup prototype="bangumi">
-                    <img binding="@src:{cover};" width="300" height="187"/>
-                    <title style="font-size: 30;" binding="textContent:{title};" />
-                    <description binding="textContent:{description};" style="text-align: center;font-size: 25;color:#fff" />
-                </lockup>
-            </prototypes>
-            <section id="bangumi" binding="items:{bangumi};" />
-        </shelf>
     </productTemplate>
 </document>`;
 
@@ -457,12 +445,18 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                     <title style="font-size: 30;" binding="textContent:{title};" />
                     <description binding="textContent:{description};" style="text-align: center;font-size: 25;color:#fff" />
                 </lockup>
+                <lockup prototype="video-more">
+                    <img src="resource://button-more" width="300" height="187"/>
+                    <title style="font-size: 30;" binding="textContent:{title};" />
+                    <description binding="textContent:{description};" style="text-align: center;font-size: 25;color:#fff" />
+                </lockup>
             </prototypes>
             <section id="${listKey}" binding="items:{${listKey}};" />`;
                             // test.shelf = shelf;
                             var section =  shelf.getElementsByTagName("section").item(0);
                             section.dataItem = new DataItem();
-                            section.dataItem.setPropertyPath(listKey, list.map((av) => {
+
+                            var datalist = list.map((av) => {
                                 let objectItem = new DataItem('video', av.aid);
                                 objectItem.cover = autoUrl2Https(av.pic);
                                 objectItem.title = av.title;
@@ -471,7 +465,17 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                                     openVideo(av.aid)
                                 };
                                 return objectItem;
-                            }));
+                            });
+                            let moreButtonItem = new DataItem('video-more', up.mid);
+                            moreButtonItem.title="更多";
+                            moreButtonItem.onselect = function (e) {
+                                // openVideo(av.aid)
+                            };
+                            // moreButtonItem.description="更多";
+                            datalist.push(moreButtonItem);
+
+
+                            section.dataItem.setPropertyPath(listKey, );
                             console.warn(section.dataItem);
                             productTemplate.appendChild(shelf);
                         }
