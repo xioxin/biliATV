@@ -31,7 +31,9 @@
 ### 关于私有API
 项目使用了UIWebView在tvOS中UIWebView是私有API
 需要手动修改Xcode文件来解锁,否则无法编译
+
 参考: [tvOSBrowser](https://github.com/steventroughtonsmith/tvOSBrowser)
+
 文件位置:
 ```
 Availability.h 在AppleTV位于： Xcode > Contents > Developer > Platforms > AppleTVOS.platform > Developer > SDKs > AppleTVOS.sdk > usr > include
