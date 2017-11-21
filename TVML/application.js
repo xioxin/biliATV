@@ -895,6 +895,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
             loding.display();
 
             section.dataItem = new DataItem();
+            var dataItems = [];
 
             var nowPage = 0;
             var end = false;
@@ -908,12 +909,13 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                             for(var i in v){
                                 objectItem[i] = v[i];
                             }
-                            section.dataItem.push(objectItem);
-                        })
+                            dataItems.push(objectItem);
+                        });
+                        section.dataItem.setPropertyPath("video",dataItems);
                     }else{
                         end = true;
                     }
-                })
+                });
                 if(loding){
                     loding.replaceDocument(listView)
                     loding = null;
