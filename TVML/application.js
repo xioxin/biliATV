@@ -618,6 +618,8 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                         }
                         var datalist = list.map((av) => {
                             item = {};
+                            item.id = av.aid;
+                            item.aid = av.aid;
                             item.cover = autoUrl2Https(av.pic);
                             item.title = av.title;
                             item.description = av.description;
