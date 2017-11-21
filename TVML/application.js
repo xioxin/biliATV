@@ -888,9 +888,9 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
    </stackTemplate>
 </document>
 `);
-            let section = listView.view.getElementById("video");
+            var section = listView.view.getElementById("video");
 
-            let loding = tvOS.template.loading(title+",加载中...");
+            var loding = tvOS.template.loading(title+",加载中...");
             loding.display();
 
             section.dataItem = new DataItem();
