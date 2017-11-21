@@ -463,7 +463,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                             test.shelf = shelf;
                             var section =  shelf.getElementsByTagName("section").item(0);
                             section.dataItem = new DataItem();
-                            section.dataItem.setPropertyPath(listKey, result.episodes.map((av) => {
+                            section.dataItem.setPropertyPath(listKey, list.map((av) => {
                                 let objectItem = new DataItem('video', av.aid);
                                 objectItem.cover = av.pic;
                                 objectItem.title = av.title;
