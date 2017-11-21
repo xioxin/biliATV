@@ -17,6 +17,8 @@ var nowPlayer = null;
 *
 * 个人资料 验证 Referer 必须为POST mid=11336264
 * https://space.bilibili.com/ajax/member/GetInfo
+* 无需验证referee
+* https://api.bilibili.com/cardrich?mid=11336264
 *
 * 最近投稿
 * https://space.bilibili.com/ajax/member/getSubmitVideos?mid=11336264&page=1&pagesize=25
@@ -325,12 +327,12 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
             });
         }
         function openUser(mid=11336264) {
-            ajax.post("http://space.bilibili.com/ajax/member/GetInfo",{"mid":mid},function (data) {
+            ajax.get(`https://api.bilibili.com/cardrich?mid=${mid}`,function (data) {
                 console.warn("user",data);
                 data = JSON.parse(data);
                 console.warn("user",data);
-                if(data.status){
-                    data = data.data;
+                if(data.code == 0){
+                    data = data.data.card;
 
                     var regtime = new Date();
                     regtime.setTime(data.regtime*1000);
