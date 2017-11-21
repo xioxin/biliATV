@@ -460,6 +460,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
             </prototypes>
             <section id="${listKey}" binding="items:{${listKey}};" />
         </shelf>`;
+                            test.shelf = shelf;
                             var section =  shelf.getElementById(`${listKey}`);
                             section.dataItem = new DataItem();
                             section.dataItem.setPropertyPath(listKey, result.episodes.map((av) => {
