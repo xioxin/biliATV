@@ -328,9 +328,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
         }
         function openUser(mid=11336264) {
             ajax.get(`https://api.bilibili.com/cardrich?mid=${mid}`,function (data) {
-                console.warn("user",data);
                 data = JSON.parse(data);
-                console.warn("user",data);
                 if(data.code == 0){
                     data = data.data.card;
                     var up = data;
@@ -485,6 +483,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                     //获取up的首页版块
                     ajax.get(`https://space.bilibili.com/ajax/member/getSubmitVideos?mid=${mid}&page=1&pagesize=25`,function (data){
                         data = JSON.parse(data);
+                        console.warn('index',data);
                         if(data.code == 0){
                             let channels = data.data;
                             console.warn('channels',channels);
