@@ -396,14 +396,9 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                 <description id="description_more"></description>
                 <row>
                     <buttonLockup id="follow_button">
-                        <badge src="resource://button-rate" />
-                        <title>未关注</title>
+                        <badge src="resource://button-rated" />
+                        <title>大概没关注</title>
                     </buttonLockup>
-                    
-                    <!--<buttonLockup id="play_button">-->
-                        <!--<badge src="resource://button-rated" />-->
-                        <!--<title>已关注</title>-->
-                    <!--</buttonLockup>-->
                 </row>
             </stack>
             <heroImg src="${data.face}" />
@@ -570,17 +565,17 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                             test.follow_button_badge = follow_button_badge;
                             if(up.following){
 
-                                follow_button.removeChild(follow_button_badge);
-                                follow_button_badge = page.view.createElement('badge');
-                                follow_button_badge.src = "resource://button-rated";
-                                follow_button_title.insertBefore(follow_button_badge);
+                                // follow_button.removeChild(follow_button_badge);
+                                // follow_button_badge = page.view.createElement('badge');
+                                // follow_button_badge.src = "resource://button-rated";
+                                // follow_button_title.insertBefore(follow_button_badge);
 
                                 follow_button_title.textContent = "已关注";
                             }else{
-                                follow_button.removeChild(follow_button_badge);
-                                follow_button_badge = page.view.createElement('badge');
-                                follow_button_badge.src = "resource://button-rate";
-                                follow_button_title.insertBefore(follow_button_badge);
+                                // follow_button.removeChild(follow_button_badge);
+                                // follow_button_badge = page.view.createElement('badge');
+                                // follow_button_badge.src = "resource://button-rate";
+                                // follow_button_title.insertBefore(follow_button_badge);
                                 follow_button_title.textContent = "未关注";
                             }
                         }
