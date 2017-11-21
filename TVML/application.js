@@ -74,6 +74,9 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                         }),
                         new tvOS.element.listItemLockup(0,'收藏夹','',function () {}),
                         new tvOS.element.listItemLockup(0,'历史','',function () {}),
+                        new tvOS.element.listItemLockup(0,'我的首页','',function () {
+                            openUser(userData.mid);
+                        }),
                         new tvOS.element.listItemLockup(0,'退出登录','',function () {
                             ajax.get('https://account.bilibili.com/login?act=exit',function () {
                                 myHome(setDocument);
