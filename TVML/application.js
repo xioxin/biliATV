@@ -479,7 +479,6 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                             console.warn(section.dataItem);
                             productTemplate.appendChild(shelf);
                         }
-                        getUserIndex();
                     });
 
 
