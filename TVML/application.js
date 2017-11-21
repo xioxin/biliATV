@@ -548,7 +548,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
 
                     // ajax.get(`https://api.bilibili.com/vipinfo/default?mid=${mid}&loginid=902845`)
 
-                    ajax.get(`https://api.bilibili.com/vipinfo/default?mid=${mid}&loginid=${userData}`,function (data) {
+                    ajax.get(`https://api.bilibili.com/vipinfo/default?mid=${mid}&loginid=${userData.mid}`,function (data) {
                         data = JSON.parse(data);
                         if(data.code == 0){
                             up.archiveCount = data.archiveCount;
