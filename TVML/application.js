@@ -395,15 +395,15 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                 </row>
                 <description id="description_more"></description>
                 <row>
-                    <buttonLockup id="play_button">
+                    <buttonLockup id="follow_button">
                         <badge src="resource://button-rate" />
                         <title>关注</title>
                     </buttonLockup>
                     
-                    <buttonLockup id="play_button">
-                        <badge src="resource://button-rated" />
-                        <title>已关注</title>
-                    </buttonLockup>
+                    <!--<buttonLockup id="play_button">-->
+                        <!--<badge src="resource://button-rated" />-->
+                        <!--<title>已关注</title>-->
+                    <!--</buttonLockup>-->
                 </row>
             </stack>
             <heroImg src="${data.face}" />
@@ -548,6 +548,15 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
 
                     // ajax.get(`https://api.bilibili.com/vipinfo/default?mid=${mid}&loginid=902845`)
 
+                    let follow_button = page.view.getElementById("follow_button");
+                    let follow_button_badge = follow_button.getElementsByTagName("badge").item(0);
+                    let follow_button_title = follow_button.getElementsByTagName("title").item(0);
+
+                    follow_button.addEventListener("select",function () {
+
+                    })
+
+
                     ajax.get(`https://api.bilibili.com/vipinfo/default?mid=${mid}&loginid=${userData.mid}`,function (data) {
                         data = JSON.parse(data);
                         if(data.code == 0){
@@ -556,6 +565,14 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                             let archiveCountBox = page.view.getElementById("archiveCount");
                             if(archiveCountBox){
                                 archiveCountBox.textContent = ` (${up.archiveCount})`
+                            }
+                            
+                            if(up.following){
+                                follow_button_badge.src = "resource://button-rated";
+                                follow_button_title.textContent = "未关注";
+                            }else{
+                                follow_button_badge.src = "resource://button-rate";
+                                follow_button_title.textContent = "已关注";
                             }
                         }
                     })
