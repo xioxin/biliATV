@@ -426,72 +426,13 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
 
                     //https://api.bilibili.com/x/space/channel/index?mid=11336264&guest=false
                     //确保顺序 所以放到 TA的投稿执行完成之后执行
-                    var getUserIndex = function () {
-                        ajax.get(`https://space.bilibili.com/ajax/member/getSubmitVideos?mid=${mid}&page=1&pagesize=25`,function (data){
-                            data = JSON.parse(data);
-                            if(data.code == 0){
-                                let channels = data.data;
-                                console.warn('channels',channels);
-                                channels.forEach(function (channel) {
-                                    let title = `${channel.name} (${channel.count})`;
-                                    let cid = channel.cid;
-                                    let listKey = "userChannel_"+cid;
-                                    let list = channel.archives;
-
-                                    var shelf = page.view.createElement('shelf');
-                                    shelf.innerHTML = `
-            <header>
-                <title>${title}</title>
-            </header>
-            <prototypes>
-                <lockup prototype="video">
-                    <img binding="@src:{cover};" width="300" height="187"/>
-                    <title style="font-size: 30;" binding="textContent:{title};" />
-                    <description binding="textContent:{description};" style="text-align: center;font-size: 25;color:#fff" />
-                </lockup>
-                <lockup prototype="video-more">
-                    <img src="${tvBaseURL}/images/more400.png" width="187" height="187" />
-                    <title style="font-size: 30;" binding="textContent:{title};" />
-                    <description binding="textContent:{description};" style="text-align: center;font-size: 25;color:#fff" />
-                </lockup>
-            </prototypes>
-            <section id="${listKey}" binding="items:{${listKey}};" />`;
-                                    let section =  shelf.getElementsByTagName("section").item(0);
-                                    section.dataItem = new DataItem();
-                                    let datalist = list.map((av) => {
-                                        let objectItem = new DataItem('video', av.aid);
-                                        objectItem.cover = autoUrl2Https(av.pic);
-                                        objectItem.title = av.title;
-                                        objectItem.description = av.description;
-                                        objectItem.onselect = function (e) {
-                                            openVideo(av.aid)
-                                        };
-                                        return objectItem;
-                                    });
-                                    let moreButtonItem = new DataItem('video-more', up.mid);
-                                    moreButtonItem.title="更多";
-                                    moreButtonItem.onselect = function (e) {
-                                        // openVideo(av.aid)
-                                    };
-                                    // moreButtonItem.description="更多";
-                                    datalist.push(moreButtonItem);
-                                    section.dataItem.setPropertyPath(listKey,datalist);
-                                    productTemplate.appendChild(shelf);
-                                })
-                            }
-
-                        });
-                    }
-
-                    var shelfKey = 0;
                     ajax.get(`https://space.bilibili.com/ajax/member/getSubmitVideos?mid=${mid}&page=1&pagesize=25`,function (data) {
                         data = JSON.parse(data);
                         if(data.status){
-                            shelfKey++;
                             var list = data.data.vlist;
                             var title = "TA的投稿";
 
-                            var listKey = `list_${shelfKey}`;
+                            var listKey = `list_up`;
 
                             var shelf = page.view.createElement('shelf');
                             shelf.innerHTML = `
@@ -542,12 +483,60 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                     });
 
 
+                    //获取up的首页版块
+                    ajax.get(`https://space.bilibili.com/ajax/member/getSubmitVideos?mid=${mid}&page=1&pagesize=25`,function (data){
+                        data = JSON.parse(data);
+                        if(data.code == 0){
+                            let channels = data.data;
+                            console.warn('channels',channels);
+                            channels.forEach(function (channel) {
+                                let title = `${channel.name} (${channel.count})`;
+                                let cid = channel.cid;
+                                let listKey = "userChannel_"+cid;
+                                let list = channel.archives;
 
-
-
-
-
-
+                                var shelf = page.view.createElement('shelf');
+                                shelf.innerHTML = `
+            <header>
+                <title>${title}</title>
+            </header>
+            <prototypes>
+                <lockup prototype="video">
+                    <img binding="@src:{cover};" width="300" height="187"/>
+                    <title style="font-size: 30;" binding="textContent:{title};" />
+                    <description binding="textContent:{description};" style="text-align: center;font-size: 25;color:#fff" />
+                </lockup>
+                <lockup prototype="video-more">
+                    <img src="${tvBaseURL}/images/more400.png" width="187" height="187" />
+                    <title style="font-size: 30;" binding="textContent:{title};" />
+                    <description binding="textContent:{description};" style="text-align: center;font-size: 25;color:#fff" />
+                </lockup>
+            </prototypes>
+            <section id="${listKey}" binding="items:{${listKey}};" />`;
+                                let section =  shelf.getElementsByTagName("section").item(0);
+                                section.dataItem = new DataItem();
+                                let datalist = list.map((av) => {
+                                    let objectItem = new DataItem('video', av.aid);
+                                    objectItem.cover = autoUrl2Https(av.pic);
+                                    objectItem.title = av.title;
+                                    objectItem.description = av.description;
+                                    objectItem.onselect = function (e) {
+                                        openVideo(av.aid)
+                                    };
+                                    return objectItem;
+                                });
+                                let moreButtonItem = new DataItem('video-more', up.mid);
+                                moreButtonItem.title="更多";
+                                moreButtonItem.onselect = function (e) {
+                                    // openVideo(av.aid)
+                                };
+                                // moreButtonItem.description="更多";
+                                datalist.push(moreButtonItem);
+                                section.dataItem.setPropertyPath(listKey,datalist);
+                                productTemplate.appendChild(shelf);
+                            })
+                        }
+                    });
 
 
                     // test.uv.appendChild(test.uv.createElement('shelf'))
