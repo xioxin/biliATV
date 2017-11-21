@@ -460,7 +460,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
             </prototypes>
             <section id="${listKey}" binding="items:{${listKey}};" />
         </shelf>`;
-                            test.shelf = shelf;
+                            // test.shelf = shelf;
                             var section =  shelf.getElementsByTagName("section").item(0);
                             section.dataItem = new DataItem();
                             section.dataItem.setPropertyPath(listKey, list.map((av) => {
@@ -473,7 +473,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                                 };
                                 return objectItem;
                             }));
-
+                            productTemplate.appendChild(shelf);
                         }
                     });
 
@@ -484,7 +484,6 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
 
 
 
-                    productTemplate.appendChild(shelf);
 
                     // test.uv.appendChild(test.uv.createElement('shelf'))
 
