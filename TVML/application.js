@@ -446,7 +446,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                     <description binding="textContent:{description};" style="text-align: center;font-size: 25;color:#fff" />
                 </lockup>
                 <lockup prototype="video-more">
-                    <img src="./images/more400.png" width="187" height="187" />
+                    <img src="${tvBaseURL}/images/more400.png" width="187" height="187" />
                     <title style="font-size: 30;" binding="textContent:{title};" />
                     <description binding="textContent:{description};" style="text-align: center;font-size: 25;color:#fff" />
                 </lockup>
