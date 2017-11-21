@@ -20,6 +20,9 @@ var nowPlayer = null;
 * 无需验证referee
 * https://api.bilibili.com/cardrich?mid=11336264
 *
+* 投稿数 和 关注信息
+* https://api.bilibili.com/vipinfo/default?mid=11336264&loginid=902845
+*
 * 最近投稿
 * https://space.bilibili.com/ajax/member/getSubmitVideos?mid=11336264&page=1&pagesize=25
 *
@@ -33,6 +36,7 @@ var nowPlayer = null;
 * https://space.bilibili.com/ajax/top/showTop?mid=11336264&guest=1
 *
 * */
+var userData = {};
 
 evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
 
@@ -56,7 +60,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                         })
                     ]);
                 }else{
-                    var userData = data.data;
+                    userData = data.data;
                     console.warn(data);
                     var name =userData.uname;
                     if(userData.vipStatus){
@@ -476,11 +480,11 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                             section.dataItem.setPropertyPath(listKey,datalist );
                             console.warn(section.dataItem);
 
-                            let shelf = productTemplate.getElementsByTagName("shelf");
-                            if(shelf.length == 0){
+                            let existShelf = productTemplate.getElementsByTagName("shelf");
+                            if(existShelf.length == 0){
                                 productTemplate.appendChild(shelf);
                             }else{
-                                shelf.item(0).insertBefore(shelf);
+                                existShelf.item(0).insertBefore(shelf);
                             }
                         }
                     });
@@ -541,6 +545,9 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                             })
                         }
                     });
+
+                    ajax.get(`https://api.bilibili.com/vipinfo/default?mid=${mid}&loginid=902845`)
+
 
 
                     // test.uv.appendChild(test.uv.createElement('shelf'))
