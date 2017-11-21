@@ -517,16 +517,13 @@ function ajax (url, method,data, callback) {
     if(method == "GET"){
         postData = '';
     }else{
-        xmlhttp.setRequestHeader("Content-Type"
-            , "application/x-www-form-urlencoded");
+        xmlhttp.setRequestHeader("Content-Type" , "application/x-www-form-urlencoded");
     }
-    xmlhttp.setRequestHeader("X-Requested-With"
-        , "XMLHttpRequest");
-    xmlhttp.setRequestHeader("User-Agent"
-        , "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.9 Safari/537.36");
+    xmlhttp.setRequestHeader("X-Requested-With" , "XMLHttpRequest");
+    xmlhttp.setRequestHeader("User-Agent" , "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.9 Safari/537.36");
+    xmlhttp.setRequestHeader("Referer","https://www.bilibili.com/");
 
-
-    console.log(postData);
+    // console.log(postData);
     xmlhttp.send(postData);
 }
 ajax.post = function (url, data, callback) {

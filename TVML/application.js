@@ -8,14 +8,33 @@ var nowPlayer = null;
 * 动漫订阅
 * https://space.bilibili.com/ajax/Bangumi/getList?mid=902845
 *
+*
+* 用户收藏夹
+* https://api.bilibili.com/x/v2/fav/folder?vmid=11336264&jsonp=jsonp&callback=_jsonp7w97f2ymphi
+*
+* 用户首页版块
+* https://api.bilibili.com/x/space/channel/index?mid=11336264&guest=false&jsonp=jsonp&callback=_jsonpx036tchreuc
+*
+* 个人资料 验证 Referer 必须为POST mid=11336264
+* https://space.bilibili.com/ajax/member/GetInfo
+*
+* 最近投稿
+* https://space.bilibili.com/ajax/member/getSubmitVideos?mid=11336264&page=1&pagesize=25
+*
+* 获取用户公告
+* https://space.bilibili.com/ajax/settings/getNotice?mid=11336264
+*
+* 获取用户标签
+* https://space.bilibili.com/ajax/member/getTags?mids=11336264
+*
+* 置顶视频
+* https://space.bilibili.com/ajax/top/showTop?mid=11336264&guest=1
+*
 * */
 
 evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
 
     if (success) {
-
-
-
         function myHome(setDocument) {
             setDocument(tvOS.template.loading("加载中个人信息.."));
             ajax.get('https://api.bilibili.com/x/web-interface/nav',function (data) {
@@ -70,7 +89,6 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
             // return loadingBox;
         }
         function openLogin(callback=function () {}) {
-
             ajax.get("https://passport.bilibili.com/qrcode/getLoginUrl",function (data) {
                 data = JSON.parse(data);
                 data = data.data;
@@ -118,7 +136,6 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                 // loadingBox.dismissModal();
                 modal.presentModal(dom);
             });
-
         }
         function openDynamic() {
             var loading = tvOS.template.loading('加载中');
@@ -200,8 +217,6 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
 
 
         }
-
-
         function timeline(setDocument) {
             setDocument(tvOS.template.loading("加载番剧信息..."));
             ajax.get('https://bangumi.bilibili.com/web_api/timeline_global',function (data) {
@@ -309,11 +324,98 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                 setDocument(listView);
             });
         }
+        function openUser(uid=11336264) {
+            ajax.post("https://space.bilibili.com/ajax/member/GetInfo",{"mid":uid},function (data) {
+                data = JSON.parse(data);
+                if(data.status){
+                    data = data.data;
 
-        function openUser(uid=0) {
+                    var regtime = new Date();
+                    regtime.setTime(data.regtime*1000);
+                    var regtime_text = `${regtime.getFullYear()}-${regtime.getMonth()}-${regtime.getDate()}`
 
+                    var nameplate = "无";
+                    var nameplate_icon = "";
+
+                    if(data.nameplate){
+                        nameplate = data.nameplate.name;
+                        nameplate_icon = data.nameplate.image;
+                        //image_small
+                    }
+
+
+                    var page = tvOS.template.custom('');
+                    page.xml = `<document>
+    <productTemplate>
+        <background>
+        </background>
+        <banner>
+            <infoList>
+                <info>
+                    <header>
+                        <title>UID</title>
+                    </header>
+                    <text>${data.sex}</text>
+                </info>
+                <info>
+                    <header>
+                        <title>性别</title>
+                    </header>
+                    <text>${data.place}</text>
+                </info>
+                <info>
+                    <header>
+                        <title>位置</title>
+                    </header>
+                    <text>${data.place}</text>
+                </info>
+                <info>
+                    <header>
+                        <title>注册于</title>
+                    </header>
+                    <text>${regtime_text}</text>
+                </info>
+                <info>
+                    <header>
+                        <title>勋章</title>
+                    </header>
+                    <text>${nameplate}</text>
+                </info>
+            </infoList>
+            <stack>
+                <title>${data.name}</title>
+                <row>
+                    <text>${data.sign}</text>
+                </row>
+                <description id="description_more"></description>
+                <row>
+                    <buttonLockup id="play_button">
+                        <badge src="resource://button-preview" />
+                        <title>播放</title>
+                    </buttonLockup>
+                </row>
+            </stack>
+            <heroImg src="${data.face}" />
+        </banner>
+        <shelf>
+            <header>
+                <title>剧集</title>
+            </header>
+            <prototypes>
+                <lockup prototype="bangumi">
+                    <img binding="@src:{cover};" width="300" height="187"/>
+                    <title style="font-size: 30;" binding="textContent:{title};" />
+                    <description binding="textContent:{description};" style="text-align: center;font-size: 25;color:#fff" />
+                </lockup>
+            </prototypes>
+            <section id="bangumi" binding="items:{bangumi};" />
+        </shelf>
+    </productTemplate>
+</document>`;
+                    page.display();
+                }
+            })
         }
-        
         function openBangumi(sid=6465) {
             //更多推荐
             //https://bangumi.bilibili.com/web_api/season/recommend/6465.json
@@ -349,8 +451,6 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                         if(result.media && result.media.episode_index && result.media.episode_index.index_show){
                             index_show = result.media.episode_index.index_show
                         }
-
-
 
                         page.xml = `<document>
     <productTemplate>
@@ -635,9 +735,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
         test.openVideo = openVideo;
         test.open2 = function () {
             // getAvData(14356253,1,function(data){console.warn(data)})
-            getVideoData(14356253,1,function (data) {
-                console.warn(data)
-            })
+            openUser();
         };
 
         var bar = tvOS.template.menuBar([
