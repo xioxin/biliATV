@@ -1252,11 +1252,12 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
       </collectionList>
    </stackTemplate>
 </document>`);
+        test.temp = view;
         test.view = view;
         // view.dataItem.title = "测试标题";
 
-        test.section = view.getElementsByTagName("section").item(0);
-        test.section.DataItem = new DataItem();
+        // test.section = view.getElementsByTagName("section").item(0);
+        test.view.DataItem = new DataItem();
 
 
         test.newVideo = function (title="title1") {
@@ -1269,9 +1270,9 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
         test.list = [
             test.newVideo("ceshi")
         ];
-
-
-        test.section.dataItem.setPropertyPath("video",test.list );
+        test.view.dataItem.setPropertyPath("title","title3" );
+        test.view.dataItem.title = "titile2";
+        test.view.dataItem.setPropertyPath("video",test.list );
 
 
 
