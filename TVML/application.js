@@ -9,7 +9,6 @@ var userData = {};
 * 动漫订阅
 * https://space.bilibili.com/ajax/Bangumi/getList?mid=902845
 *
-*
 * 用户收藏夹
 * https://api.bilibili.com/x/v2/fav/folder?vmid=11336264&jsonp=jsonp&callback=_jsonp7w97f2ymphi
 *
@@ -50,9 +49,31 @@ var userData = {};
 * 相关视频
 * https://api.bilibili.com/x/web-interface/tag/top?pn=1&ps=30&callback=relate_video_callback&jsonp=jsonp&tid=4641922&_=1511098218419
 *
-*
 * */
 
+function displayError(title, info) {
+    let xml = `<document>
+   <descriptiveAlertTemplate>
+      <title>${title}</title>
+      <description>${info}</description>
+      <row>
+         <button>
+            <text>关闭</text>
+         </button>
+      </row>
+   </descriptiveAlertTemplate>
+</document>`;
+    let parser = new DOMParser();
+    let parsed = parser.parseFromString(xml.replace(new RegExp('&', 'g'), '&amp;'), "application/xml");
+    parsed.addEventListener("select",function (e) {
+        navigationDocument.dismissModal();
+    });
+    parsed.addEventListener("play",function (e) {
+        // 显示详细错误信息
+        // navigationDocument.dismissModal();
+    });
+    navigationDocument.presentModal(parsed);
+}
 function myHome(setDocument) {
     setDocument(tvOS.template.loading("加载中个人信息.."));
     ajax.get('https://api.bilibili.com/x/web-interface/nav',function (data) {
@@ -1114,7 +1135,7 @@ function initBar() {
     var barView = bar.view;
     bar.display(barView);
 }
-function testView (testInfo){
+function testView(testInfo){
     let button = new tvOS.element.button('测试',function () {
         // var alert3 = new tvOS.template.alert('333333'||'测试标题',['描述1','description2'],[button,button2],['footTexts1','footTexts2']);
         // alert3.presentModal();
@@ -1190,13 +1211,14 @@ function playDMAV(id=14356253,page=1,data=null) {
 
 }
 
-
-
+App.onError = function (message, sourceURL, line) {
+    displayError("发生错误",`${message}\r\n\r\n${sourceURL} : ${line}`);
+};
 
 evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
     if (success) {
         initBar();
     } else {
-        console.log('Missing it all!')
+        displayError("加载外部JS文件出现错误!",tvBaseURL+'/tvOS2.js');
     }
 });
