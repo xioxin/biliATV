@@ -73,8 +73,7 @@ function displayError(title, info) {
         navigationDocument.dismissModal();
     });
     parsed.getElementById("reload").addEventListener("select",function (e) {
-        navigationDocument.dismissModal();
-        App.reload({},{});
+        App.reload({});
     });
     // parsed.addEventListener("play",function (e) {
     //     // 显示详细错误信息
