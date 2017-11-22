@@ -1272,7 +1272,8 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
             return d;
         };
         test.list = [
-            test.newVideo("ceshi")
+            test.newVideo("ceshi"),
+            test.newVideo("ceshi2")
         ];
         // test.view.DataItem.setPropertyPath("title","title3" );
         // test.view.DataItem.title = "titile2";
