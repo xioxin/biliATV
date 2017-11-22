@@ -14,8 +14,8 @@
       <file leaf-file-name="application.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="528">
-              <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+            <state relative-caret-position="748">
+              <caret line="84" column="44" lean-forward="true" selection-start-line="84" selection-start-column="44" selection-end-line="84" selection-end-column="44" />
               <folding>
                 <element signature="n#!!block;n#jsonParse#0" expanded="false" />
                 <element signature="n#!!block;n#myHome#0" expanded="false" />
@@ -397,12 +397,12 @@
       <workItem from="1511054542437" duration="15671000" />
       <workItem from="1511230604843" duration="14132000" />
       <workItem from="1511263263393" duration="7046000" />
-      <workItem from="1511320769472" duration="8036000" />
+      <workItem from="1511320769472" duration="8137000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="91400000" />
+    <option name="totallyTimeSpent" value="91501000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
@@ -1843,8 +1843,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+        <state relative-caret-position="748">
+          <caret line="84" column="44" lean-forward="true" selection-start-line="84" selection-start-column="44" selection-end-line="84" selection-end-column="44" />
           <folding>
             <element signature="n#!!block;n#jsonParse#0" expanded="false" />
             <element signature="n#!!block;n#myHome#0" expanded="false" />
