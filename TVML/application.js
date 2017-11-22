@@ -1236,7 +1236,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
         let view = tvOS.template.custom(`<document>
    <stackTemplate>
       <banner>
-         <title>测试</title>
+         <title binding="textContent:{title};">测试</title>
       </banner>
       <collectionList>
          <shelf>
@@ -1257,8 +1257,9 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
         test.view = view.view;
         // view.dataItem.title = "测试标题";
 
-        test.section = view.view.getElementsByTagName("section").item(0);
-        test.section.DataItem = new DataItem();
+        // test.section = view.view.getElementsByTagName("section").item(0);
+        test.section = view.view;
+        test.section.dataItem = new DataItem();
 
 
         var n = 0;
@@ -1275,9 +1276,9 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
             test.newVideo("ceshi"),
             test.newVideo("ceshi2")
         ];
-        // test.view.DataItem.setPropertyPath("title","title3" );
-        // test.view.DataItem.title = "titile2";
-        test.section.DataItem.setPropertyPath("video",test.list );
+        test.view.dataItem.setPropertyPath("title","title3" );
+        test.view.dataItem.title = "titile2";
+        test.section.dataItem.setPropertyPath("video",test.list );
 
         // view.dataItem.title = "测试标题3";
 
