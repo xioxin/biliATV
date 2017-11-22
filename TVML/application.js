@@ -54,8 +54,12 @@ var userData = {};
 var displayErrorLock = false;
 
 // 显示错误信息
-function displayError(title, info) {
-    if(displayErrorLock) return;
+function displayError(title="", info="") {
+    console.warn("displayError",title, info);
+    if(displayErrorLock){
+        console.warn("不报错窗口递归");
+        return;
+    }
     displayErrorLock = true;
     let xml = `<document>
    <descriptiveAlertTemplate>
@@ -1223,7 +1227,13 @@ App.onError = function (message, sourceURL, line){
 
 evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
     if(success){
-        initBar();
+        let view = videoList();
+
+        view.title = 1010;
+        view.list.push("aaa");
+        view.display();
+
+        // initBar();
     }else{
         displayError("加载外部JS文件出现错误!",tvBaseURL+'/tvOS2.js');
     }

@@ -452,21 +452,45 @@ class videoList extends tvOS_view{
     constructor(title) {
         super();
         this.pageData = {
-            title:title
+            title:title,
+            list:[],
         };
-        this.prototypes = `<lockup prototype="video">
+
+        this.pageDataProxy = new Proxy(this.pageData, {
+            get: function (target, key, receiver) {
+                console.log(`getting ${key}!`);
+                return Reflect.get(target, key, receiver);
+            },
+            set: function (target, key, value, receiver) {
+                console.log(`setting ${key}!`);
+                return Reflect.set(target, key, value, receiver);
+            }
+        });
+
+
+this.prototypes = `<lockup prototype="video">
     <img binding="@src:{cover};" width="200" height="300"/>
     <title binding="textContent:{title};" />
     <description  binding="textContent:{description};" style="font-size: 30;color:#fff" />
 </lockup>`;
     }
     get title(){
-        return this.pageData.title
+        return this.pageDataProxy.title;
     }
     set title(title){
-        this.pageData.title = title;
-        if(tvOS.parser)tvOS.parser.getElementsByTagName("title").item(0).textContent = title;
+        this.pageDataProxy.title = title;
     }
+    get list(){
+        return this.pageDataProxy.list;
+    }
+    get view(){
+        let parsed = self.view;
+        let section = parsed.getElementsByTagName("section").item(0);
+        section.set
+
+        return parsed;
+    }
+
     get xml() {
         return `<document>
    <stackTemplate>
