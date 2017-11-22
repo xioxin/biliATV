@@ -1257,8 +1257,8 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
         test.view = view.view.getElementsByTagName("section").item(0);
         // view.dataItem.title = "测试标题";
 
-        // test.section = view.getElementsByTagName("section").item(0);
-        test.view.DataItem = new DataItem();
+        test.section = view.view.getElementsByTagName("section").item(0);
+        test.section.DataItem = new DataItem();
 
 
         var n = 0;
@@ -1276,7 +1276,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
         ];
         // test.view.DataItem.setPropertyPath("title","title3" );
         // test.view.DataItem.title = "titile2";
-        test.view.DataItem.setPropertyPath("video",test.list );
+        test.section.DataItem.setPropertyPath("video",test.list );
 
 
 
