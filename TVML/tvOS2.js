@@ -449,7 +449,7 @@ class tvOS_template_custom extends tvOS_view{
 
 
 class videoList extends tvOS_view{
-    constructor(title="",list="") {
+    constructor(title="",list=[]) {
         super();
         this.pageData = {
             title:title,
