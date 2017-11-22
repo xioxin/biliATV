@@ -1227,7 +1227,7 @@ App.onError = function (message, sourceURL, line){
 
 evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
     if(success){
-        let view = videoList();
+        let view = new videoList();
 
         view.title = 1010;
         view.list.push("aaa");
