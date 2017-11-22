@@ -1253,6 +1253,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
    </stackTemplate>
 </document>`);
         test.temp = view;
+
         test.view = view.view.getElementsByTagName("section").item(0);
         // view.dataItem.title = "测试标题";
 
@@ -1261,7 +1262,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
 
 
         test.newVideo = function (title="title1") {
-            let d = new DataItem();
+            let d = new DataItem("video",UUID());
             d.cover = "https://avatars0.githubusercontent.com/u/5716100?s=40&v=4";
             d.title = title;
             d.description = "";
