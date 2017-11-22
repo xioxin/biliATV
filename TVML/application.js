@@ -74,7 +74,7 @@ function displayError(title, info) {
     });
     parsed.getElementById("reload").addEventListener("holdselect",function (e) {
         navigationDocument.dismissModal();
-        App.reload();
+        App.reload({},{});
     });
     // parsed.addEventListener("play",function (e) {
     //     // 显示详细错误信息
@@ -344,67 +344,25 @@ function openDynamic() {
             console.warn('我的动态',data);
             if(data.code==0){
                 data = data.data;
-                data.map(function (d) {
-                    let objectItem = new DataItem('video', v.id);
-                });
-                data.forEach(function (d) {
-                    let uuid = listView.buttonSelect(function (e,data) {
-                        console.log('d',d,e);
-                        var aid = 0;
-                        if(d.type == 0){
-                            aid = d.archive.aid;
-                            if(aid){
-                                //getBiliPlayURL("https://www.bilibili.com/video/av"+aid);
-                                openVideo(aid);
-                            }
-                        }else if(d.type == 1){
-                            aid = d.bangumi.aid;
-                        }
-
-                        // https://bangumi.bilibili.com/anime/6427/play
-
-                    });
-
+                let items = data.map(function (d) {
                     if(d.type == 0){
-                        buttons+=`<lockup data-identifier-uuid="${uuid}">
-                  <img  src="${d.archive.pic}" width="300" height="200" />
-                  <overlay style="margin:0px;padding:5px;" >
-                                                        <text style="font-size:22px;tv-position:bottom-left;color: rgba(0, 0, 0, 0.9);"> ${d.archive.tname}</text>
-
-        </overlay>
-                  <title>${d.archive.title}</title>
-                  <row>
-                        <img style="border-radius: circle;" src="${d.archive.owner.face}" width="32" height="32" />
-                        <text> ${d.archive.owner.name}</text>
-                    </row>
-               </lockup>`;
+                        let objectItem = new DataItem('video', d.archive.aid);
+                        objectItem.cover = d.archive.pic;
+                        objectItem.title = d.archive.title;
+                        objectItem.class = d.archive.tname;
+                        objectItem.face = d.archive.owner.face;
+                        objectItem.user = d.archive.owner.name;
                     }else if(d.type == 1){
-                        buttons+=`<lockup data-identifier-uuid="${uuid}">
-                  <img src="${d.bangumi.cover}" width="300" height="200" />
-                  <title>${d.bangumi.title}</title>
-               </lockup>`;
+                        let objectItem = new DataItem('video', d.bangumi.aid);
+                        objectItem.cover = d.bangumi.cover;
+                        objectItem.title = d.bangumi.title;
+                        objectItem.class = '';
+                        objectItem.face = '';
+                        objectItem.user = '';
                     }
-
-                })
-
-                var temp = `<document>
-   <stackTemplate>
-      <banner>
-         <title>个人动态</title>
-      </banner>
-      <collectionList>
-         <grid>
-            <section>
-               ${buttons}
-            </section>
-         </grid>
-      </collectionList>
-   </stackTemplate>
-</document>
-`;
-                listView.xml = (temp);
-                loading.replaceDocument(listView);
-
+                    return objectItem;
+                });
+                callback(items);
             }else{
                 displayError(`加载错误 错误ID${data.code}`,)
             }
@@ -714,8 +672,7 @@ function openUserVideo(mid,title) {
                     callback(false);
                 }
                 var datalist = list.map((av) => {
-                    let item = {};
-                    item.id = av.aid;
+                    let item = new DataItem('video', av.aid);;
                     item.aid = av.aid;
                     item.cover = autoUrl2Https(av.pic);
                     item.title = av.title;
@@ -1020,6 +977,7 @@ function openVideoList(title,pageProcessing,prototypes='') {
     section.dataItem = new DataItem();
     var dataItems = [];
 
+
     var nowPage = 0;
     var end = false;
 
@@ -1028,11 +986,7 @@ function openVideoList(title,pageProcessing,prototypes='') {
         pageProcessing(nowPage,function (list) {
             if(list){
                 list.forEach(function (v) {
-                    let objectItem = new DataItem('video', v.id);
-                    for(var i in v){
-                        objectItem[i] = v[i];
-                    }
-                    dataItems.push(objectItem);
+                    dataItems.push(v);
                 });
                 section.dataItem.setPropertyPath("video",dataItems);
             }else{
@@ -1046,6 +1000,11 @@ function openVideoList(title,pageProcessing,prototypes='') {
     }
     getNextPage();
 }
+
+
+
+
+
 function openVideo(aid,notAutoPlay=0) {
     var loading = tvOS.template.loading(`加载 AV${aid}`);
     loading.display();
@@ -1242,9 +1201,19 @@ function playDMAV(id=14356253,page=1,data=null) {
 
 }
 
+
+
+
+
+
+
 App.onError = function (message, sourceURL, line){
-    displayError("发生错误",`${message}\r\n\r\n${sourceURL} : ${line}`);
+    console.log(message, sourceURL, line);
+    // displayError("发生错误",`${message}\r\n\r\n${sourceURL} : ${line}`);
 };
+
+
+
 
 
 

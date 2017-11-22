@@ -447,6 +447,49 @@ class tvOS_template_custom extends tvOS_view{
 
 
 
+
+class videoList extends tvOS_view{
+    constructor(title) {
+        super();
+        this.pageData = {
+            title:title
+        };
+        this.prototypes = `<lockup prototype="video">
+    <img binding="@src:{cover};" width="200" height="300"/>
+    <title binding="textContent:{title};" />
+    <description  binding="textContent:{description};" style="font-size: 30;color:#fff" />
+</lockup>`;
+    }
+    get title(){
+        return this.pageData.title
+    }
+    set title(title){
+        this.pageData.title = title;
+        if(tvOS.parser)tvOS.parser.getElementsByTagName("title").item(0).textContent = title;
+    }
+    get xml() {
+        return `<document>
+   <stackTemplate>
+      <banner>
+         <title>${title}</title>
+      </banner>
+      <collectionList>
+         <grid>
+            <prototypes>
+                ${prototypes}
+            </prototypes>
+            <section id="video" binding="items:{video};" />
+         </grid>
+      </collectionList>
+   </stackTemplate>
+</document>`;
+    }
+
+}
+
+
+
+
 var tvOS = {
     template : {
         alert:function (title="",description="",button=[],footText=[]) {
