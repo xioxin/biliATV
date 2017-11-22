@@ -449,18 +449,14 @@ class tvOS_template_custom extends tvOS_view{
 
 
 class videoList extends tvOS_view{
-    constructor(title="",list=[]) {
+    constructor(title="",list = []) {
         super();
         this.pageData = {
             title:title,
             list:list,
         };
-        this.listProxy = new Proxy(this.pageData.list, {
-            set: function (target, key, value, receiver) {
-                if(this.section&&this.section.dataItem)this.section.dataItem.touchPropertyPath("video");
-                return Reflect.set(target, key, value, receiver);
-            }
-        });
+        this.list = list;
+
 
 this.prototypes = `<lockup prototype="video">
     <img binding="@src:{cover};" width="200" height="300"/>
@@ -474,6 +470,16 @@ this.prototypes = `<lockup prototype="video">
     set title(title){
         this.pageData.title = title;
         if(this.parsed)this.parsed.getElementsByTagName("title").item(0).textContent = title;
+    }
+    set list(list){
+        this.pageData.list = list;
+        this.listProxy = new Proxy(this.pageData.list, {
+            set: function (target, key, value, receiver) {
+                console.log("set ",key);
+                if(this.section&&this.section.dataItem)this.section.dataItem.touchPropertyPath("video");
+                return Reflect.set(target, key, value, receiver);
+            }
+        });
     }
     get list(){
         return this.listProxy;
