@@ -545,7 +545,7 @@ function ajax (url, method,data, callback) {
                     return xmlhttp.responseText
                 } else { // Or function
                     xh = xmlhttp
-                    console.warn(xmlhttp);
+                    // console.warn(xmlhttp);
                     callback(xmlhttp.responseText)
                 }
             } else {

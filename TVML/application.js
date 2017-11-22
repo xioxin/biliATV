@@ -72,7 +72,7 @@ function displayError(title, info) {
     parsed.getElementById("cancel").addEventListener("select",function (e) {
         navigationDocument.dismissModal();
     });
-    parsed.getElementById("reload").addEventListener("holdselect",function (e) {
+    parsed.getElementById("reload").addEventListener("select",function (e) {
         navigationDocument.dismissModal();
         App.reload({},{});
     });
