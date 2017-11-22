@@ -1231,7 +1231,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
 
         test.view = view;
         view.title = 1010;
-        view.list.push("aaa");
+        view.pageDataProxy.list.push("aaa");
         view.display();
 
         // initBar();
