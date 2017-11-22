@@ -472,11 +472,14 @@ this.prototypes = `<lockup prototype="video">
         if(this.parsed)this.parsed.getElementsByTagName("title").item(0).textContent = title;
     }
     set list(list){
+        var $this = this;
         this.pageData.list = list;
         this.listProxy = new Proxy(this.pageData.list, {
             set: function (target, key, value, receiver) {
                 console.log("set ",key);
-                if(this.section&&this.section.dataItem)this.section.dataItem.touchPropertyPath("video");
+                if(key!="length"){
+                    if($this.section&&$this.section.dataItem)$this.section.dataItem.touchPropertyPath("video");
+                }
                 return Reflect.set(target, key, value, receiver);
             }
         });
