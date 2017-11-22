@@ -69,21 +69,17 @@ function displayError(title, info) {
 </document>`;
     let parser = new DOMParser();
     let parsed = parser.parseFromString(xml.replace(new RegExp('&', 'g'), '&amp;'), "application/xml");
-    parsed.addEventListener("select",function (e) {
+    parsed.getElementById("cancel").addEventListener("select",function (e) {
         navigationDocument.dismissModal();
     });
-    parsed.addEventListener("holdselect",function (e) {
+    parsed.getElementById("reload").addEventListener("holdselect",function (e) {
         navigationDocument.dismissModal();
         App.reload();
     });
-    parsed.addEventListener("play",function (e) {
-        // 显示详细错误信息
-        // navigationDocument.dismissModal();
-    });
-
-
-
-
+    // parsed.addEventListener("play",function (e) {
+    //     // 显示详细错误信息
+    //     // navigationDocument.dismissModal();
+    // });
     navigationDocument.presentModal(parsed);
 }
 
