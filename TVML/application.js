@@ -1257,8 +1257,8 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
         test.view = view.view;
         // view.dataItem.title = "测试标题";
 
-        // test.section = view.view.getElementsByTagName("section").item(0);
-        test.section = view.view;
+        test.section = view.view.getElementsByTagName("section").item(0);
+        // test.section = view.view;
         test.section.dataItem = new DataItem();
 
 
@@ -1276,8 +1276,8 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
             test.newVideo("ceshi"),
             test.newVideo("ceshi2")
         ];
-        test.view.dataItem.setPropertyPath("title","title3" );
-        test.view.dataItem.title = "titile2";
+        test.section.dataItem.setPropertyPath("title","title3" );
+        test.section.dataItem.title = "titile2";
         test.section.dataItem.setPropertyPath("video",test.list );
 
         // view.dataItem.title = "测试标题3";
