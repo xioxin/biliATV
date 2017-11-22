@@ -1236,7 +1236,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
         let view = tvOS.template.custom(`<document>
    <stackTemplate>
       <banner>
-         <title></title>
+         <title  binding="textContent:{title};" />
       </banner>
       <collectionList>
          <grid>
