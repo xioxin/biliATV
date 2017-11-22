@@ -1253,9 +1253,25 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
    </stackTemplate>
 </document>`);
         test.view = view;
-        view.getElementsByTagName("stackTemplate").item(0).dataItem = new DataItem();
-        view.getElementsByTagName("stackTemplate").item(0).title = "测试标题";
-        view.getElementsByTagName("stackTemplate").item(0).setPropertyPath("title","测试标题2" );
+        view.dataItem = new DataItem();
+        view.dataItem.title = "测试标题";
+
+        test.newVideo = function (title="title1") {
+            let d = new DataItem();
+            d.cover = "https://avatars0.githubusercontent.com/u/5716100?s=40&v=4";
+            d.title = title;
+            d.description = "";
+            return d;
+        };
+        test.list = [
+            test.newVideo("ceshi")
+        ];
+
+
+        view.dataItem.setPropertyPath("video",test.list );
+
+
+
         // view.dataItem.title = "测试标题3";
 
         view.display();
