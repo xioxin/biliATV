@@ -1234,8 +1234,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
         // view.display();
 
         test.newVideo = function (title="title1") {
-            n++;
-            let d = new DataItem("video",n);
+            let d = new DataItem("video",UUID());
             d.cover = "https://avatars0.githubusercontent.com/u/5716100";
             d.title = title;
             d.description = "";
