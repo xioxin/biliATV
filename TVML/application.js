@@ -1241,7 +1241,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
             return d;
         };
 
-        let view = videoList("title111",[
+        let view = new videoList("title111",[
             test.newVideo("ceshi")
         ]);
 
