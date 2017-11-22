@@ -498,7 +498,7 @@ this.prototypes = `<lockup prototype="video">
       <collectionList>
          <grid>
             <prototypes>
-                ${prototypes}
+                ${this.prototypes}
             </prototypes>
             <section id="video" binding="items:{video};" />
          </grid>
