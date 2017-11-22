@@ -51,8 +51,12 @@ var userData = {};
 * https://api.bilibili.com/x/web-interface/tag/top?pn=1&ps=30&callback=relate_video_callback&jsonp=jsonp&tid=4641922&_=1511098218419
 * */
 
+var displayErrorLock = false;
+
 // 显示错误信息
 function displayError(title, info) {
+    if(displayErrorLock) return;
+    displayErrorLock = true;
     let xml = `<document>
    <descriptiveAlertTemplate>
       <title>${title}</title>
@@ -80,6 +84,7 @@ function displayError(title, info) {
     //     // navigationDocument.dismissModal();
     // });
     navigationDocument.presentModal(parsed);
+    displayErrorLock = false;
 }
 
 // json解析错误拦截
@@ -1207,8 +1212,8 @@ function playDMAV(id=14356253,page=1,data=null) {
 
 
 App.onError = function (message, sourceURL, line){
-    console.log(message, sourceURL, line);
-    // displayError("发生错误",`${message}\r\n\r\n${sourceURL} : ${line}`);
+    // console.log(message, sourceURL, line);
+    displayError("发生错误",`${message}\r\n\r\n${sourceURL} : ${line}`);
 };
 
 
