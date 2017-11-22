@@ -1244,7 +1244,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                 <lockup prototype="video">
                     <img binding="@src:{cover};" width="200" height="300"/>
                     <title binding="textContent:{title};" />
-                    <description  binding="textContent:{description};" style="font-size: 30;color:#fff" />
+                    <description binding="textContent:{description};" style="font-size: 30;color:#fff" />
                 </lockup>
             </prototypes>
             <section id="video" binding="items:{video};" />
@@ -1253,9 +1253,9 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
    </stackTemplate>
 </document>`);
         test.view = view;
-        view.dataItem = new DataItem();
-        view.dataItem.title = "测试标题";
-        view.dataItem.setPropertyPath("title","测试标题2" );
+        view.getElementsByTagName("stackTemplate").item(0).dataItem = new DataItem();
+        view.getElementsByTagName("stackTemplate").item(0).title = "测试标题";
+        view.getElementsByTagName("stackTemplate").item(0).setPropertyPath("title","测试标题2" );
         // view.dataItem.title = "测试标题3";
 
         view.display();
