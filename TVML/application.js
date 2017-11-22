@@ -1229,6 +1229,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
     if(success){
         let view = new videoList();
 
+        test.view = view;
         view.title = 1010;
         view.list.push("aaa");
         view.display();
