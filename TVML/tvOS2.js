@@ -476,8 +476,8 @@ this.prototypes = `<lockup prototype="video">
         this.pageData.list = list;
         this.listProxy = new Proxy(this.pageData.list, {
             set: function (target, key, value, receiver) {
-                console.log("set ",key);
                 if(key!="length"){
+                    // console.log("set ",key);
                     if($this.section&&$this.section.dataItem)$this.section.dataItem.touchPropertyPath("video");
                 }
                 return Reflect.set(target, key, value, receiver);

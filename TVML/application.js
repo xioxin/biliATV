@@ -1232,34 +1232,34 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
         // view.title = 1010;
         // view.pageDataProxy.list.push("aaa");
         // view.display();
+        //
+        //
+        // test.newVideo = function (title="title1") {
+        //     let d = new DataItem("video",UUID());
+        //     d.cover = "https://avatars0.githubusercontent.com/u/5716100";
+        //     d.title = title;
+        //     d.description = "";
+        //     return d;
+        // };
+        //
+        // test.list = [
+        //     test.newVideo("ceshi")
+        // ];
+        //
+        // let view = new videoList("title111",test.list);
+        //
+        //
+        // test.add = function () {
+        //     view.list.push(test.newVideo(UUID()));
+        // };
+        //
+        // // test.section.dataItem.touchPropertyPath
+        //
+        // // view.dataItem.title = "测试标题3";
+        //
+        // view.display();
 
-
-        test.newVideo = function (title="title1") {
-            let d = new DataItem("video",UUID());
-            d.cover = "https://avatars0.githubusercontent.com/u/5716100";
-            d.title = title;
-            d.description = "";
-            return d;
-        };
-
-        test.list = [
-            test.newVideo("ceshi")
-        ];
-
-        let view = new videoList("title111",test.list);
-
-
-        test.add = function () {
-            view.list.push(test.newVideo(UUID()));
-        };
-
-        // test.section.dataItem.touchPropertyPath
-
-        // view.dataItem.title = "测试标题3";
-
-        view.display();
-
-        // initBar();
+        initBar();
     }else{
         displayError("加载外部JS文件出现错误!",tvBaseURL+'/tvOS2.js');
     }
