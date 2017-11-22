@@ -463,6 +463,11 @@ class videoList extends tvOS_view{
             set: function (target, key, value, receiver) {
                 console.log(`setting ${key}!`);
                 return Reflect.set(target, key, value, receiver);
+            },
+            apply (target, ctx, args) {
+                console.log(`apply ${key}!`);
+
+                return Reflect.apply(...arguments);
             }
         });
 

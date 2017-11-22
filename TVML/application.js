@@ -1227,12 +1227,38 @@ App.onError = function (message, sourceURL, line){
 
 evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
     if(success){
-        let view = new videoList();
+        // let view = new videoList();
+        //
+        // view.title = 1010;
+        // view.pageDataProxy.list.push("aaa");
+        // view.display();
 
+        let view = tvOS.template.custom(`<document>
+   <stackTemplate>
+      <banner>
+         <title></title>
+      </banner>
+      <collectionList>
+         <grid>
+            <prototypes>
+                <lockup prototype="video">
+                    <img binding="@src:{cover};" width="200" height="300"/>
+                    <title binding="textContent:{title};" />
+                    <description  binding="textContent:{description};" style="font-size: 30;color:#fff" />
+                </lockup>
+            </prototypes>
+            <section id="video" binding="items:{video};" />
+         </grid>
+      </collectionList>
+   </stackTemplate>
+</document>`);
         test.view = view;
-        view.title = 1010;
-        view.pageDataProxy.list.push("aaa");
-        view.display();
+        view.dataItem = new DataItem();
+        view.dataItem.title = "测试标题";
+        view.dataItem.setPropertyPath("title","测试标题2" );
+        view.dataItem.title = "测试标题3";
+
+
 
         // initBar();
     }else{
