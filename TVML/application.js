@@ -1253,8 +1253,11 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
    </stackTemplate>
 </document>`);
         test.view = view;
-        view.dataItem = new DataItem();
-        view.dataItem.title = "测试标题";
+        // view.dataItem.title = "测试标题";
+
+        test.section = view.getElementsByTagName("section").item(0);
+        test.section.DataItem = new DataItem();
+
 
         test.newVideo = function (title="title1") {
             let d = new DataItem();
@@ -1268,7 +1271,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
         ];
 
 
-        view.dataItem.setPropertyPath("video",test.list );
+        test.section.dataItem.setPropertyPath("video",test.list );
 
 
 
