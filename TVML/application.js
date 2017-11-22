@@ -1233,37 +1233,6 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
         // view.pageDataProxy.list.push("aaa");
         // view.display();
 
-        let view = tvOS.template.custom(`<document>
-   <stackTemplate>
-      <banner>
-         <title binding="textContent:{title};">测试</title>
-      </banner>
-      <collectionList>
-         <shelf>
-            <prototypes>
-                <lockup prototype="video">
-                    <img binding="@src:{cover};" width="200" height="300"/>
-                    <title binding="textContent:{title};" />
-                    <description binding="textContent:{description};" style="font-size: 30;color:#fff" />
-                </lockup>
-            </prototypes>
-            <section id="video" binding="items:{video};" />
-         </shelf>
-      </collectionList>
-   </stackTemplate>
-</document>`);
-        test.temp = view;
-
-        test.view = view.view;
-        // view.dataItem.title = "测试标题";
-
-        // test.section = view.view.getElementsByTagName("section").item(0);
-        test.section = view.view;
-        test.section.dataItem = new DataItem();
-
-
-        var n = 0;
-
         test.newVideo = function (title="title1") {
             n++;
             let d = new DataItem("video",n);
@@ -1272,13 +1241,12 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
             d.description = "";
             return d;
         };
-        test.list = [
-            test.newVideo("ceshi"),
-            test.newVideo("ceshi2")
-        ];
-        test.section.dataItem.setPropertyPath("title","title3" );
-        test.section.dataItem.title = "titile2";
-        test.section.dataItem.setPropertyPath("video",test.list);
+
+        let view = videoList("title111",[
+            test.newVideo("ceshi")
+        ]);
+
+
 
 
         // test.section.dataItem.touchPropertyPath

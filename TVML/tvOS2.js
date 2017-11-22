@@ -455,22 +455,12 @@ class videoList extends tvOS_view{
             title:title,
             list:list,
         };
-        this.pageDataProxy = new Proxy(this.pageData, {
-            get: function (target, key, receiver) {
-                console.log(`getting ${key}!`);
-                return Reflect.get(target, key, receiver);
-            },
+        this.listProxy = new Proxy(this.pageData.list, {
             set: function (target, key, value, receiver) {
-                console.log(`setting ${key}!`);
+                if(this.section&&this.section.dataItem)this.section.dataItem.touchPropertyPath("video");
                 return Reflect.set(target, key, value, receiver);
-            },
-            apply (target, ctx, args) {
-                console.log(`apply ${key}!`);
-
-                return Reflect.apply(...arguments);
             }
         });
-
 
 this.prototypes = `<lockup prototype="video">
     <img binding="@src:{cover};" width="200" height="300"/>
@@ -479,26 +469,29 @@ this.prototypes = `<lockup prototype="video">
 </lockup>`;
     }
     get title(){
-        return this.pageDataProxy.title;
+        return this.pageData.title;
     }
     set title(title){
-        this.pageDataProxy.title = title;
+        this.pageData.title = title;
+        if(this.parsed)this.parsed.getElementsByTagName("title").item(0).textContent = title;
     }
     get list(){
-        return this.pageDataProxy.list;
+        return this.listProxy;
     }
     get view(){
         let parsed = super.view;
-        let section = parsed.getElementsByTagName("section").item(0);
-        // section.set
-
+        if(!this.section){
+            this.section = parsed.getElementsByTagName("section").item(0);
+            this.section.dataItem = new DataItem();
+            this.section.dataItem.setPropertyPath("video",this.pageData.list);
+        }
         return parsed;
     }
     get xml() {
         return `<document>
    <stackTemplate>
       <banner>
-         <title></title>
+         <title>${this.title}</title>
       </banner>
       <collectionList>
          <grid>
@@ -513,6 +506,8 @@ this.prototypes = `<lockup prototype="video">
     }
 
 }
+
+
 
 
 
