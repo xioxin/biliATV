@@ -1257,8 +1257,8 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
         test.view = view.view;
         // view.dataItem.title = "测试标题";
 
-        test.section = view.view.getElementsByTagName("section").item(0);
-        // test.section = view.view;
+        // test.section = view.view.getElementsByTagName("section").item(0);
+        test.section = view.view;
         test.section.dataItem = new DataItem();
 
 
@@ -1267,7 +1267,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
         test.newVideo = function (title="title1") {
             n++;
             let d = new DataItem("video",n);
-            d.cover = "https://avatars0.githubusercontent.com/u/5716100?s=40&v=4";
+            d.cover = "https://avatars0.githubusercontent.com/u/5716100";
             d.title = title;
             d.description = "";
             return d;
@@ -1278,7 +1278,10 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
         ];
         test.section.dataItem.setPropertyPath("title","title3" );
         test.section.dataItem.title = "titile2";
-        test.section.dataItem.setPropertyPath("video",test.list );
+        test.section.dataItem.setPropertyPath("video",test.list);
+
+
+        // test.section.dataItem.touchPropertyPath
 
         // view.dataItem.title = "测试标题3";
 
