@@ -71,6 +71,7 @@ function displayError(title, info) {
     });
     parsed.addEventListener("holdselect",function (e) {
         App.reload();
+        navigationDocument.dismissModal();
     });
 
     parsed.addEventListener("play",function (e) {
