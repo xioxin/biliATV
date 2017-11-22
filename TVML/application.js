@@ -5,51 +5,53 @@ var nowPlayer = null;
 var userData = {};
 
 /*
-* 动漫订阅
+* 我的 动漫订阅
 * https://space.bilibili.com/ajax/Bangumi/getList?mid=902845
 *
-* 用户收藏夹
+* 我的 我的订阅(旧版)
+* https://api.bilibili.com/x/web-feed/feed?ps=10&pn=2&type=0
+*
+* 空间 用户收藏夹
 * https://api.bilibili.com/x/v2/fav/folder?vmid=11336264&jsonp=jsonp&callback=_jsonp7w97f2ymphi
 *
-* 用户首页版块
+* 空间 用户首页版块
 * https://api.bilibili.com/x/space/channel/index?mid=11336264&guest=false&jsonp=jsonp&callback=_jsonpx036tchreuc
 *
-* 个人资料 验证 Referer 必须为POST mid=11336264
+* 空间 个人资料 验证 Referer 必须为POST mid=11336264
 * https://space.bilibili.com/ajax/member/GetInfo
 *
-* 无需验证referee
+* 空间 个人资料 无需验证referee
 * https://api.bilibili.com/cardrich?mid=11336264
 *
-* 投稿数 和 关注信息
+* 空间 投稿数 和 关注信息
 * https://api.bilibili.com/vipinfo/default?mid=11336264&loginid=902845
 *
-* 最近投稿
+* 空间 最近投稿
 * https://space.bilibili.com/ajax/member/getSubmitVideos?mid=11336264&page=1&pagesize=25
 *
-* 获取用户公告
+* 空间 获取用户公告
 * https://space.bilibili.com/ajax/settings/getNotice?mid=11336264
 *
-* 获取用户标签
+* 空间 获取用户标签
 * https://space.bilibili.com/ajax/member/getTags?mids=11336264
 *
-* 置顶视频
+* 空间 置顶视频
 * https://space.bilibili.com/ajax/top/showTop?mid=11336264&guest=1
 *
-* 番剧:
-*
-* 更多推荐
+* 番剧 更多推荐
 * https://bangumi.bilibili.com/web_api/season/recommend/6465.json
 *
-* 详情
+* 番剧 番剧详情
 * https://bangumi.bilibili.com/jsonp/seasoninfo/6465.ver?callback=seasonListCallback&jsonp=jsonp&_=1511089954345
 *
-* 承包
+* 番剧 承包7日榜
 * https://bangumi.bilibili.com/sponsor/rankweb/get_sponsor_week_list?season_id=6308&pagesize=7
 *
-* 相关视频
+* 番剧 相关视频
 * https://api.bilibili.com/x/web-interface/tag/top?pn=1&ps=30&callback=relate_video_callback&jsonp=jsonp&tid=4641922&_=1511098218419
 * */
 
+// 显示错误信息
 function displayError(title, info) {
     let xml = `<document>
    <descriptiveAlertTemplate>
@@ -73,11 +75,23 @@ function displayError(title, info) {
     });
     navigationDocument.presentModal(parsed);
 }
+
+// json解析错误拦截
+function jsonParse(s) {
+    var data = {};
+    try{
+        var data = JSON.parse(s);
+    }catch(exception) {
+        displayError("JSON解析错误",s);
+    }
+    return data;
+}
+
 function myHome(setDocument) {
     setDocument(tvOS.template.loading("加载中个人信息.."));
     ajax.get('https://api.bilibili.com/x/web-interface/nav',function (data) {
         console.warn(data);
-        data = JSON.parse(data);
+        data = jsonParse(data);
         var myhome;
         if(data.code != 0){
             myhome = new tvOS.template.compilation('个人中心','尚未登录',data.message,'https://static.hdslb.com/images/akari.jpg',[
@@ -129,139 +143,10 @@ function myHome(setDocument) {
     /**/
     // return loadingBox;
 }
-function openLogin(callback=function () {}) {
-    ajax.get("https://passport.bilibili.com/qrcode/getLoginUrl",function (data) {
-        data = JSON.parse(data);
-        data = data.data;
-        var oauthKey = data.oauthKey;
-
-        console.warn(data);
-        var getinfo = function () {
-            console.log(oauthKey);
-            ajax.post('https://passport.bilibili.com/qrcode/getLoginInfo',{
-                oauthKey:oauthKey,
-                gourl:"https://www.bilibili.com/",
-            },function (data) {
-                console.warn(data);
-                data = JSON.parse(data);
-                if(data.status){
-                    clearInterval(timer);
-                    modalDom.getElementsByTagName('text').item(2).innerHTML = "登录中...";
-                    ajax.get(data.data.url,function (data) {
-                        // console.warn(data);
-                        modal.dismissModal();
-                        callback(true);
-                    })
-                }else{
-                    modalDom.getElementsByTagName('text').item(2).innerHTML = data.message;
-                }
-            });
-        }
-
-        var timer = setInterval(getinfo,3000);
-        setTimeout(getinfo,100);
-
-
-        var modal = new tvOS.template.descriptiveAlert('登录账号',`https://pan.baidu.com/share/qrcode?w=300&h=300&url=${encodeURIComponent(data.url)}`,"使用bilibili手机客户端扫描上方二维码",[
-            new tvOS.element.button("刷新二维码",function (e,button) {
-                // modal.dismissModal();
-                openLogin(callback);
-            }),
-            new tvOS.element.button("取消",function (e,button) {
-                clearInterval(timer);
-                modal.dismissModal();
-                callback(false)
-            })
-        ],' ',false);
-        var modalDom = dom = modal.view;
-        // loadingBox.dismissModal();
-        modal.presentModal(dom);
-    });
-}
-function openDynamic() {
-    var loading = tvOS.template.loading('加载中');
-    loading.display();
-    ajax.get("https://api.bilibili.com/x/web-feed/feed?ps=100",function (data) {
-        data = JSON.parse(data);
-        if(data.code==0){
-            data = data.data;
-
-            var buttons = '';
-            var listView = tvOS.template.custom('');
-
-            data.forEach(function (d) {
-
-                let uuid = listView.buttonSelect(function (e,data) {
-                    console.log('d',d,e);
-                    var aid = 0;
-                    if(d.type == 0){
-                        aid = d.archive.aid;
-                        if(aid){
-                            //getBiliPlayURL("https://www.bilibili.com/video/av"+aid);
-                            openVideo(aid);
-                        }
-                    }else if(d.type == 1){
-                        aid = d.bangumi.aid;
-                    }
-
-
-                    // https://bangumi.bilibili.com/anime/6427/play
-
-                });
-
-                if(d.type == 0){
-                    buttons+=`<lockup data-identifier-uuid="${uuid}">
-                  <img  src="${d.archive.pic}" width="300" height="200" />
-                  <overlay style="margin:0px;padding:5px;" >
-                                                        <text style="font-size:22px;tv-position:bottom-left;color: rgba(0, 0, 0, 0.9);"> ${d.archive.tname}</text>
-
-        </overlay>
-                  <title>${d.archive.title}</title>
-                  <row>
-                        <img style="border-radius: circle;" src="${d.archive.owner.face}" width="32" height="32" />
-                        <text> ${d.archive.owner.name}</text>
-                    </row>
-               </lockup>`;
-                }else if(d.type == 1){
-                    buttons+=`<lockup data-identifier-uuid="${uuid}">
-                  <img src="${d.bangumi.cover}" width="300" height="200" />
-                  <title>${d.bangumi.title}</title>
-               </lockup>`;
-                }
-
-            })
-
-
-            var temp = `<document>
-   <stackTemplate>
-      <banner>
-         <title>个人动态</title>
-      </banner>
-      <collectionList>
-         <grid>
-            <section>
-               ${buttons}
-            </section>
-         </grid>
-      </collectionList>
-   </stackTemplate>
-</document>
-`;
-            listView.xml = (temp);
-            loading.replaceDocument(listView);
-
-        }
-
-
-
-    })
-
-
-}
 function timeline(setDocument) {
     setDocument(tvOS.template.loading("加载番剧信息..."));
     ajax.get('https://bangumi.bilibili.com/web_api/timeline_global',function (data) {
-        data = JSON.parse(data);
+        data = jsonParse(data);
         console.warn(data);
         var tilelineData = data.result;
         var listView = tvOS.template.custom('');
@@ -365,9 +250,175 @@ function timeline(setDocument) {
         setDocument(listView);
     });
 }
+function openSearchView(setDocument) {
+    var view = tvOS.template.custom(`<document>
+   <searchTemplate>
+      <searchField/>
+      <shelf>
+         <header>
+            <title>Popular</title>
+         </header>
+         <section>
+            <lockup>
+               <img src="path to images on your server/Car_Movie_250x375_A.png" width="182" height="274" />
+               <title>Movie 1</title>
+            </lockup>
+            <lockup>
+               <img src="path to images on your server/Car_Movie_250x375_B.png" width="182" height="274" />
+               <title>Movie 2</title>
+            </lockup>
+            <lockup>
+               <img src="path to images on your server/Car_Movie_250x375_C.png" width="182" height="274" />
+               <title>Movie 3</title>
+            </lockup>
+         </section>
+      </shelf>
+   </searchTemplate>
+</document>`);
+    setDocument(view);
+}
+
+function openLogin(callback=function () {}) {
+    ajax.get("https://passport.bilibili.com/qrcode/getLoginUrl",function (data) {
+        data = jsonParse(data);
+        data = data.data;
+        var oauthKey = data.oauthKey;
+
+        console.warn(data);
+        var getinfo = function () {
+            console.log(oauthKey);
+            ajax.post('https://passport.bilibili.com/qrcode/getLoginInfo',{
+                oauthKey:oauthKey,
+                gourl:"https://www.bilibili.com/",
+            },function (data) {
+                console.warn(data);
+                data = jsonParse(data);
+                if(data.status){
+                    clearInterval(timer);
+                    modalDom.getElementsByTagName('text').item(2).innerHTML = "登录中...";
+                    ajax.get(data.data.url,function (data) {
+                        // console.warn(data);
+                        modal.dismissModal();
+                        callback(true);
+                    })
+                }else{
+                    modalDom.getElementsByTagName('text').item(2).innerHTML = data.message;
+                }
+            });
+        }
+
+        var timer = setInterval(getinfo,3000);
+        setTimeout(getinfo,100);
+
+
+        var modal = new tvOS.template.descriptiveAlert('登录账号',`https://pan.baidu.com/share/qrcode?w=300&h=300&url=${encodeURIComponent(data.url)}`,"使用bilibili手机客户端扫描上方二维码",[
+            new tvOS.element.button("刷新二维码",function (e,button) {
+                // modal.dismissModal();
+                openLogin(callback);
+            }),
+            new tvOS.element.button("取消",function (e,button) {
+                clearInterval(timer);
+                modal.dismissModal();
+                callback(false)
+            })
+        ],' ',false);
+        var modalDom = dom = modal.view;
+        // loadingBox.dismissModal();
+        modal.presentModal(dom);
+    });
+}
+function openDynamic() {
+    var loading = tvOS.template.loading('加载中');
+    loading.display();
+
+    openVideoList("我的动态",function (page,callback) {
+        ajax.get("https://api.bilibili.com/x/web-feed/feed?ps=100",function (data) {
+            data = jsonParse(data);
+            if(data.code==0){
+                data = data.data;
+                data.map(function (d) {
+                    let objectItem = new DataItem('video', v.id);
+                });
+                data.forEach(function (d) {
+                    let uuid = listView.buttonSelect(function (e,data) {
+                        console.log('d',d,e);
+                        var aid = 0;
+                        if(d.type == 0){
+                            aid = d.archive.aid;
+                            if(aid){
+                                //getBiliPlayURL("https://www.bilibili.com/video/av"+aid);
+                                openVideo(aid);
+                            }
+                        }else if(d.type == 1){
+                            aid = d.bangumi.aid;
+                        }
+
+
+                        // https://bangumi.bilibili.com/anime/6427/play
+
+                    });
+
+                    if(d.type == 0){
+                        buttons+=`<lockup data-identifier-uuid="${uuid}">
+                  <img  src="${d.archive.pic}" width="300" height="200" />
+                  <overlay style="margin:0px;padding:5px;" >
+                                                        <text style="font-size:22px;tv-position:bottom-left;color: rgba(0, 0, 0, 0.9);"> ${d.archive.tname}</text>
+
+        </overlay>
+                  <title>${d.archive.title}</title>
+                  <row>
+                        <img style="border-radius: circle;" src="${d.archive.owner.face}" width="32" height="32" />
+                        <text> ${d.archive.owner.name}</text>
+                    </row>
+               </lockup>`;
+                    }else if(d.type == 1){
+                        buttons+=`<lockup data-identifier-uuid="${uuid}">
+                  <img src="${d.bangumi.cover}" width="300" height="200" />
+                  <title>${d.bangumi.title}</title>
+               </lockup>`;
+                    }
+
+                })
+
+                var temp = `<document>
+   <stackTemplate>
+      <banner>
+         <title>个人动态</title>
+      </banner>
+      <collectionList>
+         <grid>
+            <section>
+               ${buttons}
+            </section>
+         </grid>
+      </collectionList>
+   </stackTemplate>
+</document>
+`;
+                listView.xml = (temp);
+                loading.replaceDocument(listView);
+
+            }else{
+                displayError(`加载错误 错误ID${data.code}`,)
+            }
+            callback(false)
+        })
+    },`<lockup prototype="video">
+    <img binding="@src:{cover};" width="300" height="200"/>
+    <overlay style="margin:0px;padding:5px;" >
+        <text style="font-size:22px;tv-position:bottom-left;color: rgba(255, 255, 255, 0.9);" binding="textContent:{class};"></text>
+    </overlay>
+    <title binding="textContent:{title};" />
+    <row>
+        <img style="border-radius: circle;" src="${face}" width="32" height="32" />
+        <text> ${user}</text>
+    </row>
+</lockup>`)
+
+}
 function openUser(mid) {
     ajax.get(`https://api.bilibili.com/cardrich?mid=${mid}`,function (data) {
-        data = JSON.parse(data);
+        data = jsonParse(data);
         if(data.code == 0){
             data = data.data.card;
             var up = data;
@@ -465,7 +516,7 @@ function openUser(mid) {
             //填充公告
             // https://space.bilibili.com/ajax/settings/getNotice?mid=11336264
             ajax.get(`https://space.bilibili.com/ajax/settings/getNotice?mid=${mid}`,function (data) {
-                data = JSON.parse(data);
+                data = jsonParse(data);
                 if(data.status){
                     var notice = data.data.notice;
                     page.view.getElementById("description_more").textContent = notice;
@@ -476,7 +527,7 @@ function openUser(mid) {
             //https://api.bilibili.com/x/space/channel/index?mid=11336264&guest=false
             //确保顺序 所以放到 TA的投稿执行完成之后执行
             ajax.get(`https://space.bilibili.com/ajax/member/getSubmitVideos?mid=${mid}&page=1&pagesize=25`,function (data) {
-                data = JSON.parse(data);
+                data = jsonParse(data);
                 if(data.status){
                     var list = data.data.vlist;
                     var title = "TA的投稿";
@@ -539,7 +590,7 @@ function openUser(mid) {
 
             //获取up的首页版块
             ajax.get(`https://api.bilibili.com/x/space/channel/index?mid=${mid}&guest=false`,function (data){
-                data = JSON.parse(data);
+                data = jsonParse(data);
                 console.warn('index',data);
                 if(data.code == 0){
                     let channels = data.data;
@@ -609,7 +660,7 @@ function openUser(mid) {
 
 
             ajax.get(`https://api.bilibili.com/vipinfo/default?mid=${mid}&loginid=${userData.mid}`,function (data) {
-                data = JSON.parse(data);
+                data = jsonParse(data);
                 if(data.code == 0){
                     up.archiveCount = data.data.archiveCount;
                     up.following = data.data.following;
@@ -649,7 +700,7 @@ function openUser(mid) {
 function openUserVideo(mid,title) {
     openVideoList(title,function (page,callback) {
         ajax.get(`https://space.bilibili.com/ajax/member/getSubmitVideos?mid=${mid}&page=${page}&pagesize=25`,function (data) {
-            data = JSON.parse(data);
+            data = jsonParse(data);
             if(data.status){
                 var list = data.data.vlist;
                 if(!list){
@@ -680,7 +731,7 @@ function openUserVideo(mid,title) {
 function openUserChannelVideo(mid,cid,title) {
     openVideoList(title,function (page,callback) {
         ajax.get(`https://api.bilibili.com/x/space/channel/video?mid=${mid}&cid=${cid}&pn=${page}&ps=30&order=0`,function (data) {
-            data = JSON.parse(data);
+            data = jsonParse(data);
             if(data.code == 0){
                 var list = data.data.list.archives;
                 if(!list){
@@ -852,12 +903,12 @@ function openBangumi(sid) {
 
                 //加载相关视频
                 ajax.get("https://api.bilibili.com/x/tag/info?tag_name="+encodeURI(result.title),function (tagData) {
-                    tagData = JSON.parse(tagData);
+                    tagData = jsonParse(tagData);
                     console.log('tagData',tagData);
                     if(tagData.code == 0){
                         let tagId  = tagData.data.tag_id;
                         ajax.get(`https://api.bilibili.com/x/web-interface/tag/top?pn=1&ps=30&tid=${tagId}`,function (tagVideo) {
-                            tagVideo = JSON.parse(tagVideo);
+                            tagVideo = jsonParse(tagVideo);
                             console.log('tagVideo',tagVideo);
                             if(tagVideo.code == 0){
                                 tagVideo = tagVideo.data;
@@ -888,7 +939,7 @@ function openBangumi(sid) {
 
                 //加载土豪
                 ajax.get(`https://bangumi.bilibili.com/sponsor/rankweb/get_sponsor_week_list?season_id=${sid}&pagesize=7`,function (tuhao) {
-                    tuhao = JSON.parse(tuhao);
+                    tuhao = jsonParse(tuhao);
                     if(tuhao.code == 0){
                         console.log("tuhao",tuhao);
                         tuhao = tuhao.result;
@@ -909,7 +960,7 @@ function openBangumi(sid) {
                 })
                 //加载更多推荐
                 ajax.get(`https://bangumi.bilibili.com/web_api/season/recommend/${sid}.json`,function (more) {
-                    more = JSON.parse(more);
+                    more = jsonParse(more);
                     if(more.code == 0){
                         // console.log("tuhao",more);
                         more = more.result.list;
@@ -932,7 +983,12 @@ function openBangumi(sid) {
         eval(data);
     })
 }
-function openVideoList(title,pageProcessing) {
+function openVideoList(title,pageProcessing,prototypes='') {
+    if(!prototypes)prototypes = `<lockup prototype="video">
+    <img binding="@src:{cover};" width="200" height="300"/>
+    <title binding="textContent:{title};" />
+    <description  binding="textContent:{description};" style="font-size: 30;color:#fff" />
+</lockup>`;
     var listView = tvOS.template.custom(`<document>
    <stackTemplate>
       <banner>
@@ -941,18 +997,13 @@ function openVideoList(title,pageProcessing) {
       <collectionList>
          <grid>
             <prototypes>
-                <lockup prototype="video">
-                    <img binding="@src:{cover};" width="200" height="300"/>
-                    <title binding="textContent:{title};" />
-                    <description  binding="textContent:{description};" style="font-size: 30;color:#fff" />
-                </lockup>
+                ${prototypes}
             </prototypes>
             <section id="video" binding="items:{video};" />
          </grid>
       </collectionList>
    </stackTemplate>
-</document>
-`);
+</document>`);
     var section = listView.view.getElementById("video");
     test.section = section;
 
@@ -1072,33 +1123,7 @@ function openVideo(aid,notAutoPlay=0) {
         loading.replaceDocument(page);
     });
 }
-function openSearchView(setDocument) {
-    var view = tvOS.template.custom(`<document>
-   <searchTemplate>
-      <searchField/>
-      <shelf>
-         <header>
-            <title>Popular</title>
-         </header>
-         <section>
-            <lockup>
-               <img src="path to images on your server/Car_Movie_250x375_A.png" width="182" height="274" />
-               <title>Movie 1</title>
-            </lockup>
-            <lockup>
-               <img src="path to images on your server/Car_Movie_250x375_B.png" width="182" height="274" />
-               <title>Movie 2</title>
-            </lockup>
-            <lockup>
-               <img src="path to images on your server/Car_Movie_250x375_C.png" width="182" height="274" />
-               <title>Movie 3</title>
-            </lockup>
-         </section>
-      </shelf>
-   </searchTemplate>
-</document>`);
-    setDocument(view);
-}
+
 function initBar(){
     var bar = tvOS.template.menuBar([
         tvOS.element.menuItem('我的',function (e,menuItem) {
@@ -1213,6 +1238,9 @@ function playDMAV(id=14356253,page=1,data=null) {
 App.onError = function (message, sourceURL, line){
     displayError("发生错误",`${message}\r\n\r\n${sourceURL} : ${line}`);
 };
+
+
+
 evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
     if(success){
         initBar();
