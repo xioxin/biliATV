@@ -5,7 +5,6 @@ var nowPlayer = null;
 var userData = {};
 
 /*
-*
 * 动漫订阅
 * https://space.bilibili.com/ajax/Bangumi/getList?mid=902845
 *
@@ -17,6 +16,7 @@ var userData = {};
 *
 * 个人资料 验证 Referer 必须为POST mid=11336264
 * https://space.bilibili.com/ajax/member/GetInfo
+*
 * 无需验证referee
 * https://api.bilibili.com/cardrich?mid=11336264
 *
@@ -35,8 +35,8 @@ var userData = {};
 * 置顶视频
 * https://space.bilibili.com/ajax/top/showTop?mid=11336264&guest=1
 *
-*
 * 番剧:
+*
 * 更多推荐
 * https://bangumi.bilibili.com/web_api/season/recommend/6465.json
 *
@@ -48,7 +48,6 @@ var userData = {};
 *
 * 相关视频
 * https://api.bilibili.com/x/web-interface/tag/top?pn=1&ps=30&callback=relate_video_callback&jsonp=jsonp&tid=4641922&_=1511098218419
-*
 * */
 
 function displayError(title, info) {
@@ -990,7 +989,7 @@ function openVideoList(title,pageProcessing) {
     getNextPage();
 }
 function openVideo(aid,notAutoPlay=0) {
-    var loading = tvOS.template.loading(`加载 AV${id}`);
+    var loading = tvOS.template.loading(`加载 AV${aid}`);
     loading.display();
     getAvData(aid,1,function (data) {
         var video = data;
@@ -1100,7 +1099,7 @@ function openSearchView(setDocument) {
 </document>`);
     setDocument(view);
 }
-function initBar() {
+function initBar(){
     var bar = tvOS.template.menuBar([
         tvOS.element.menuItem('我的',function (e,menuItem) {
             if(!menuItem.hasDocument){
@@ -1211,14 +1210,13 @@ function playDMAV(id=14356253,page=1,data=null) {
 
 }
 
-App.onError = function (message, sourceURL, line) {
+App.onError = function (message, sourceURL, line){
     displayError("发生错误",`${message}\r\n\r\n${sourceURL} : ${line}`);
 };
-
 evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
-    if (success) {
+    if(success){
         initBar();
-    } else {
+    }else{
         displayError("加载外部JS文件出现错误!",tvBaseURL+'/tvOS2.js');
     }
 });
