@@ -493,7 +493,7 @@ this.prototypes = `<lockup prototype="video">
         return `<document>
    <stackTemplate>
       <banner>
-         <title>${title}</title>
+         <title></title>
       </banner>
       <collectionList>
          <grid>
