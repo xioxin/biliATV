@@ -548,6 +548,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                                 let moreButtonItem = new DataItem('video-more', up.mid);
                                 moreButtonItem.title="更多";
                                 moreButtonItem.onselect = function (e) {
+                                    openUserChannelVideo(up.mid,cid,title);
                                     // openVideo(av.aid)
                                 };
                                 // moreButtonItem.description="更多";
@@ -617,7 +618,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                             callback(false);
                         }
                         var datalist = list.map((av) => {
-                            item = {};
+                            let item = {};
                             item.id = av.aid;
                             item.aid = av.aid;
                             item.cover = autoUrl2Https(av.pic);
@@ -634,6 +635,36 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                     }
                 })
             })
+        }
+        function openUserChannelVideo(mid,cid,title) {
+            openVideoList(title,function (page,callback) {
+                ajax.get(`https://api.bilibili.com/x/space/channel/video?mid=${mid}&cid=${cid}&pn=${page}&ps=30&order=0`,function (data) {
+                    data = JSON.parse(data);
+                    if(data.code == 0){
+                        var list = data.data.list.archives;
+                        if(!list){
+                            callback(false);
+                        }
+                        var datalist = list.map((av) => {
+                            if(av.state<0)return;
+                            let item = {};
+                            item.id = av.aid;
+                            item.aid = av.aid;
+                            item.cover = autoUrl2Https(av.pic);
+                            item.title = av.title;
+                            item.description = av.description;
+                            item.onselect = function (e) {
+                                openVideo(av.aid)
+                            };
+                            return item;
+                        });
+                        callback(datalist);
+                    }else{
+                        return false;
+                    }
+                })
+            })
+            //
         }
 
 

@@ -5,9 +5,7 @@
 国内大部分资源可以直接用 [LazyCat](https://github.com/fuzhuo/LazyCat) 解决
 
 但是[LazyCat](https://github.com/fuzhuo/LazyCat)的喵哩喵哩满足不了我的需求
-所以打算自己再写一个
-
-
+所以打算自己再写一个 一个完整的bilibili客户端
 
 
 #### todo:
@@ -23,7 +21,7 @@
     * [x] 番剧页面
     * [x] 视频详情
     * [ ] 视频详情V2
-    * [ ] UP主页面
+    * [ ] UP主页面 80%
     * [ ] 热门视频(B站首页)
     * [ ] 搜索
     * [ ] 设置界面
@@ -74,7 +72,7 @@ cd biliATV && sh build.sh
 
 
 # 感谢
-
+* 感谢[@fuzhuo](https://github.com/fuzhuo)的帮助
 * [DanMuPlayer](https://github.com/fuzhuo/DanMuPlayer)
 * [tvOSBrowser](https://github.com/steventroughtonsmith/tvOSBrowser)
 

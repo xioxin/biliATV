@@ -41,23 +41,17 @@ class tvOS_view extends tvOS_identification{
                 }
             })
         }
-
-        parsed.addEventListener('select', function (e) {
-            if(e.target && e.target.dataItem){
-                if(e.target.dataItem.onselect){
-                    e.target.dataItem.onselect(e,e.target.dataItem);
+        let autoDataItemEvent = ['select','highlight','play','holdselect'];
+        autoDataItemEvent.forEach(function (key) {
+            parsed.addEventListener(key, function (e) {
+                if(e.target && e.target.dataItem){
+                    if(e.target.dataItem["on"+key]){
+                        e.target.dataItem["on"+key](e);
+                    }
                 }
-            }
-
+            });
         })
-        parsed.addEventListener('focus', function (e) {
-            console.log("focus",e);
-
-        })
-
-
     }
-
     addEvent(type,uuid,handle,element){
         if(!handle)return;
         if(!this.event[type]){
@@ -86,7 +80,6 @@ class tvOS_view extends tvOS_identification{
             console.warn(error);
         }
     }
-
 }
 class tvOS_element extends tvOS_identification{
     constructor(){
