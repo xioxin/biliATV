@@ -69,10 +69,18 @@ function displayError(title, info) {
     parsed.addEventListener("select",function (e) {
         navigationDocument.dismissModal();
     });
+    parsed.addEventListener("holdselect",function (e) {
+        App.reload();
+    });
+
     parsed.addEventListener("play",function (e) {
         // 显示详细错误信息
         // navigationDocument.dismissModal();
     });
+
+
+
+
     navigationDocument.presentModal(parsed);
 }
 
