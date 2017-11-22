@@ -1233,6 +1233,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
         // view.pageDataProxy.list.push("aaa");
         // view.display();
 
+
         test.newVideo = function (title="title1") {
             let d = new DataItem("video",UUID());
             d.cover = "https://avatars0.githubusercontent.com/u/5716100";
@@ -1241,9 +1242,13 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
             return d;
         };
 
-        let view = new videoList("title111",[
+        test.list = [
             test.newVideo("ceshi")
-        ]);
+        ];
+        test.add = function () {
+            test.list.push(test.newVideo(UUID()));
+        };
+        let view = new videoList("title111",test.list);
 
 
 
