@@ -1245,13 +1245,13 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
         test.list = [
             test.newVideo("ceshi")
         ];
-        test.add = function () {
-            test.list.push(test.newVideo(UUID()));
-        };
+
         let view = new videoList("title111",test.list);
 
 
-
+        test.add = function () {
+            view.list.push(test.newVideo(UUID()));
+        };
 
         // test.section.dataItem.touchPropertyPath
 
