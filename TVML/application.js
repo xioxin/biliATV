@@ -1258,7 +1258,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
         view.dataItem.setPropertyPath("title","测试标题2" );
         view.dataItem.title = "测试标题3";
 
-
+        view.display();
 
         // initBar();
     }else{
