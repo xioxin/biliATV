@@ -483,7 +483,7 @@ this.prototypes = `<lockup prototype="video">
         return this.pageDataProxy.list;
     }
     get view(){
-        let parsed = self.view;
+        let parsed = parent.view;
         let section = parsed.getElementsByTagName("section").item(0);
         section.set
 
