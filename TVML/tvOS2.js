@@ -41,7 +41,12 @@ class tvOS_view extends tvOS_identification{
                 }
             })
         }
-        let autoDataItemEvent = ['select','highlight','play','holdselect'];
+        /*case change
+case highlight
+case holdSelect
+case play
+case select*/
+        let autoDataItemEvent = ['change','select','highlight','play','holdselect'];
         autoDataItemEvent.forEach(function (key) {
             parsed.addEventListener(key, function (e) {
                 if(e.target && e.target.dataItem){

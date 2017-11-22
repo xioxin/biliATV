@@ -481,6 +481,9 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                                 objectItem.onselect = function (e) {
                                     openVideo(av.aid)
                                 };
+                                objectItem.onholdselect = function (e) {
+                                    openVideo(av.aid,true);
+                                };
                                 return objectItem;
                             });
                             let moreButtonItem = new DataItem('video-more', up.mid);
@@ -542,6 +545,9 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                                     objectItem.description = av.description;
                                     objectItem.onselect = function (e) {
                                         openVideo(av.aid)
+                                    };
+                                    objectItem.onholdselect = function (e) {
+                                        openVideo(av.aid,true);
                                     };
                                     return objectItem;
                                 });
@@ -627,6 +633,9 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                             item.onselect = function (e) {
                                 openVideo(av.aid)
                             };
+                            objectItem.onholdselect = function (e) {
+                                openVideo(av.aid,true);
+                            };
                             return item;
                         });
                         callback(datalist);
@@ -655,6 +664,9 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                             item.description = av.description;
                             item.onselect = function (e) {
                                 openVideo(av.aid)
+                            };
+                            item.onholdselect = function (e) {
+                                openVideo(av.aid,true);
                             };
                             return item;
                         });
@@ -847,6 +859,9 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
                                             objectItem.onselect = function (e) {
                                                 openVideo(av.aid*1);
                                             };
+                                            objectItem.onholdselect = function (e) {
+                                                openVideo(av.aid,true);
+                                            };
                                             return objectItem;
                                         }));
                                     }
@@ -980,13 +995,13 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
 
 
 
-        function openVideo(aid,type=0) {
+        function openVideo(aid,notAutoPlay=0) {
 
             getVideoData(aid,1,function (data,loading) {
 
                 videoTest[aid] = data;
 
-                if(data.part.length == 1){
+                if(notAutoPlay==0 && data.part.length == 1){
                     loading.removeDocument();
                     playDMAV(data.aid,1,data);
                     return;
