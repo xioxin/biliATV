@@ -58,8 +58,11 @@ function displayError(title, info) {
       <title>${title}</title>
       <description>${info}</description>
       <row>
-         <button>
+         <button id="cancel">
             <text>关闭</text>
+         </button>
+         <button id="reload">
+            <text>重载应用</text>
          </button>
       </row>
    </descriptiveAlertTemplate>
@@ -70,10 +73,9 @@ function displayError(title, info) {
         navigationDocument.dismissModal();
     });
     parsed.addEventListener("holdselect",function (e) {
-        App.reload();
         navigationDocument.dismissModal();
+        App.reload();
     });
-
     parsed.addEventListener("play",function (e) {
         // 显示详细错误信息
         // navigationDocument.dismissModal();
