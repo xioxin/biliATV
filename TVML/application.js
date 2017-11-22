@@ -332,8 +332,9 @@ function openDynamic() {
     loading.display();
 
     openVideoList("我的动态",function (page,callback) {
-        ajax.get("https://api.bilibili.com/x/web-feed/feed?ps=100",function (data) {
+        ajax.get("https://api.bilibili.com/x/web-feed/feed?ps=10&pn=1",function (data) {
             data = jsonParse(data);
+            console.warn('我的动态',data);
             if(data.code==0){
                 data = data.data;
                 data.map(function (d) {
@@ -352,7 +353,6 @@ function openDynamic() {
                         }else if(d.type == 1){
                             aid = d.bangumi.aid;
                         }
-
 
                         // https://bangumi.bilibili.com/anime/6427/play
 
