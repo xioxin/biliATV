@@ -69,7 +69,13 @@ case select*/
         navigationDocument.pushDocument(view||this.view);
     }
     replaceDocument(newView){
-        navigationDocument.replaceDocument(newView.view, this.view);
+
+        if(this.view && navigationDocument.documents.indexOf(this.view)){
+            navigationDocument.replaceDocument(newView.view, this.view);
+        }else{
+            newView.display();
+        }
+
     }
     dismissModal(){
         navigationDocument.
