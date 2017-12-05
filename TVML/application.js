@@ -383,8 +383,8 @@ function openDynamic() {
     </overlay>
     <title binding="textContent:{title};" />
     <row>
-        <img style="border-radius: circle;" src="${face}" width="32" height="32" />
-        <text> ${user}</text>
+        <img style="border-radius: circle;" binding="@src:{face};" width="32" height="32" />
+        <text binding="textContent:{user};"></text>
     </row>
 </lockup>`)
 
