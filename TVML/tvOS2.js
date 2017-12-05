@@ -68,10 +68,10 @@ case select*/
     display(view=false){
         navigationDocument.pushDocument(view||this.view);
     }
-    replaceDocument(newView){
+    replaceDocument(newView,oldView=false){
 
         if(this.view && navigationDocument.documents.indexOf(this.view)){
-            navigationDocument.replaceDocument(newView.view, this.view);
+            navigationDocument.replaceDocument(newView.view, oldView?oldView.view:this.view);
         }else{
             newView.display();
         }
