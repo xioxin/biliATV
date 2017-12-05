@@ -70,7 +70,7 @@ case select*/
     }
     replaceDocument(newView,oldView=false){
 
-        if(this.view && navigationDocument.documents.indexOf(this.view)){
+        if(this.view && navigationDocument.documents.indexOf(this.view)!=-1){
             navigationDocument.replaceDocument(newView.view, oldView?oldView.view:this.view);
         }else{
             newView.display();
