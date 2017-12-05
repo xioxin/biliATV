@@ -352,23 +352,27 @@ function openDynamic() {
             console.warn('我的动态',data);
             if(data.code==0){
                 data = data.data;
-                let items = data.map(function (d) {
+                let items = [];
+                data.forEach(function (d) {
+                    var objectItem = false
                     if(d.type == 0){
-                        let objectItem = new DataItem('video', d.archive.aid);
+                        objectItem = new DataItem('video', d.archive.aid);
                         objectItem.cover = d.archive.pic;
                         objectItem.title = d.archive.title;
                         objectItem.class = d.archive.tname;
                         objectItem.face = d.archive.owner.face;
                         objectItem.user = d.archive.owner.name;
                     }else if(d.type == 1){
-                        let objectItem = new DataItem('video', d.bangumi.aid);
+                        objectItem = new DataItem('video', d.bangumi.aid);
                         objectItem.cover = d.bangumi.cover;
                         objectItem.title = d.bangumi.title;
                         objectItem.class = '';
                         objectItem.face = '';
                         objectItem.user = '';
+                    }else{
+                        console.warn("未知数据类型",d);
                     }
-                    return objectItem;
+                    if(objectItem)items.push(objectItem);
                 });
                 callback(items);
             }else{
