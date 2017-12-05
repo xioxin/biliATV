@@ -343,8 +343,8 @@ function openLogin(callback=function () {}) {
     });
 }
 function openDynamic() {
-    var loading = tvOS.template.loading('加载中');
-    loading.display();
+    // var loading = tvOS.template.loading('加载中');
+    // loading.display();
 
     openVideoList("我的动态",function (page,callback) {
         ajax.get("https://api.bilibili.com/x/web-feed/feed?ps=10&pn=1",function (data) {
@@ -390,7 +390,8 @@ function openDynamic() {
         <img style="border-radius: circle;" binding="@src:{face};" width="32" height="32" />
         <text binding="textContent:{user};"></text>
     </row>
-</lockup>`)
+</lockup>`);
+
 
 }
 function openUser(mid) {
@@ -983,8 +984,8 @@ function openVideoList(title,pageProcessing,prototypes='') {
     var section = listView.view.getElementById("video");
     test.section = section;
 
-    var loding = tvOS.template.loading(title+",加载中...");
-    loding.display();
+    var openVideoList_loding = tvOS.template.loading(title+",加载中...");
+    openVideoList_loding.display();
 
     section.dataItem = new DataItem();
     var dataItems = [];
@@ -1005,9 +1006,9 @@ function openVideoList(title,pageProcessing,prototypes='') {
                 end = true;
             }
         });
-        if(loding){
-            loding.replaceDocument(listView)
-            loding = null;
+        if(openVideoList_loding){
+            openVideoList_loding.replaceDocument(listView)
+            openVideoList_loding = null;
         }
     }
     getNextPage();
