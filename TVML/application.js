@@ -347,7 +347,7 @@ function openDynamic() {
     // loading.display();
 
     openVideoList("我的动态",function (page,callback,getPage) {
-        ajax.get("https://api.bilibili.com/x/web-feed/feed?ps=10&pn=1",function (data) {
+        ajax.get("https://api.bilibili.com/x/web-feed/feed?ps=10&pn="+page,function (data) {
             data = jsonParse(data);
             console.warn('我的动态',data);
             if(data.code==0){
