@@ -354,7 +354,7 @@ function openDynamic() {
                 data = data.data;
                 let items = [];
                 data.forEach(function (d) {
-                    var objectItem = false
+                    var objectItem = false;
                     if(d.type == 0){
                         objectItem = new DataItem('video', d.archive.aid);
                         objectItem.cover = d.archive.pic;
