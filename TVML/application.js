@@ -346,7 +346,7 @@ function openDynamic() {
     // var loading = tvOS.template.loading('加载中');
     // loading.display();
 
-    openVideoList("我的动态",function (page,callback) {
+    openVideoList("我的动态",function (page,callback,getPage) {
         ajax.get("https://api.bilibili.com/x/web-feed/feed?ps=10&pn=1",function (data) {
             data = jsonParse(data);
             console.warn('我的动态',data);
@@ -362,6 +362,15 @@ function openDynamic() {
                         objectItem.class = d.archive.tname;
                         objectItem.face = d.archive.owner.face;
                         objectItem.user = d.archive.owner.name;
+                        objectItem.onselect = function (e) {
+                            openVideo(d.archive.aid)
+                        };
+                        objectItem.onholdselect = function (e) {
+                            openVideo(d.archive.aid,true);
+                        };
+                        objectItem.onhighlight = function (e) {
+                            getPage(page+1);
+                        };
                     }else if(d.type == 1){
                         objectItem = new DataItem('video', d.bangumi.aid);
                         objectItem.cover = d.bangumi.cover;
@@ -986,7 +995,6 @@ function openVideoList(title,pageProcessing,prototypes='') {
 
     var openVideoList_loding = tvOS.template.loading(title+",加载中...");
     openVideoList_loding.display();
-
     section.dataItem = new DataItem();
     var dataItems = [];
 
@@ -1005,6 +1013,8 @@ function openVideoList(title,pageProcessing,prototypes='') {
             }else{
                 end = true;
             }
+        },function (page) {
+            if(page > nowPage)getNextPage();
         });
         if(openVideoList_loding){
             openVideoList_loding.replaceDocument(listView)
