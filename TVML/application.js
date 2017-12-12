@@ -1056,7 +1056,7 @@ function openVideo(aid,notAutoPlay=0) {
                     <header>
                         <title>ID</title>
                     </header>
-                    <text>${data.aid}</text>
+                    <text>AV${data.aid}</text>
                 </info>
                 <info>
                     <header>
@@ -1064,12 +1064,12 @@ function openVideo(aid,notAutoPlay=0) {
                     </header>
                     <text>${data.cardrich.name}</text>
                 </info>
-                <!--<info>-->
-                    <!--<header>-->
-                        <!--<title>播放量</title>-->
-                    <!--</header>-->
-                    <!--<text>BBBBBB</text>-->
-                <!--</info>-->
+                <info>
+                    <header>
+                        <title>签名</title>
+                    </header>
+                    <text>${data.cardrich.sign}</text>
+                </info>
                 <!--<info>-->
                     <!--<header>-->
                         <!--<title>上传时间</title>-->

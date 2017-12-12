@@ -582,14 +582,17 @@ class urlCacheHack : URLCache {
                     if let _data = userCardrich["data"] as? Dictionary<String,Any>{
                         
                         if let card = _data["card"] as? Dictionary<String,Any>{
-                            
+                            print(url);
+                            print(card);
                             var user = biliCardrichModel()
-                            user.mid = card["mid"] as? Int ?? 0
+                            user.mid = Int(card["mid"] as? String ?? mid) ?? 0;
                             user.name = card["name"] as? String ?? ""
                             user.sex = card["sex"] as? String ?? ""
                             user.face = card["face"] as? String ?? ""
                             user.sign = card["sign"] as? String ?? ""
-                            user.fans = card["fans"] as? Int ?? 0
+                            user.fans = Int(card["fans"] as? String ?? "0") ?? 0;
+//                            user.regtime =
+                            
                             bili.biliCardrich[mid] = user;
                         }
                     }
