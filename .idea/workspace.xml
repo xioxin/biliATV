@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5570ac4e-289d-447a-94bf-62dcd593ef60" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DanMuPlayer" afterPath="$PROJECT_DIR$/DanMuPlayer" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TVML/application.js" afterPath="$PROJECT_DIR$/TVML/application.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/biliATV/biliModel.swift" afterPath="$PROJECT_DIR$/biliATV/biliModel.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -305,7 +304,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1513090348935</updated>
-      <workItem from="1513090350440" duration="2792000" />
+      <workItem from="1513090350440" duration="2945000" />
     </task>
     <task id="LOCAL-00001" summary="修正番剧清晰度问题 调整界面">
       <created>1513103850012</created>
@@ -318,7 +317,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2792000" />
+    <option name="totallyTimeSpent" value="2945000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="961" extended-state="6" />
