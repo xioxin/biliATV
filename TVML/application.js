@@ -404,6 +404,8 @@ function openDynamic() {
 
 }
 function openUser(mid) {
+    var loading = tvOS.template.loading(`加载中...`);
+    loading.display();
     ajax.get(`https://api.bilibili.com/cardrich?mid=${mid}`,function (data) {
         data = jsonParse(data);
         if(data.code == 0){
@@ -497,7 +499,7 @@ function openUser(mid) {
 </document>`;
 
             test.uv = page.view;
-            page.display();
+            loading.replaceDocument(page);
 
             var productTemplate = page.view.getElementsByTagName('productTemplate').item(0);
             //填充公告
