@@ -1044,24 +1044,31 @@ function openVideo(aid,notAutoPlay=0) {
         </background>
         <banner>
             <infoList>
+            
+                <info>
+                    <header>
+                        <title>ID</title>
+                    </header>
+                    <text>${data.aid}</text>
+                </info>
                 <info>
                     <header>
                         <title>UP主</title>
                     </header>
-                    <text>AAAAAA</text>
+                    <text>${data.cardrich.name}</text>
                 </info>
-                <info>
-                    <header>
-                        <title>播放量</title>
-                    </header>
-                    <text>BBBBBB</text>
-                </info>
-                <info>
-                    <header>
-                        <title>上传时间</title>
-                    </header>
-                    <text>BBBBBB</text>
-                </info>
+                <!--<info>-->
+                    <!--<header>-->
+                        <!--<title>播放量</title>-->
+                    <!--</header>-->
+                    <!--<text>BBBBBB</text>-->
+                <!--</info>-->
+                <!--<info>-->
+                    <!--<header>-->
+                        <!--<title>上传时间</title>-->
+                    <!--</header>-->
+                    <!--<text>BBBBBB</text>-->
+                <!--</info>-->
             </infoList>
             <stack>
                 <title>${data.wb_title}</title>
@@ -1074,8 +1081,8 @@ function openVideo(aid,notAutoPlay=0) {
                         <badge src="resource://button-preview" />
                         <title>播放</title>
                     </buttonLockup>
-                    <buttonLockup id="play_button">
-                        <badge src="${data.cardrich.face}" />
+                    <buttonLockup id="up_button">
+                        <image src="${data.cardrich.face}" />
                         <title>${data.cardrich.name}</title>
                     </buttonLockup>
                 </row>
@@ -1097,6 +1104,14 @@ function openVideo(aid,notAutoPlay=0) {
         </shelf>
     </productTemplate>
 </document>`);
+
+        page.view.getElementById("play_button").addEventListener("select",function (e) {
+            playDMAV(data.aid,1)
+        });
+        page.view.getElementById("up_button").addEventListener("select",function (e) {
+            openUser(data.cardrich.mid);
+        });
+
         var section = page.view.getElementById("video")
         section.dataItem = new DataItem();
         section.dataItem.setPropertyPath("video", data.part.map((p) => {
@@ -1109,7 +1124,14 @@ function openVideo(aid,notAutoPlay=0) {
             };
             return objectItem;
         }));
+
+
+
+
         loading.replaceDocument(page);
+
+
+
     });
 }
 

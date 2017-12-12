@@ -110,6 +110,9 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
         cacheHack.setModel(bili)
         URLCache.shared  = cacheHack
         
+        URLProtocol.registerClass(MHURLProtocol.self)
+        
+        
         webview.delegate = self;
         webview.frame = UIScreen.main.bounds
         

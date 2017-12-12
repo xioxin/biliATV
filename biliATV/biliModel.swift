@@ -57,15 +57,14 @@ class biliModel{
     
     public func webViewDidStartLoad(_ webview: UIWebView){
         print("👉 WEB START ");
+        
+
         webview.stringByEvaluatingJavaScript(from: """
-            window.MediaSource={isTypeSupported:function(){return !0}};
-            var ___iframes = document.getElementsByTagName('iframe');
-            for(var ___i=0;___i<___iframes.length;___i++){
-              if(___iframes[___i] && ___iframes[___i].contentWindow){
-                  ___iframes[___i].contentWindow.MediaSource={isTypeSupported:function(){return !0}};
-              }
-            }
+            console.log("quality hack");
+            window.MediaSource=function(){};
+            window.MediaSource.isTypeSupported = function(){return !0};
 """);
+        
         
         
         print("webViewDidStartLoad🔥");
@@ -85,22 +84,20 @@ class biliModel{
     
     public func webViewDidFinishLoad(_ webview: UIWebView){
 
-        
-        
         if (webview.isLoading) {
             print("🈲️ 301");
             return;
         }
         
+        
         webview.stringByEvaluatingJavaScript(from: """
-            window.MediaSource={isTypeSupported:function(){return !0}};
-            var ___iframes = document.getElementsByTagName('iframe');
-            for(var ___i=0;___i<___iframes.length;___i++){
-              if(___iframes[___i] && ___iframes[___i].contentWindow){
-                  ___iframes[___i].contentWindow.MediaSource={isTypeSupported:function(){return !0}};
-              }
-            }
+            console.log("quality hack");
+            window.MediaSource=function(){};
+            window.MediaSource.isTypeSupported = function(){return !0};
 """);
+        
+
+        
         
         let videoQuality = 80
         let setQualityCode = """
@@ -193,6 +190,23 @@ class biliModel{
         let videoPartString = webview.stringByEvaluatingJavaScript(from: "JSON.stringify(window.VideoPart.nodedata)");
         
         print(videoPartString);
+        
+        
+        
+//
+//        print("👉 iframe src: =======")
+//
+//        let iframeUrl = webview.stringByEvaluatingJavaScript(from: "document.getElementsByTagName('iframe')[0].src") ?? "";
+//        print(iframeUrl)
+//
+//
+//        if((iframeUrl.range(of: "/html5player.html")) != nil){
+//            webview.stringByEvaluatingJavaScript(from: "window.location.href=document.getElementsByTagName('iframe')[0].src");
+//        }
+//
+        
+        
+        
         
         var videoPart:Array<Dictionary<String,Any>> = [];
         
@@ -474,6 +488,7 @@ class urlCacheHack : URLCache {
         
         
         if((url.range(of: "/playurl")) != nil){
+            print("========/playurl=======")
             print(url);
             let cid = query["cid"] ?? ""
             var data = String.init(data: cachedResponse.data, encoding: String.Encoding.utf8)!;
