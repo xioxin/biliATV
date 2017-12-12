@@ -1039,6 +1039,7 @@ function openVideo(aid,notAutoPlay=0) {
     loading.display();
     getAvData(aid,1,function (data) {
         var video = data;
+        console.warn(data);
         if(notAutoPlay==0 && data.part.length == 1){
             loading.removeDocument();
             playDMAV(data.aid,1,data);
