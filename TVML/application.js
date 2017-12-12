@@ -404,6 +404,10 @@ function openDynamic() {
 
 }
 function openUser(mid) {
+    if(mid<=0){
+        displayError("错误 用户页面 缺少必要参数","mid");
+        return;
+    }
     var loading = tvOS.template.loading(`加载中...`);
     loading.display();
     ajax.get(`https://api.bilibili.com/cardrich?mid=${mid}`,function (data) {
