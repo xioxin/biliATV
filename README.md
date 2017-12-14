@@ -8,8 +8,15 @@
 所以打算自己再写一个 一个完整的bilibili客户端
 
 
-###使用技巧
+### 使用技巧
 > 长按视频封面可以强制打开视频详情界面 （如果不分P的视频将会直接播放）
+
+### 需要重新安装的更新:
+17年12月13日: 修复番剧清晰度解析问题
+17年12月14日: 修复播放器跳转进度时候的时间和指示器消失的问题
+
+
+
 
 
 #### todo:
@@ -67,12 +74,14 @@ Availability.h 在AppleTV模拟器位于： Xcode > Contents > Developer > Platf
 #define __TVOS_PROHIBITED_NOTQUITE                     __OS_AVAILABILITY(tvos,unavailable)
 ```
 
-## 安装方法
-由于使用了submodule所以请不要直接下载zip
+## 部署方法
+由于使用了submodule所以请不要直接下载zip,而是使用git clone
 ```
 git clone https://github.com/xioxin/biliATV.git
 cd biliATV && sh build.sh
 ```
+
+
 
 
 # 感谢
