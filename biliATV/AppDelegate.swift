@@ -127,6 +127,8 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
         
 
         
+        
+        
 //        self.player = SGPlayer.init()
 //
 //        self.player.view.frame = self.view.frame
@@ -144,6 +146,16 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
         return true
     }
     
+    public func getUserCookie(){
+        
+        if let cookiesdata:Data = UserDefaults.standard.object(forKey: "UserCookie") as? Data{
+            
+            print("\(cookiesdata)")
+            
+        }
+        
+        
+    }
     
     
     public func webViewDidStartLoad(_ webView: UIWebView){
@@ -240,8 +252,55 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
                     callback,0,dataDic])
                 }
             }
+        
+        
+        let saveUserCookie : @convention(block) () -> Void = {
+            () -> Void in
+            
+            print("saveUserCookie");
+            
+            if let cookies: Array = HTTPCookieStorage.shared.cookies(for: NSURL(string: "https://www.bilibili.com")! as URL)
+            {
+                let data: Data = NSKeyedArchiver.archivedData(withRootObject: cookies)
+                UserDefaults.standard.set(data, forKey: "UserCookie")
+                
+                print("cookie保存成功")
+                
+            }else{
+                print("保存cookie信息失败")
+            }
+            
+        }
+        
+        let getUserCookie : @convention(block) () -> Void = {
+            () -> Void in
+            
+            print("getUserCookie2");
+            
+            let cookiesdata:Data = UserDefaults.standard.object(forKey: "UserCookie") as! Data
+            if cookiesdata.count > 0 {
+                let cookies: Array<HTTPCookie> = NSKeyedUnarchiver.unarchiveObject(with: cookiesdata) as! Array<HTTPCookie>
+                if(cookies.count == 0){
+                    print("getUserCookie 0条数据")
+                }
+                for cookie in cookies {
+                    HTTPCookieStorage.shared.setCookie(cookie)
+                    print("getUserCookie 已设置 \(cookie.name)")
+                }
+            }else{
+                print("getUserCookie 数据长度为0")
+            }
+            
+            
+        }
+        
+        
+        
+        
        
          self.tvJsContext.setObject(unsafeBitCast(getAvData, to: AnyObject.self), forKeyedSubscript: "getAvData" as (NSCopying & NSObjectProtocol))
+        self.tvJsContext.setObject(unsafeBitCast(saveUserCookie, to: AnyObject.self), forKeyedSubscript: "saveUserCookie" as (NSCopying & NSObjectProtocol))
+        self.tvJsContext.setObject(unsafeBitCast(getUserCookie, to: AnyObject.self), forKeyedSubscript: "getUserCookie" as (NSCopying & NSObjectProtocol))
         
         
         

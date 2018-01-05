@@ -3,6 +3,7 @@ var test = {};
 var videoTest = {};
 var nowPlayer = null;
 var userData = {};
+var window = this;
 
 /*
 * 我的 动漫订阅
@@ -313,6 +314,9 @@ function openLogin(callback=function () {}) {
                     modalDom.getElementsByTagName('text').item(2).innerHTML = "登录中...";
                     ajax.get(data.data.url,function (data) {
                         // console.warn(data);
+
+                        //持久化cookie内容;
+                        window.saveUserCookie&&saveUserCookie();
                         modal.dismissModal();
                         callback(true);
                     })
@@ -326,8 +330,10 @@ function openLogin(callback=function () {}) {
         setTimeout(getinfo,100);
 
 
+
         var modal = new tvOS.template.descriptiveAlert('登录账号',`https://pan.baidu.com/share/qrcode?w=300&h=300&url=${encodeURIComponent(data.url)}`,"使用bilibili手机客户端扫描上方二维码",[
             new tvOS.element.button("刷新二维码",function (e,button) {
+                clearInterval(timer);
                 // modal.dismissModal();
                 openLogin(callback);
             }),
@@ -1304,6 +1310,9 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
         // view.display();
 
         initBar();
+        
+        //获取之前持久化的cookie
+        window.getUserCookie&&getUserCookie();
     }else{
         displayError("加载外部JS文件出现错误!",tvBaseURL+'/tvOS2.js');
     }
