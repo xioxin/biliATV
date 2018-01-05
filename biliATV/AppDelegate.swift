@@ -265,18 +265,20 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
             
             print("getUserCookie2");
             
-            let cookiesdata:Data = UserDefaults.standard.object(forKey: "UserCookie") as! Data
-            if cookiesdata.count > 0 {
-                let cookies: Array<HTTPCookie> = NSKeyedUnarchiver.unarchiveObject(with: cookiesdata) as! Array<HTTPCookie>
-                if(cookies.count == 0){
-                    print("getUserCookie 0条数据")
+            if let cookiesdata:Data = UserDefaults.standard.object(forKey: "UserCookie") as? Data{
+                if cookiesdata.count > 0 {
+                    let cookies: Array<HTTPCookie> = NSKeyedUnarchiver.unarchiveObject(with: cookiesdata) as! Array<HTTPCookie>
+                    if(cookies.count == 0){
+                        print("getUserCookie 0条数据")
+                    }
+                    for cookie in cookies {
+                        HTTPCookieStorage.shared.setCookie(cookie)
+                        print("getUserCookie 已设置 \(cookie.name)")
+                    }
+                }else{
+                    print("getUserCookie 数据长度为0")
                 }
-                for cookie in cookies {
-                    HTTPCookieStorage.shared.setCookie(cookie)
-                    print("getUserCookie 已设置 \(cookie.name)")
-                }
-            }else{
-                print("getUserCookie 数据长度为0")
+                
             }
             
             
