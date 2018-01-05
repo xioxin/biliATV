@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5570ac4e-289d-447a-94bf-62dcd593ef60" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DanMuPlayer" afterPath="$PROJECT_DIR$/DanMuPlayer" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TVML/application.js" afterPath="$PROJECT_DIR$/TVML/application.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/biliATV/AppDelegate.swift" afterPath="$PROJECT_DIR$/biliATV/AppDelegate.swift" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,8 +16,8 @@
       <file leaf-file-name="application.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TVML/application.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="343">
-              <caret line="145" column="44" lean-forward="true" selection-start-line="145" selection-start-column="44" selection-end-line="145" selection-end-column="44" />
+            <state relative-caret-position="387">
+              <caret line="147" column="19" lean-forward="true" selection-start-line="147" selection-start-column="19" selection-end-line="147" selection-end-column="19" />
               <folding>
                 <element signature="n#!!block;n#displayError#0" expanded="false" />
                 <element signature="n#!!block;n#jsonParse#0" expanded="false" />
@@ -232,9 +230,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds">
-    <option name="x" value="176" />
-    <option name="y" value="93" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="17" />
+    <option name="y" value="24" />
     <option name="width" value="1680" />
     <option name="height" value="949" />
   </component>
@@ -331,7 +329,7 @@
       <workItem from="1513148343162" duration="1522000" />
       <workItem from="1513275127388" duration="100000" />
       <workItem from="1513305929233" duration="248000" />
-      <workItem from="1515157857992" duration="472000" />
+      <workItem from="1515157857992" duration="760000" />
     </task>
     <task id="LOCAL-00001" summary="修正番剧清晰度问题 调整界面">
       <created>1513103850012</created>
@@ -344,10 +342,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5706000" />
+    <option name="totallyTimeSpent" value="5994000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="176" y="93" width="1680" height="949" extended-state="0" />
+    <frame x="0" y="23" width="1680" height="949" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26495728" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1108,8 +1106,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TVML/application.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="145" column="44" lean-forward="true" selection-start-line="145" selection-start-column="44" selection-end-line="145" selection-end-column="44" />
+        <state relative-caret-position="387">
+          <caret line="147" column="19" lean-forward="true" selection-start-line="147" selection-start-column="19" selection-end-line="147" selection-end-column="19" />
           <folding>
             <element signature="n#!!block;n#displayError#0" expanded="false" />
             <element signature="n#!!block;n#jsonParse#0" expanded="false" />
