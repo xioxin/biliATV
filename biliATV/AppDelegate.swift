@@ -146,18 +146,6 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
         return true
     }
     
-    public func getUserCookie(){
-        
-        if let cookiesdata:Data = UserDefaults.standard.object(forKey: "UserCookie") as? Data{
-            
-            print("\(cookiesdata)")
-            
-        }
-        
-        
-    }
-    
-    
     public func webViewDidStartLoad(_ webView: UIWebView){
         return bili!.webViewDidStartLoad(webview)
     }

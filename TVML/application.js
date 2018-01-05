@@ -141,6 +141,8 @@ function myHome(setDocument) {
                 }),
                 new tvOS.element.listItemLockup(0,'退出登录','',function () {
                     ajax.get('https://account.bilibili.com/login?act=exit',function () {
+                        //持久化UserCookie;
+                        window.saveUserCookie&&saveUserCookie();
                         myHome(setDocument);
                     })
                 }),
@@ -1310,7 +1312,7 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
         // view.display();
 
         initBar();
-        
+
         //获取之前持久化的cookie
         window.getUserCookie&&getUserCookie();
     }else{
