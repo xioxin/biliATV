@@ -26,7 +26,11 @@ class MHURLProtocol: URLProtocol {
         //从本地缓中读取数据
         let datas = """
 console.log("quality hack");
-            window.MediaSource=function(){};
+            window.MediaSource=function(){
+this.addEventListener = window.MediaSource.addEventListener;
+this.isTypeSupported = window.MediaSource.isTypeSupported;
+};
+            window.MediaSource.addEventListener = function(){}
             window.MediaSource.isTypeSupported = function(){return !0};
 window.REFERRER_LIST = [
 ];

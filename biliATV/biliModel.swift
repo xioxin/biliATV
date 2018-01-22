@@ -60,8 +60,12 @@ class biliModel{
         
 
         webview.stringByEvaluatingJavaScript(from: """
-            console.log("quality hack");
-            window.MediaSource=function(){};
+console.log("quality hack");
+            window.MediaSource=function(){
+this.addEventListener = window.MediaSource.addEventListener;
+this.isTypeSupported = window.MediaSource.isTypeSupported;
+};
+            window.MediaSource.addEventListener = function(){}
             window.MediaSource.isTypeSupported = function(){return !0};
 """);
         
@@ -91,8 +95,12 @@ class biliModel{
         
         
         webview.stringByEvaluatingJavaScript(from: """
-            console.log("quality hack");
-            window.MediaSource=function(){};
+console.log("quality hack");
+            window.MediaSource=function(){
+this.addEventListener = window.MediaSource.addEventListener;
+this.isTypeSupported = window.MediaSource.isTypeSupported;
+};
+            window.MediaSource.addEventListener = function(){}
             window.MediaSource.isTypeSupported = function(){return !0};
 """);
         
@@ -178,7 +186,12 @@ class biliModel{
         videoM.wb_desc = webview.stringByEvaluatingJavaScript(from: "window.wb_desc") ?? ""
         videoM.wb_info = webview.stringByEvaluatingJavaScript(from: "window.wb_info") ?? ""
         videoM.wb_url = webview.stringByEvaluatingJavaScript(from: "window.wb_url") ?? ""
-        videoM.wb_full_url = sLink(webview.stringByEvaluatingJavaScript(from: "window.wb_full_url") ?? "")
+        videoM.wb_full_url = sLink(webview.stringByEvaluatingJavaScript(from: "window.document.location.href") ?? "")
+        
+        
+        
+        
+        
         videoM.wb_img = sLink(webview.stringByEvaluatingJavaScript(from: "window.wb_img") ?? "")
         videoM.wb_summary = webview.stringByEvaluatingJavaScript(from: "window.wb_summary") ?? ""
         
