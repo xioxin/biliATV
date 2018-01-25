@@ -109,20 +109,7 @@ this.isTypeSupported = window.MediaSource.isTypeSupported;
         
         let videoQuality = 80
         let setQualityCode = """
-        window.localStorage.setItem('bilibili_player_settings',JSON.stringify((function(s){
-        if(!s){
-        s = {setting_config:{defquality:'\(videoQuality)'}};
-        console.log('setconfig',s);
-        return ;
-        }else{
-        s = JSON.parse(s);
-        if(typeof s != "object") s = {};
-        if(!s.setting_config)s.setting_config = {};
-        s.setting_config.defquality = '\(videoQuality)';
-        console.log('setconfig',s);
-        return s;
-        }
-        })(window.localStorage.getItem('bilibili_player_settings'))));
+        window.localStorage.removeItem('bilibili_player_settings');
         """;
         
         //设置清晰度;
