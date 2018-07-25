@@ -333,7 +333,7 @@ function openLogin(callback=function () {}) {
 
 
 
-        var modal = new tvOS.template.descriptiveAlert('登录账号',`https://pan.baidu.com/share/qrcode?w=300&h=300&url=${encodeURIComponent(data.url)}`,"使用bilibili手机客户端扫描上方二维码",[
+        var modal = new tvOS.template.descriptiveAlert('登录账号',`https://www.kuaizhan.com/common/encode-png?large=true&data=${encodeURIComponent(data.url)}`,"使用bilibili手机客户端扫描上方二维码",[
             new tvOS.element.button("刷新二维码",function (e,button) {
                 clearInterval(timer);
                 // modal.dismissModal();
