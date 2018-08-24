@@ -507,7 +507,8 @@ class urlCacheHack : URLCache {
                 
                 var playData = biliPlayDataModel()
                 
-                if let playDataD = playDataRew as? Dictionary<String,Any> {
+                if let playDataJsonD = playDataRew as? Dictionary<String, Any> {
+                    let playDataD = playDataJsonD["data"] as? Dictionary<String, Any> ?? [:]
                     
                     playData.cid = Int(cid) ?? 0;
                     playData.from   = playDataD["from"] as? String ?? ""
