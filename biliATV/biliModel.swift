@@ -15,9 +15,9 @@ class biliModel{
     var cid2AidAndPage = Dictionary<Int,Array<Int>>();
     
     
-    var webView:UIWebView!
+    var webView:BILWebView!
 
-    init(_ thisWebView:UIWebView){
+    init(_ thisWebView:BILWebView){
         webView = thisWebView;
     }
     
@@ -55,7 +55,7 @@ class biliModel{
     
     
     
-    public func webViewDidStartLoad(_ webview: UIWebView){
+    public func webViewDidStartLoad(_ webview: BILWebView){
         print("👉 WEB START ");
         
 
@@ -86,9 +86,9 @@ this.isTypeSupported = window.MediaSource.isTypeSupported;
         return link
     }
     
-    public func webViewDidFinishLoad(_ webview: UIWebView){
+    public func webViewDidFinishLoad(_ webview: BILWebView){
 
-        if (webview.isLoading) {
+        if (webview.isLoading()) {
             print("🈲️ 301");
             return;
         }
