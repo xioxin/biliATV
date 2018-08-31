@@ -16,11 +16,11 @@ import AVFoundation
 var ua = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3260.2 Safari/537.36"
 
 @UIApplicationMain
-class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControllerDelegate,UIWebViewDelegate {
+class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControllerDelegate {
     
     var window: UIWindow?
     var appController: TVApplicationController?
-    var webview:UIWebView!
+    var wProxy: webProxy!
 //    var player:SGPlayer!
 
 //    var vlc = VLCVideoView();
@@ -29,7 +29,6 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
     
     
     
-    var bili:biliModel!
     var tvJsContext: JSContext!
 
     
@@ -95,67 +94,12 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
         UserDefaults.standard.register(defaults: ["UserAgent": ua])
         UserDefaults.standard.synchronize()
         
-        let webViewClass : AnyObject.Type = NSClassFromString("UIWebView")!
-        let webViewObject : NSObject.Type = webViewClass as! NSObject.Type
-    
+        wProxy = webProxy.init()
         
-        webview = webViewObject.init() as! UIWebView
-//        webview.bounds = UIScreen.main.bounds;
-
-        
-
-        
-        bili = biliModel(webview)
-        let cacheHack:urlCacheHack = urlCacheHack.init()
-        cacheHack.setModel(bili)
-        URLCache.shared  = cacheHack
-        
-        URLProtocol.registerClass(MHURLProtocol.self)
-        
-        
-        webview.delegate = self;
-        webview.frame = UIScreen.main.bounds
-        
-        
-//        let url = URL(string: "https://www.bilibili.com/video/av14356253/")
-//        let request = URLRequest.init(url: url!)
-//        self.webview.loadRequest(request);
-        
-        
-        self.view.addSubview(webview as! UIView)
-
-        
-
-        
-        
-        
-//        self.player = SGPlayer.init()
-//
-//        self.player.view.frame = self.view.frame
-//        self.player.replaceVideo(with: URL(string: "http://www.sample-videos.com/video/flv/720/big_buck_bunny_720p_1mb.flv"));
-//        self.player.play()
-   
-        
-        //self.player.decoder = SGPlayerDecoder.byFFmpeg()
-//        self.player.view.frame = self.view.frame
-        
-//        self.player.tap
-        //UIViewController
-//        appController?.navigationController.pushViewController(UIViewController, animated: <#T##Bool#>)(self.player., animated: true)
+        self.window!.addSubview(wProxy.webview)
         
         return true
     }
-    
-    public func webViewDidStartLoad(_ webView: UIWebView){
-        return bili!.webViewDidStartLoad(webview)
-    }
-    
-    public func webViewDidFinishLoad(_ webview: UIWebView){
-        return bili!.webViewDidFinishLoad(webview)
-    }
-    
-  
-    
     
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -232,7 +176,7 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
             
             
 //            self.Scallback = callback;
-            self.bili.getAvData(aid,page: page){
+            self.wProxy.bili.getAvData(aid,page: page){
                     data in
                 let _data = data;
                 let dataDic = _data._dic;
@@ -299,6 +243,38 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
 //        self.tvJsContext.evaluateScript("run();");
 
 
+    }
+}
+
+@objc class webProxy: NSObject {
+    var webview:BILWebView!
+    var bili:biliModel!
+    
+    override init() {
+        webview = BILWebView.init()
+        
+        bili = biliModel(webview)
+        let cacheHack:urlCacheHack = urlCacheHack.init()
+        cacheHack.setModel(bili)
+        URLCache.shared = cacheHack
+        
+        URLProtocol.registerClass(MHURLProtocol.self)
+        
+        super.init()
+        
+        webview.setDelegate(self);
+    }
+    
+    @objc public func webViewDidStartLoad(_ webView: BILWebView){
+        return bili!.webViewDidStartLoad(webview)
+    }
+    
+    @objc public func webViewDidFinishLoad(_ webview: BILWebView){
+        return bili!.webViewDidFinishLoad(webview)
+    }
+    
+    @objc public func webView(_ webView: BILWebView, didFailLoadWithError error: Error){
+        return bili!.webViewDidFinishLoad(webview)
     }
 }
 

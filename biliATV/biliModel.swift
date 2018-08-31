@@ -15,9 +15,9 @@ class biliModel{
     var cid2AidAndPage = Dictionary<Int,Array<Int>>();
     
     
-    var webView:UIWebView!
+    var webView:BILWebView!
 
-    init(_ thisWebView:UIWebView){
+    init(_ thisWebView:BILWebView){
         webView = thisWebView;
     }
     
@@ -55,7 +55,7 @@ class biliModel{
     
     
     
-    public func webViewDidStartLoad(_ webview: UIWebView){
+    public func webViewDidStartLoad(_ webview: BILWebView){
         print("👉 WEB START ");
         
 
@@ -86,9 +86,9 @@ this.isTypeSupported = window.MediaSource.isTypeSupported;
         return link
     }
     
-    public func webViewDidFinishLoad(_ webview: UIWebView){
+    public func webViewDidFinishLoad(_ webview: BILWebView){
 
-        if (webview.isLoading) {
+        if (webview.isLoading()) {
             print("🈲️ 301");
             return;
         }
@@ -508,7 +508,18 @@ class urlCacheHack : URLCache {
                 var playData = biliPlayDataModel()
                 
                 if let playDataJsonD = playDataRew as? Dictionary<String, Any> {
-                    let playDataD = playDataJsonD["data"] as? Dictionary<String, Any> ?? [:]
+                    // 番剧
+                    // https://bangumi.bilibili.com/player/web_api/v2/playurl?cid=53331296&appkey=84956560bc028eb7&otype=json&type=&quality=0&module=bangumi&season_type=1&qn=0&sign=55b1f426baa5631df2c4cef3e3ea4862
+                    // 动态
+                    // https://api.bilibili.com/x/player/playurl?avid=30169749&cid=52604596&qn=0&type=mp4&otype=json
+                    
+                    var playDataD: Dictionary<String, Any>
+                    if let mDataD = playDataJsonD["data"] as? Dictionary<String, Any> {
+                        playDataD = mDataD
+                    }
+                    else {
+                        playDataD = playDataJsonD
+                    }
                     
                     playData.cid = Int(cid) ?? 0;
                     playData.from   = playDataD["from"] as? String ?? ""
