@@ -1042,12 +1042,26 @@ function openVideoList(title,pageProcessing,prototypes='') {
 
 
 
-function openVideo(aid,notAutoPlay=0) {
-    var loading = tvOS.template.loading(`加载 AV${aid}`);
-    loading.display();
+function openVideo(aid,notAutoPlay=0,loadingView=null) {
+    var loading;
+    if (loadingView) {
+        loading = loadingView;
+    }
+    else {
+        loading = tvOS.template.loading(`加载 AV${aid}`);
+        loading.display();
+    }
+
     getAvData(aid,1,function (data) {
         var video = data;
         console.warn(data);
+
+        if (data.error_msg && data.error_msg.length) {
+            loading.view.getElementsByTagName("title").item(0).innerHTML = `加载失败，重新加载 AV${aid}`;
+            openVideo(aid, notAutoPlay, loading);
+            return;
+        }
+
         if(notAutoPlay==0 && data.part.length == 1){
             loading.removeDocument();
             playDMAV(data.aid,1,data);
