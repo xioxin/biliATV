@@ -209,7 +209,7 @@
 				TargetAttributes = {
 					16055A601F285264000F3AF7 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = J8HDJ8AK6D;
+						DevelopmentTeam = N8JMN6858M;
 						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
 					};
@@ -394,7 +394,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = J8HDJ8AK6D;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N8JMN6858M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/biliATV",
@@ -402,8 +404,9 @@
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/DanMuPlayer/DanMuPlayer\"";
 				INFOPLIST_FILE = "$(SRCROOT)/biliATV/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.SuiBianGaiGai.biliATV;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SuiBianGaiGai.biliATV1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "biliATV/Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -416,7 +419,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = J8HDJ8AK6D;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N8JMN6858M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/biliATV",
@@ -424,8 +429,9 @@
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/DanMuPlayer/DanMuPlayer\"";
 				INFOPLIST_FILE = "$(SRCROOT)/biliATV/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.SuiBianGaiGai.biliATV;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SuiBianGaiGai.biliATV1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "biliATV/Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};

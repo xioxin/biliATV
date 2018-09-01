@@ -35,8 +35,8 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
     
     // tvBaseURL points to a server on your local machine. To create a local server for testing purposes, use the following command inside your project folder from the Terminal app: ruby -run -ehttpd . -p9001. See NSAppTransportSecurity for information on using a non-secure server.
 //    static let tvBaseURL = "https://raw.githubusercontent.com/xioxin/biliATV/master/TVML"
-    static let tvBaseURL = "https://coding.net/u/xin/p/biliATV/git/raw/master/TVML"
-//    static let tvBaseURL = "http://192.168.1.5:80/biliATV/TVML"
+//    static let tvBaseURL = "https://coding.net/u/xin/p/biliATV/git/raw/master/TVML"
+    static let tvBaseURL = "https://raw.githubusercontent.com/xioxin/biliATV/dev/TVML/application.js"
     
     static let tvBootURL = "\(AppDelegate.tvBaseURL)/application.js"
 
@@ -65,6 +65,16 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.main.bounds)
 
+        
+        var cookieProperties = [HTTPCookiePropertyKey: String]()
+        cookieProperties[HTTPCookiePropertyKey.name] = "CURRENT_QUALITY" as String
+        cookieProperties[HTTPCookiePropertyKey.value] = "80" as String
+        cookieProperties[HTTPCookiePropertyKey.domain] = "bilibili.com" as String
+        cookieProperties[HTTPCookiePropertyKey.path] = "/" as String
+        
+        let cookie = HTTPCookie(properties: cookieProperties)
+        HTTPCookieStorage.shared.setCookie(cookie!)
+        
         // Create the TVApplicationControllerContext for this application and set the properties that will be passed to the `App.onLaunch` function in JavaScript.
         let appControllerContext = TVApplicationControllerContext()
 

@@ -1265,6 +1265,7 @@ function playDMAV(id=14356253,page=1,data=null) {
         _play(data,page);
         return;
     }
+    console.log('playDMAV');
 
     getAvData(id,page,function (data) {
         setTimeout(function () {
@@ -1276,7 +1277,74 @@ function playDMAV(id=14356253,page=1,data=null) {
 }
 
 
+function getAvData(id,page,cd){
+    
 
+    console.log('get av data', id, page, cd);
+    
+    ajax.get(`https://www.bilibili.com/video/av${id}`,function (html) {
+       console.log(html);
+
+       var txt = html
+       .match(/__playinfo__=(.*?)<\/script>/g)
+       .map(m => m.replace(/^__playinfo__=(.*?)<\/script>$/, '$1'))[0];
+
+        console.log(txt);
+
+       var playinfo = JSON.parse(txt);
+
+       console.log('playinfo', playinfo);
+        
+
+       var video_url = '';
+
+       if(playinfo.data.durl.length>1){
+            playinfo.data.durl.forEach(function (durl) {
+               if(video_url)video_url+=";";
+               video_url += `%${durl.length/1000}%${durl.url}`;
+           });
+           video_url = 'edl://'+video_url;
+       }else{
+           video_url = playinfo.data.durl[0].url;
+       }
+
+
+       let videoList = new DMPlaylist();
+       let video = new DMMediaItem('video', video_url);
+       video.url = video_url;
+    //    video.artworkImageURL = data.wb_img;
+       video.options = {headers:{
+           "User-Agent": ua,
+           "referer": `https://www.bilibili.com/video/av${id}`
+       }};
+    //    video.title = `P${part.page}:${part.name} - ${data.wb_desc}`;
+    //    video.description = data.wb_summary;
+       videoList.push(video);
+       console.log(videoList);
+       if(nowPlayer)nowPlayer.stop();
+       let myPlayer = new DMPlayer();
+       nowPlayer = myPlayer;
+       console.log(myPlayer);
+       myPlayer.playlist = videoList;
+       myPlayer.play()
+
+
+
+    //    .join('/@/');
+
+    console.log('txt',txt);
+
+    });
+
+
+}
+
+
+
+
+function reload() {
+    App.reload({});
+}
 
 
 

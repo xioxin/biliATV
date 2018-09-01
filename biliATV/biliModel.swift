@@ -93,6 +93,23 @@ this.isTypeSupported = window.MediaSource.isTypeSupported;
             return;
         }
         
+        print("__playinfo__");
+        let playinfo = webview.stringByEvaluatingJavaScript(from: "JSON.stringify(window.__playinfo__)")
+        print(playinfo as Any)
+        
+        do{
+            let _playinfo = try JSONSerialization.jsonObject(with: (playinfo?.data(using: String.Encoding.utf8))!, options: .mutableContainers) as! [String: Any];
+            
+            let dash_mpd = _playinfo["dash_mpd"] as? String ?? ""
+            let durl = _playinfo["durl"] as? Array<Any> ?? []
+            print(dash_mpd);
+            print(durl);
+            
+            
+        }catch{
+            print("Error: (__playinfo__)")
+        }
+        
         
         webview.stringByEvaluatingJavaScript(from: """
 console.log("quality hack");
@@ -133,6 +150,10 @@ this.isTypeSupported = window.MediaSource.isTypeSupported;
         let aid = webview.stringByEvaluatingJavaScript(from: "window.aid") ?? "";
         let cid = webview.stringByEvaluatingJavaScript(from: "window.cid") ?? "";
         let mid = webview.stringByEvaluatingJavaScript(from: "window.mid") ?? "";
+        
+        
+        
+        
         
         
         
