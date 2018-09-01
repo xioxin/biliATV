@@ -1212,7 +1212,7 @@ function testView(testInfo){
     var alert = new tvOS.template.alert(testInfo||'测试标题',['描述1','description2'],[button,button2],['footTexts1','footTexts2']);
     return alert;
 }
-function playDMAV(id=14356253,page=1,data=null) {
+function playDMAV(id=30621030,page=2,data=null) {
     var _play = function (data,page) {
         let part = data.part[page-1];
         if(part){
@@ -1279,10 +1279,11 @@ function playDMAV(id=14356253,page=1,data=null) {
 
 function getAvData(id,page,cd){
     
+    var url = `https://www.bilibili.com/video/av${id}/?p=${page}`;
 
     console.log('get av data', id, page, cd);
     
-    ajax.get(`https://www.bilibili.com/video/av${id}`,function (html) {
+    ajax.get(url,function (html) {
        console.log(html);
 
        var playinfoJson = html
@@ -1325,7 +1326,7 @@ function getAvData(id,page,cd){
     //    video.artworkImageURL = data.wb_img;
        video.options = {headers:{
            "User-Agent": ua,
-           "referer": `https://www.bilibili.com/video/av${id}`
+           "referer": url
        }};
     //    video.title = `P${part.page}:${part.name} - ${data.wb_desc}`;
     //    video.description = data.wb_summary;
