@@ -65,16 +65,26 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.main.bounds)
 
-        
+//
         var cookieProperties = [HTTPCookiePropertyKey: String]()
         cookieProperties[HTTPCookiePropertyKey.name] = "CURRENT_QUALITY" as String
-        cookieProperties[HTTPCookiePropertyKey.value] = "80" as String
-        cookieProperties[HTTPCookiePropertyKey.domain] = "bilibili.com" as String
+        cookieProperties[HTTPCookiePropertyKey.value] = "112" as String
+        cookieProperties[HTTPCookiePropertyKey.domain] = ".bilibili.com" as String
         cookieProperties[HTTPCookiePropertyKey.path] = "/" as String
-        
         let cookie = HTTPCookie(properties: cookieProperties)
         HTTPCookieStorage.shared.setCookie(cookie!)
         
+        
+//
+//        var cookieProperties2 = [HTTPCookiePropertyKey: String]()
+//        cookieProperties2[HTTPCookiePropertyKey.name] = "CURRENT_FNVAL" as String
+//        cookieProperties2[HTTPCookiePropertyKey.value] = "8" as String
+//        cookieProperties2[HTTPCookiePropertyKey.domain] = "https://www.bilibili.com" as String
+//        cookieProperties2[HTTPCookiePropertyKey.path] = "/" as String
+        
+//        let cookie2 = HTTPCookie(properties: cookieProperties2)
+//
+//        HTTPCookieStorage.shared.setCookie(cookie2!)
         // Create the TVApplicationControllerContext for this application and set the properties that will be passed to the `App.onLaunch` function in JavaScript.
         let appControllerContext = TVApplicationControllerContext()
 
@@ -204,6 +214,9 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
             if let cookies: Array = HTTPCookieStorage.shared.cookies(for: NSURL(string: "https://www.bilibili.com")! as URL)
             {
                 let data: Data = NSKeyedArchiver.archivedData(withRootObject: cookies)
+                
+                print(data)
+                
                 UserDefaults.standard.set(data, forKey: "UserCookie")
                 
                 print("cookie保存成功")
@@ -228,6 +241,7 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
                     for cookie in cookies {
                         HTTPCookieStorage.shared.setCookie(cookie)
                         print("getUserCookie 已设置 \(cookie.name)")
+                        print(cookie);
                     }
                 }else{
                     print("getUserCookie 数据长度为0")
