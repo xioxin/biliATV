@@ -1300,6 +1300,7 @@ function getAvData(id,page,cd){
        var InitialState = JSON.parse(InitialStateJson);
 
        var videoData = InitialState.videoData;
+       var upData = InitialState.upData;
        /***
 aid: 30894051
 attribute: 16384
@@ -1349,12 +1350,14 @@ videos: 1
         return v;
        });
 
+       const cardrich = upData;
        const data = {
         wb_full_url: url,
         wb_img: videoData.pic,
         wb_desc: videoData.title,
         wb_summary: videoData.desc,
         part: part,
+        cardrich: cardrich,
        }
        cd(data);
 
