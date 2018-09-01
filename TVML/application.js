@@ -1299,6 +1299,40 @@ function getAvData(id,page,cd){
 
        var InitialState = JSON.parse(InitialStateJson);
 
+       var videoData = InitialState.videoData;
+       /***
+aid: 30894051
+attribute: 16384
+cid: 53940994
+copyright: 2
+ctime: 1535805226
+desc: "https://www.youtube.com/watch?v=BBA5pIFCgAk↵Dog Peanut Butter Pad↵2018年8月29日发布↵联动视频：【熊叔电视购物】升级版Zungle音乐太阳眼镜（av29271427）"
+dimension: {width: 1920, height: 1080, rotate: 0}
+duration: 689
+dynamic: "#熊叔实验室# (°∀°)ﾉ 嗨，花生酱"
+embedPlayer: "EmbedPlayer(\"player\", \"//static.hdslb.com/play.swf\", \"cid=53940994&aid=30894051&pre_ad=\")"
+no_cache: false
+owner: {mid: 22009424, name: "conandiy", face: "http://i2.hdslb.com/bfs/face/14f2e33b74942976fc542c2e773dee0a339c4b13.jpg"}
+pages: [Object] (1)
+        cid: 53940994
+        dimension: {width: 1920, height: 1080, rotate: 0}
+        duration: 689
+        from: "vupload"
+        page: 1
+        part: "Dog Peanut Butter Pad_sub"
+        vid: ""
+        weblink: ""
+pic: "http://i0.hdslb.com/bfs/archive/552a8977c37ae69a94dfb571aa05a1e53b754d17.jpg"
+pubdate: 1535805227
+rights: {bp: 0, elec: 0, download: 1, movie: 0, pay: 0, …}
+stat: {aid: 30894051, view: "--", danmaku: "--", reply: 2, favorite: "--", …}
+state: 0
+tid: 124
+title: "【熊叔实验室】狗狗的花生酱吸盘垫 @conandiy"
+tname: "趣味科普人文"
+videos: 1
+        */
+
     //    window.__INITIAL_STATE__=
 
 
@@ -1306,38 +1340,24 @@ function getAvData(id,page,cd){
        console.log('playinfo', playinfo);
        console.log('InitialState', InitialState);
         
+       const part = videoData.pages.map((v, i) => {
 
-       var video_url = '';
+        v.name = v.part;
+        if(v.page == page){
+            v.playData = playinfo.data;
+        }
+        return v;
+       });
 
-       if(playinfo.data.durl.length>1){
-            playinfo.data.durl.forEach(function (durl) {
-               if(video_url)video_url+=";";
-               video_url += `%${durl.length/1000}%${durl.url}`;
-           });
-           video_url = 'edl://'+video_url;
-       }else{
-           video_url = playinfo.data.durl[0].url;
+       const data = {
+        wb_full_url: url,
+        wb_img: videoData.pic,
+        wb_desc: videoData.title,
+        wb_summary: videoData.desc,
+        part: part,
        }
+       cd(data);
 
-
-       let videoList = new DMPlaylist();
-       let video = new DMMediaItem('video', video_url);
-       video.url = video_url;
-    //    video.artworkImageURL = data.wb_img;
-       video.options = {headers:{
-           "User-Agent": ua,
-           "referer": url
-       }};
-    //    video.title = `P${part.page}:${part.name} - ${data.wb_desc}`;
-    //    video.description = data.wb_summary;
-       videoList.push(video);
-       console.log(videoList);
-       if(nowPlayer)nowPlayer.stop();
-       let myPlayer = new DMPlayer();
-       nowPlayer = myPlayer;
-       console.log(myPlayer);
-       myPlayer.playlist = videoList;
-       myPlayer.play()
 
     });
 
