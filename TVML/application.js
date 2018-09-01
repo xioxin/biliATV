@@ -1294,7 +1294,7 @@ function getAvData(id,page,cd){
 
        var InitialStateJson = html
        .match(/__INITIAL_STATE__=(.*?)};/g)
-       .map(m => m.replace(/^__playinfo__=(.*?)};$/, '$1}'))[0];
+       .map(m => m.replace(/^__INITIAL_STATE__=(.*?)};$/, '$1}'))[0];
 
        var InitialState = JSON.parse(InitialStateJson);
 
