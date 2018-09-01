@@ -1339,12 +1339,6 @@ function getAvData(id,page,cd){
        myPlayer.playlist = videoList;
        myPlayer.play()
 
-
-
-    //    .join('/@/');
-
-    console.log('txt',txt);
-
     });
 
 
