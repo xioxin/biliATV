@@ -1352,6 +1352,7 @@ videos: 1
 
        const cardrich = upData;
        const data = {
+        aid: id,
         wb_full_url: url,
         wb_img: videoData.pic,
         wb_desc: videoData.title,
