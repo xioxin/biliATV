@@ -890,6 +890,7 @@ function openBangumi(sid) {
                         objectItem.description = `NEW 第${av.index}话`;
                     }
                     objectItem.onselect = function (e) {
+                        console.log('av',av);
                         playDMAV(av.av_id*1,av.page*1)
                     };
                     return objectItem;
