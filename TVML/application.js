@@ -1285,15 +1285,25 @@ function getAvData(id,page,cd){
     ajax.get(`https://www.bilibili.com/video/av${id}`,function (html) {
        console.log(html);
 
-       var txt = html
+       var playinfoJson = html
        .match(/__playinfo__=(.*?)<\/script>/g)
        .map(m => m.replace(/^__playinfo__=(.*?)<\/script>$/, '$1'))[0];
 
-        console.log(txt);
+       var playinfo = JSON.parse(playinfoJson);
 
-       var playinfo = JSON.parse(txt);
+
+       var InitialStateJson = html
+       .match(/__INITIAL_STATE__=(.*?)};/g)
+       .map(m => m.replace(/^__playinfo__=(.*?)};$/, '$1}'))[0];
+
+       var InitialState = JSON.parse(InitialStateJson);
+
+    //    window.__INITIAL_STATE__=
+
+
 
        console.log('playinfo', playinfo);
+       console.log('InitialState', InitialState);
         
 
        var video_url = '';
