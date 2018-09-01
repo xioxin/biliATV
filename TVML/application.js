@@ -1359,6 +1359,9 @@ videos: 1
         part: part,
         cardrich: cardrich,
        }
+
+        console.log('data',data);
+
        cd(data);
 
 
