@@ -1128,7 +1128,7 @@ function openVideo(aid, displayName=null,notAutoPlay=0,loadingView=null) {
 
 		if(notAutoPlay==0 && data.part.length == 1){
 			loading.removeDocument();
-			playVideo(data, 0);
+			playVideo(data, 0, getQualityApiValue(getUserSettings("Video_Quality")));
 			return;
 		}
 		var page = tvOS.template.custom(`<document>
@@ -1200,7 +1200,7 @@ function openVideo(aid, displayName=null,notAutoPlay=0,loadingView=null) {
 		console.log(data.cardrich.face);
 
 		page.view.getElementById("play_button").addEventListener("select",function (e) {
-			playVideo(data, 0);
+			playVideo(data, 0, getQualityApiValue(getUserSettings("Video_Quality")));
 		});
 		page.view.getElementById("up_button").addEventListener("select",function (e) {
 			openUser(data.cardrich.mid);
@@ -1214,7 +1214,7 @@ function openVideo(aid, displayName=null,notAutoPlay=0,loadingView=null) {
 			objectItem.title = p.name;
 			objectItem.description = `P${p.page}`;
 			objectItem.onselect = function (e){
-				playVideo(data, p.page-1);
+				playVideo(data, p.page-1, getQualityApiValue(getUserSettings("Video_Quality")));
 			};
 				return objectItem;
 		}));
@@ -1224,12 +1224,8 @@ function openVideo(aid, displayName=null,notAutoPlay=0,loadingView=null) {
 
 function initBar(){
     var bar = tvOS.template.menuBar([
-        tvOS.element.menuItem('我的',function (e,menuItem) {
-            if(!menuItem.hasDocument){
-                myHome(function (v) {
-                    menuItem.setDocument(v);
-                });
-            }
+		tvOS.element.menuItem('首页',function (e,menuItem) {
+            
         }),
         tvOS.element.menuItem('追番',function (e,menuItem) {
             if(!menuItem.hasDocument){
@@ -1253,9 +1249,18 @@ function initBar(){
                 });
             }
         }),
-		tvOS.element.menuItem('调试',function (e,menuItem) {
+		tvOS.element.menuItem('我的',function (e,menuItem) {
             if(!menuItem.hasDocument){
-                 menuItem.setDocument(reloadView());
+                myHome(function (v) {
+                    menuItem.setDocument(v);
+                });
+            }
+        }),
+		tvOS.element.menuItem('设置',function (e,menuItem) {
+            if(!menuItem.hasDocument){
+				openSettingsView(function (v) {
+                    menuItem.setDocument(v);
+                });
             }
         })
     ]);
@@ -1263,12 +1268,80 @@ function initBar(){
     bar.display(barView);
 }
 
+function openSettingsView(setDocument){
+	
+	var getDefaultQuality = getUserSettings("Video_Quality");
+	if(getDefaultQuality == "")
+	{
+		getDefaultQuality = "3";
+		saveUserSettings("Video_Quality", getDefaultQuality);
+	}
+	
+    var settingsPage = tvOS.template.custom(`<document>
+   <listTemplate>
+      <banner>
+         <title>设置</title>
+      </banner>
+      <list>
+         <section>
+            <listItemLockup id="setBtn_playQuality">
+               <title>播放</title>
+			   <subtitle id="setBtn_playQuality_current">清晰度：${getQualityStr(getDefaultQuality)}</subtitle>
+               <relatedContent>
+                  <lockup>
+                     <title>播放清晰度</title>
+                     <description>调整播放视频时的首选清晰度</description>
+                  </lockup>
+               </relatedContent>
+            </listItemLockup>
+			<listItemLockup id="setBtn_debug">
+               <title>调试</title>
+               <relatedContent>
+                  <lockup>
+                     <title>调试</title>
+                     <description>使用开发者功能</description>
+                  </lockup>
+               </relatedContent>
+            </listItemLockup>
+            <listItemLockup id="setBtn_about">
+               <title>关于</title>
+               <relatedContent>
+                  <lockup>
+                     <title>关于应用</title>
+                     <description>了解此应用程序的详细信息，或取得协助。</description>
+                  </lockup>
+               </relatedContent>
+            </listItemLockup>
+         </section>
+      </list>
+   </listTemplate>
+</document>`);
+
+	settingsPage.view.getElementById("setBtn_playQuality").addEventListener("select",function (e) {
+		changeVideoQuality(function (s) {
+            if(s){
+                openSettingsView(setDocument);
+            }
+        });
+	});
+	
+	settingsPage.view.getElementById("setBtn_debug").addEventListener("select",function (e) {
+		reloadView();
+	});
+	
+	settingsPage.view.getElementById("setBtn_about").addEventListener("select",function (e) {
+			
+	});
+
+	setDocument(settingsPage); 
+}
+
 function reloadView(){
     let button = new tvOS.element.button('好',function () {
 		App.reload({});
 	});
     var alert = new tvOS.template.alert('请问要重新加载应用程序吗？','按下此按钮将会将应用程序全部重新初始化，所有未保存的内容将会丢失。',button,'此操作不可逆');
-    return alert;
+    alert.presentModal();
 }
 
 function testView(testInfo){
@@ -1283,6 +1356,113 @@ function testView(testInfo){
     });
     var alert = new tvOS.template.alert(testInfo||'测试标题',['描述1','description2'],[button,button2],['footTexts1','footTexts2']);
     return alert;
+}
+
+function getQualityStr(id)
+{
+	switch(id){
+		case "0": {
+			return "流畅";
+			break;
+		}
+		case "1": {
+			return "清晰";
+			break;
+		}
+		case "2": {
+			return "高清";
+			break;
+		}
+		case "3": {
+			return "1080P";
+			break;
+		}
+		case "4": {
+			return "1080P+";
+			break;
+		}
+		default: {
+			return "1080P";
+			break;
+		}
+	}
+}
+
+function getQualityApiValue(id)
+{
+	switch(id){
+		case "0": {
+			return 15;
+			break;
+		}
+		case "1": {
+			return 32;
+			break;
+		}
+		case "2": {
+			return 64;
+			break;
+		}
+		case "3": {
+			return 80;
+			break;
+		}
+		case "3": {
+			return 112;
+			break;
+		}
+		default: {
+			return 80;
+			break;
+		}
+	}
+}
+
+function changeVideoQuality(callback=function () {}) {
+    let xml = `<document>
+   <descriptiveAlertTemplate>
+      <title>选择清晰度</title>
+      <description>在以下清晰度中选择一项，将会优先使用选择的清晰度播放。</description>
+      <row>
+         <button id="qBtn_low">
+            <text>流畅</text>
+         </button>
+		 <button id="qBtn_medium">
+            <text>清晰</text>
+         </button>
+		 <button id="qBtn_high">
+            <text>高清</text>
+         </button>
+		 <button id="qBtn_ultra">
+            <text>1080P</text>
+         </button>
+      </row>
+   </descriptiveAlertTemplate>
+</document>`;
+    let parser = new DOMParser();
+    let parsed = parser.parseFromString(xml.replace(new RegExp('&', 'g'), '&amp;'), "application/xml");
+	
+    parsed.getElementById("qBtn_low").addEventListener("select",function (e) {
+		saveUserSettings("Video_Quality", "0");
+		callback(true);
+        navigationDocument.dismissModal();
+    });
+	parsed.getElementById("qBtn_medium").addEventListener("select",function (e) {
+		saveUserSettings("Video_Quality", "1");
+		callback(true);
+        navigationDocument.dismissModal();
+    });
+	parsed.getElementById("qBtn_high").addEventListener("select",function (e) {
+		saveUserSettings("Video_Quality", "2");
+		callback(true);
+        navigationDocument.dismissModal();
+    });
+	parsed.getElementById("qBtn_ultra").addEventListener("select",function (e) {
+		saveUserSettings("Video_Quality", "3");
+		callback(true);
+        navigationDocument.dismissModal();
+    });
+    navigationDocument.presentModal(parsed);
 }
 
 
