@@ -252,14 +252,27 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
             
         }
         
+        let saveUserSettings : @convention(block) (String, String) -> Void = {
+            (configKey: String, configValue: String) -> Void in
+            UserDefaults.standard.set(configValue, forKey: configKey);
+        }
+        
+        let getUserSettings : @convention(block) (String) -> String = {
+            (configKey: String) -> String in
+
+            let configValue = UserDefaults.standard.string(forKey: configKey);
+            return configValue ?? "";
+        }
+        
         
 //
 //
 //
-//         self.tvJsContext.setObject(unsafeBitCast(getAvData, to: AnyObject.self), forKeyedSubscript: "getAvData" as (NSCopying & NSObjectProtocol))
+//      self.tvJsContext.setObject(unsafeBitCast(getAvData, to: AnyObject.self), forKeyedSubscript: "getAvData" as (NSCopying & NSObjectProtocol))
         self.tvJsContext.setObject(unsafeBitCast(saveUserCookie, to: AnyObject.self), forKeyedSubscript: "saveUserCookie" as (NSCopying & NSObjectProtocol))
         self.tvJsContext.setObject(unsafeBitCast(getUserCookie, to: AnyObject.self), forKeyedSubscript: "getUserCookie" as (NSCopying & NSObjectProtocol))
-        
+        self.tvJsContext.setObject(unsafeBitCast(saveUserSettings, to: AnyObject.self), forKeyedSubscript: "saveUserSettings"as (NSCopying & NSObjectProtocol))
+        self.tvJsContext.setObject(unsafeBitCast(getUserSettings, to: AnyObject.self), forKeyedSubscript: "getUserSettings"as (NSCopying & NSObjectProtocol))
         
         
         self.tvJsContext.evaluateScript("var ua = '\(ua)';");
