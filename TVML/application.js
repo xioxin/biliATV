@@ -929,7 +929,7 @@ function openBangumi(sid) {
                     // tvOS.template.compilation(result.bangumi_title,result.jp_title,`${result.evaluate}\r\n${result.staff}`).display();
                 });
                 page.view.getElementById("play_button").addEventListener("select",function (e) {
-					playBangumi(sid, result.episodes[0], 80);
+					playBangumi(sid, result.episodes[0], getQualityApiValue(getUserSettings("Video_Quality")));
                 });
                 var bangumiSection = page.view.getElementById("bangumi")
                 bangumiSection.dataItem = new DataItem();
@@ -942,7 +942,7 @@ function openBangumi(sid) {
                         objectItem.description = `NEW 第${av.index}话`;
                     }
                     objectItem.onselect = function (e) {
-                        playBangumi(sid, av, 80);
+                        playBangumi(sid, av, getQualityApiValue(getUserSettings("Video_Quality")));
                     };
                     return objectItem;
                 }));
