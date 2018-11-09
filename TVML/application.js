@@ -306,83 +306,17 @@ function openSearchView(setDocument) {
             </lockup>
             <lockup id="test_video_Play">
                <img src="path to images on your server/Car_Movie_250x375_B.png" width="182" height="274" />
-               <title>一个测试视频(you-get)</title>
+               <title>一个测试视频</title>
             </lockup>
             <lockup>
                <img src="path to images on your server/Car_Movie_250x375_C.png" width="182" height="274" />
-               <title>Movie 3</title>
+               <title>不知道放什么</title>
             </lockup>
          </section>
       </shelf>
    </searchTemplate>
 </document>`);
     setDocument(page); 
-	
-	page.view.getElementById("test_bangumi_Play").addEventListener("select",function (e) {
-        let videoList = new DMPlaylist();
-            let video = new DMMediaItem('video', "http://upos-hz-mirrorwcsu.acgvideo.com/upgcxcode/96/74/62227496/62227496-1-64.flv?e=ig8euxZM2rNcNbR37WhVhoMz7zdjhwdEto8g5X10ugNcXBlqNxHxNEVE5XREto8KqJZHUa6m5J0SqE85tZvEuENvNC8xNEVE9EKE9IMvXBvE2ENvNCImNEVEK9GVqJIwqa80WXIekXRE9IB5QK==&deadline=1541673016&gen=playurl&nbs=1&oi=1985755415&os=wcsu&platform=pc&trid=d36faa3f55704c058fa306053e56260e&uipk=5&upsig=1d0e4fa254e67868dc6fb6505d420952");
-            video.url = "http://upos-hz-mirrorwcsu.acgvideo.com/upgcxcode/96/74/62227496/62227496-1-64.flv?e=ig8euxZM2rNcNbR37WhVhoMz7zdjhwdEto8g5X10ugNcXBlqNxHxNEVE5XREto8KqJZHUa6m5J0SqE85tZvEuENvNC8xNEVE9EKE9IMvXBvE2ENvNCImNEVEK9GVqJIwqa80WXIekXRE9IB5QK==&deadline=1541673016&gen=playurl&nbs=1&oi=1985755415&os=wcsu&platform=pc&trid=d36faa3f55704c058fa306053e56260e&uipk=5&upsig=1d0e4fa254e67868dc6fb6505d420952";
-            //video.artworkImageURL = data.wb_img;
-            video.options = {headers:{
-                "User-Agent": ua,
-                "referer": "https://www.bilibili.com/bangumi/play/ep251094/"
-            }};
-			video.title = "只要贝尔哲布布大小姐喜欢就好";
-            //video.title = `P${part.page}:${part.name} - ${data.wb_desc}`;
-            video.description = "一段说明";
-            videoList.push(video);
-            console.log(videoList);
-            if(nowPlayer)nowPlayer.stop();
-            let myPlayer = new DMPlayer();
-            nowPlayer = myPlayer;
-            console.log(myPlayer);
-            myPlayer.playlist = videoList;
-            // myPlayer.addEventListener('timeBoundaryDidCross', (listener, extraInfo) => {
-            //     console.log("bound: " + listener.boundary);
-            // }, {});
-
-            // myPlayer.addEventListener('timeDidChange', function(listener,extraInfo) {
-            //     console.log("time: " + listener.time);
-            // },{interval: 1});
-            // myPlayer.addEventListener('stateDidChange', function(listener, extraInfo) {
-            //     console.log("state: " + listener.state);
-            // },{});
-            // myPlayer.addDanMu(msg="This is a test", color=0xFF0000, fontSize=25, style=0);
-            myPlayer.play()
-    });
-	
-	page.view.getElementById("test_video_Play").addEventListener("select",function (e) {
-        let videoList = new DMPlaylist();
-            let video = new DMMediaItem('video', "http://upos-hz-mirrorwcsu.acgvideo.com/upgcxcode/58/75/62327558/62327558-1-80.flv?e=ig8euxZM2rNcNbT1hzuVhoM1hbNa7wdVNEVEuCIv29hEn0lqXg8Y2ENvNCImNEVEUJ1miI7MT96fqj3E9r1qNCNEto8g2ENvN03eN0B5tZlqNxTEto8BTrNvNeZVuJ10Kj_g2UB02J0mN0B599M=&deadline=1541691041&gen=playurl&nbs=1&oi=1985755415&os=wcsu&platform=pc&trid=3763c9e8012e4c3eb52c1f3563dd2d94&uipk=5&upsig=d213a478e3aa243018e11a04d123a72d");
-            video.url = "http://upos-hz-mirrorwcsu.acgvideo.com/upgcxcode/58/75/62327558/62327558-1-80.flv?e=ig8euxZM2rNcNbT1hzuVhoM1hbNa7wdVNEVEuCIv29hEn0lqXg8Y2ENvNCImNEVEUJ1miI7MT96fqj3E9r1qNCNEto8g2ENvN03eN0B5tZlqNxTEto8BTrNvNeZVuJ10Kj_g2UB02J0mN0B599M=&deadline=1541691041&gen=playurl&nbs=1&oi=1985755415&os=wcsu&platform=pc&trid=3763c9e8012e4c3eb52c1f3563dd2d94&uipk=5&upsig=d213a478e3aa243018e11a04d123a72d";
-            //video.artworkImageURL = data.wb_img;
-            video.options = {headers:{
-                "User-Agent": ua,
-                "referer": "https://www.bilibili.com/bangumi/play/ep251094/"
-            }};
-			video.title = "只要贝尔哲布布大小姐喜欢就好";
-            //video.title = `P${part.page}:${part.name} - ${data.wb_desc}`;
-            video.description = "一段说明";
-            videoList.push(video);
-            console.log(videoList);
-            if(nowPlayer)nowPlayer.stop();
-            let myPlayer = new DMPlayer();
-            nowPlayer = myPlayer;
-            console.log(myPlayer);
-            myPlayer.playlist = videoList;
-            // myPlayer.addEventListener('timeBoundaryDidCross', (listener, extraInfo) => {
-            //     console.log("bound: " + listener.boundary);
-            // }, {});
-
-            // myPlayer.addEventListener('timeDidChange', function(listener,extraInfo) {
-            //     console.log("time: " + listener.time);
-            // },{interval: 1});
-            // myPlayer.addEventListener('stateDidChange', function(listener, extraInfo) {
-            //     console.log("state: " + listener.state);
-            // },{});
-            // myPlayer.addDanMu(msg="This is a test", color=0xFF0000, fontSize=25, style=0);
-            myPlayer.play()
-    });
 	
 	var searchField = page.view.getElementById("searchBox");
     var keyboard = searchField.getFeature("Keyboard");
@@ -1550,6 +1484,7 @@ function openVideoWindow(aid, detail, imageURL, page, title, desc, isBangumi = n
 }
 
 var SEC1 = '94aba54af9065f71de72f5508f1cd42e';
+var appkey = '84956560bc028eb7';
 var api_url = 'http://interface.bilibili.com/v2/playurl?';
 var bangumi_api_url = 'http://bangumi.bilibili.com/player/web_api/playurl?';
 
@@ -1558,8 +1493,7 @@ function biliApiRequest(cid, quality, bangumi = null, bangumi_movie = null, rd)
 	var ts = (new Date()).getTime().toString();
 	if(bangumi)
 	{
-		//还没搞明白
-		var params_str = 'appkey=84956560bc028eb7&cid=' + cid + '&module=bangumi&otype=json&qn=' + quality + '&quality=' + quality + '&season_type=1&type=';
+		var params_str = 'appkey=' + appkey + '&cid=' + cid + '&module=bangumi&otype=json&qn=' + quality + '&quality=' + quality + '&season_type=1&type=';
 		var chksum = genMD5(params_str+SEC1);
 		var genApiUrl = bangumi_api_url + params_str + '&sign=' + chksum;
 		
@@ -1571,7 +1505,7 @@ function biliApiRequest(cid, quality, bangumi = null, bangumi_movie = null, rd)
 	}
 	else
 	{
-		var params_str = 'appkey=84956560bc028eb7&cid=' + cid + '&otype=json&qn=' + quality + '&quality=' + quality + '&type=';
+		var params_str = 'appkey=' + appkey + '&cid=' + cid + '&otype=json&qn=' + quality + '&quality=' + quality + '&type=';
 		var chksum = genMD5(params_str+SEC1);
 		var genApiUrl = api_url + params_str + '&sign=' + chksum;
 		
