@@ -92,6 +92,26 @@ function displayError(title="", info="") {
     displayErrorLock = false;
 }
 
+function Alert(title="", info="") {
+    let xml = `<document>
+   <descriptiveAlertTemplate>
+      <title>${title}</title>
+      <description>${info}</description>
+      <row>
+         <button id="ok">
+            <text>好</text>
+         </button>
+      </row>
+   </descriptiveAlertTemplate>
+</document>`;
+    let parser = new DOMParser();
+    let parsed = parser.parseFromString(xml.replace(new RegExp('&', 'g'), '&amp;'), "application/xml");
+    parsed.getElementById("ok").addEventListener("select",function (e) {
+        navigationDocument.dismissModal();
+    });
+    navigationDocument.presentModal(parsed);
+}
+
 // json解析错误拦截
 function jsonParse(s) {
     var data = {};
@@ -269,31 +289,55 @@ function timeline(setDocument) {
     });
 }
 function openSearchView(setDocument) {
-    var view = tvOS.template.custom(`<document>
+    var page = tvOS.template.custom(`<document>
    <searchTemplate>
-      <searchField/>
-      <shelf>
+      <searchField keyboardTraits="alphanumeric" id="searchBox">在这里输入你想寻找的视频</searchField>
+		<button id="searchBtn">
+				<text>搜索</text>
+		</button>
+	  <shelf>
          <header>
-            <title>Popular</title>
+            <title>热搜</title>
          </header>
          <section>
-            <lockup>
+            <lockup id="test_bangumi_Play">
                <img src="path to images on your server/Car_Movie_250x375_A.png" width="182" height="274" />
-               <title>Movie 1</title>
+               <title>一个测试番剧</title>
             </lockup>
-            <lockup>
+            <lockup id="test_video_Play">
                <img src="path to images on your server/Car_Movie_250x375_B.png" width="182" height="274" />
-               <title>Movie 2</title>
+               <title>一个测试视频</title>
             </lockup>
             <lockup>
                <img src="path to images on your server/Car_Movie_250x375_C.png" width="182" height="274" />
-               <title>Movie 3</title>
+               <title>不知道放什么</title>
             </lockup>
          </section>
       </shelf>
    </searchTemplate>
 </document>`);
-    setDocument(view);
+    setDocument(page); 
+	
+	var searchField = page.view.getElementById("searchBox");
+    var keyboard = searchField.getFeature("Keyboard");
+	var searchText = "";
+ 
+    keyboard.onTextChange = function() {
+            searchText = keyboard.text;
+            console.log("Search text changed " + searchText);
+    }
+	
+	page.view.getElementById("searchBtn").addEventListener("select",function (e) {
+        if(searchText != "")
+		{
+			searchResults(page, searchText);
+		}
+    });
+}
+
+function searchResults(doc, s_keyword)
+{
+	openVideo(s_keyword, null, true);
 }
 
 function openLogin(callback=function () {}) {
@@ -361,8 +405,9 @@ function openDynamic() {
             if(data.code==0){
                 data = data.data;
                 let items = [];
-                data.forEach(function (d) {
-                    var objectItem = false;
+				var objectItem = false;
+                try{
+					data.forEach(function (d) {
                     if(d.type == 0){
                         objectItem = new DataItem('video', d.archive.aid);
                         objectItem.cover = d.archive.pic;
@@ -371,10 +416,10 @@ function openDynamic() {
                         objectItem.face = d.archive.owner.face;
                         objectItem.user = d.archive.owner.name;
                         objectItem.onselect = function (e) {
-                            openVideo(d.archive.aid)
+                            openVideo(d.archive.aid, d.archive.title, true)
                         };
                         objectItem.onholdselect = function (e) {
-                            openVideo(d.archive.aid,true);
+                            openVideo(d.archive.aid, d.archive.title);
                         };
                         objectItem.onhighlight = function (e) {
                             getPage(page+1);
@@ -383,14 +428,21 @@ function openDynamic() {
                         objectItem = new DataItem('video', d.bangumi.aid);
                         objectItem.cover = d.bangumi.cover;
                         objectItem.title = d.bangumi.title;
+						objectItem.onselect = function (e) {
+                            openBangumi(d.bangumi.season_id);
+                        };
                         objectItem.class = '';
                         objectItem.face = '';
-                        objectItem.user = '';
+                        objectItem.user = `更新至第 ${d.bangumi.new_ep.index} 集`;
                     }else{
                         console.warn("未知数据类型",d);
                     }
                     if(objectItem)items.push(objectItem);
-                });
+					});
+				}
+				catch {
+					
+				}
                 callback(items);
             }else{
                 displayError(`加载错误 错误ID${data.code}`,)
@@ -563,10 +615,10 @@ function openUser(mid) {
                         objectItem.title = av.title;
                         objectItem.description = av.description;
                         objectItem.onselect = function (e) {
-                            openVideo(av.aid)
+                            openVideo(av.aid, av.title, true)
                         };
                         objectItem.onholdselect = function (e) {
-                            openVideo(av.aid,true);
+                            openVideo(av.aid, av.title);
                         };
                         return objectItem;
                     });
@@ -628,10 +680,10 @@ function openUser(mid) {
                             objectItem.title = av.title;
                             objectItem.description = av.description;
                             objectItem.onselect = function (e) {
-                                openVideo(av.aid)
+                                openVideo(av.aid, av.title, true)
                             };
                             objectItem.onholdselect = function (e) {
-                                openVideo(av.aid,true);
+                                openVideo(av.aid, av.title);
                             };
                             return objectItem;
                         });
@@ -714,10 +766,10 @@ function openUserVideo(mid,title) {
                     item.title = av.title;
                     item.description = av.description;
                     item.onselect = function (e) {
-                        openVideo(av.aid)
+                        openVideo(av.aid, av.title, true)
                     };
                     objectItem.onholdselect = function (e) {
-                        openVideo(av.aid,true);
+                        openVideo(av.aid, av.title);
                     };
                     return item;
                 });
@@ -746,10 +798,10 @@ function openUserChannelVideo(mid,cid,title) {
                     item.title = av.title;
                     item.description = av.description;
                     item.onselect = function (e) {
-                        openVideo(av.aid)
+                        openVideo(av.aid, av.title, true)
                     };
                     item.onholdselect = function (e) {
-                        openVideo(av.aid,true);
+                        openVideo(av.aid, av.title);
                     };
                     return item;
                 });
@@ -877,7 +929,7 @@ function openBangumi(sid) {
                     // tvOS.template.compilation(result.bangumi_title,result.jp_title,`${result.evaluate}\r\n${result.staff}`).display();
                 });
                 page.view.getElementById("play_button").addEventListener("select",function (e) {
-                    playDMAV(result.episodes[0].av_id*1,result.episodes[0].page*1)
+					playBangumi(sid, result.episodes[0], getQualityApiValue(getUserSettings("Video_Quality")));
                 });
                 var bangumiSection = page.view.getElementById("bangumi")
                 bangumiSection.dataItem = new DataItem();
@@ -890,7 +942,7 @@ function openBangumi(sid) {
                         objectItem.description = `NEW 第${av.index}话`;
                     }
                     objectItem.onselect = function (e) {
-                        playDMAV(av.av_id*1,av.page*1)
+                        playBangumi(sid, av, getQualityApiValue(getUserSettings("Video_Quality")));
                     };
                     return objectItem;
                 }));
@@ -925,10 +977,10 @@ function openBangumi(sid) {
 
                                     objectItem.description = `UP:${up}  T:${av.tname}`;
                                     objectItem.onselect = function (e) {
-                                        openVideo(av.aid*1);
+                                        openVideo(av.aid*1, av.title, true);
                                     };
                                     objectItem.onholdselect = function (e) {
-                                        openVideo(av.aid,true);
+                                        openVideo(av.aid, av.title);
                                     };
                                     return objectItem;
                                 }));
@@ -1042,38 +1094,49 @@ function openVideoList(title,pageProcessing,prototypes='') {
 
 
 
-function openVideo(aid,notAutoPlay=0,loadingView=null) {
+function openVideo(aid, displayName=null,notAutoPlay=0,loadingView=null) {
     var loading;
     if (loadingView) {
         loading = loadingView;
     }
     else {
-        loading = tvOS.template.loading(`加载 AV${aid}`);
+		var displayStr = `加载 AV${aid}`;	
+		if(displayName != null)
+		{
+			displayStr = displayName;
+		}
+		loading = tvOS.template.loading(displayStr);
         loading.display();
     }
 
     getAvData(aid,1,function (data) {
-        var video = data;
-        console.warn(data);
+		if(data.isBangumi == true)
+		{
+			openBangumi(data.seasonID);
+			loading.removeDocument();
+			return;
+		}
+		
+		var video = data;
+		console.warn(data);
 
-        if (data.error_msg && data.error_msg.length) {
-            loading.view.getElementsByTagName("title").item(0).innerHTML = `加载失败，重新加载 AV${aid}`;
-            openVideo(aid, notAutoPlay, loading);
-            return;
-        }
+		if (data.error_msg && data.error_msg.length) {
+			loading.view.getElementsByTagName("title").item(0).innerHTML = `加载失败，重新加载 AV${aid}`;
+			openVideo(aid, displayName, notAutoPlay, loading);
+			return;
+		}
 
-        if(notAutoPlay==0 && data.part.length == 1){
-            loading.removeDocument();
-            playDMAV(data.aid,1,data);
-            return;
-        }
-        var page = tvOS.template.custom(`<document>
+		if(notAutoPlay==0 && data.part.length == 1){
+			loading.removeDocument();
+			playVideo(data, 0, getQualityApiValue(getUserSettings("Video_Quality")));
+			return;
+		}
+		var page = tvOS.template.custom(`<document>
     <productTemplate>
         <background>
         </background>
         <banner>
             <infoList>
-            
                 <info>
                     <header>
                         <title>ID</title>
@@ -1100,18 +1163,18 @@ function openVideo(aid,notAutoPlay=0,loadingView=null) {
                 <!--</info>-->
             </infoList>
             <stack>
-                <title>${data.wb_title}</title>
+                <title>${data.wb_desc}</title>
                 <!--<row>-->
                     <!--<text>UP主：</text>-->
                 <!--</row>-->
-                <description id="description_more" allowsZooming="true" moreLabel="more">${data.wb_desc}</description>
+                <description id="description_more" allowsZooming="true" moreLabel="more">${data.wb_summary}</description>
                 <row>
                     <buttonLockup id="play_button">
                         <badge src="resource://button-preview" />
                         <title>播放</title>
                     </buttonLockup>
                     <buttonLockup id="up_button">
-                        <image src="${data.cardrich.face}" />
+                        <image src="resource://button-artist"/>
                         <title>${data.cardrich.name}</title>
                     </buttonLockup>
                 </row>
@@ -1134,44 +1197,35 @@ function openVideo(aid,notAutoPlay=0,loadingView=null) {
     </productTemplate>
 </document>`);
 
-        page.view.getElementById("play_button").addEventListener("select",function (e) {
-            playDMAV(data.aid,1)
-        });
-        page.view.getElementById("up_button").addEventListener("select",function (e) {
-            openUser(data.cardrich.mid);
-        });
+		console.log(data.cardrich.face);
 
-        var section = page.view.getElementById("video")
-        section.dataItem = new DataItem();
-        section.dataItem.setPropertyPath("video", data.part.map((p) => {
-            let objectItem = new DataItem('video', p.page);
-            objectItem.cover = video.wb_img;
-            objectItem.title = p.name;
-            objectItem.description = `P${p.page}`;
-            objectItem.onselect = function (e){
-                playDMAV(data.aid,p.page)
-            };
-            return objectItem;
-        }));
+		page.view.getElementById("play_button").addEventListener("select",function (e) {
+			playVideo(data, 0, getQualityApiValue(getUserSettings("Video_Quality")));
+		});
+		page.view.getElementById("up_button").addEventListener("select",function (e) {
+			openUser(data.cardrich.mid);
+		});
 
-
-
-
-        loading.replaceDocument(page);
-
-
-
+		var section = page.view.getElementById("video")
+		section.dataItem = new DataItem();
+		section.dataItem.setPropertyPath("video", data.part.map((p) => {
+			let objectItem = new DataItem('video', p.page);
+			objectItem.cover = video.wb_img;
+			objectItem.title = p.name;
+			objectItem.description = `P${p.page}`;
+			objectItem.onselect = function (e){
+				playVideo(data, p.page-1, getQualityApiValue(getUserSettings("Video_Quality")));
+			};
+				return objectItem;
+		}));
+		loading.replaceDocument(page);
     });
 }
 
 function initBar(){
     var bar = tvOS.template.menuBar([
-        tvOS.element.menuItem('我的',function (e,menuItem) {
-            if(!menuItem.hasDocument){
-                myHome(function (v) {
-                    menuItem.setDocument(v);
-                });
-            }
+		tvOS.element.menuItem('首页',function (e,menuItem) {
+            
         }),
         tvOS.element.menuItem('追番',function (e,menuItem) {
             if(!menuItem.hasDocument){
@@ -1185,12 +1239,26 @@ function initBar(){
         //         // openBangumi();
         //     }
         // }),
-        // tvOS.element.menuItem('分区',function (e,menuItem) {
-        //     // menuItem.setDocument(testView('22222'));
-        // }),
+        //tvOS.element.menuItem('分区',function (e,menuItem) {
+        //      menuItem.setDocument(testView('22222'));
+        //}),
         tvOS.element.menuItem('搜索',function (e,menuItem) {
             if(!menuItem.hasDocument){
                 openSearchView(function (v){
+                    menuItem.setDocument(v);
+                });
+            }
+        }),
+		tvOS.element.menuItem('我的',function (e,menuItem) {
+            if(!menuItem.hasDocument){
+                myHome(function (v) {
+                    menuItem.setDocument(v);
+                });
+            }
+        }),
+		tvOS.element.menuItem('设置',function (e,menuItem) {
+            if(!menuItem.hasDocument){
+				openSettingsView(function (v) {
                     menuItem.setDocument(v);
                 });
             }
@@ -1199,6 +1267,83 @@ function initBar(){
     var barView = bar.view;
     bar.display(barView);
 }
+
+function openSettingsView(setDocument){
+	
+	var getDefaultQuality = getUserSettings("Video_Quality");
+	if(getDefaultQuality == "")
+	{
+		getDefaultQuality = "3";
+		saveUserSettings("Video_Quality", getDefaultQuality);
+	}
+	
+    var settingsPage = tvOS.template.custom(`<document>
+   <listTemplate>
+      <banner>
+         <title>设置</title>
+      </banner>
+      <list>
+         <section>
+            <listItemLockup id="setBtn_playQuality">
+               <title>播放</title>
+			   <subtitle id="setBtn_playQuality_current">清晰度：${getQualityStr(getDefaultQuality)}</subtitle>
+               <relatedContent>
+                  <lockup>
+                     <title>播放清晰度</title>
+                     <description>调整播放视频时的首选清晰度</description>
+                  </lockup>
+               </relatedContent>
+            </listItemLockup>
+			<listItemLockup id="setBtn_debug">
+               <title>调试</title>
+               <relatedContent>
+                  <lockup>
+                     <title>调试</title>
+                     <description>使用开发者功能</description>
+                  </lockup>
+               </relatedContent>
+            </listItemLockup>
+            <listItemLockup id="setBtn_about">
+               <title>关于</title>
+               <relatedContent>
+                  <lockup>
+                     <title>关于应用</title>
+                     <description>了解此应用程序的详细信息，或取得协助。</description>
+                  </lockup>
+               </relatedContent>
+            </listItemLockup>
+         </section>
+      </list>
+   </listTemplate>
+</document>`);
+
+	settingsPage.view.getElementById("setBtn_playQuality").addEventListener("select",function (e) {
+		changeVideoQuality(function (s) {
+            if(s){
+                openSettingsView(setDocument);
+            }
+        });
+	});
+	
+	settingsPage.view.getElementById("setBtn_debug").addEventListener("select",function (e) {
+		reloadView();
+	});
+	
+	settingsPage.view.getElementById("setBtn_about").addEventListener("select",function (e) {
+			
+	});
+
+	setDocument(settingsPage); 
+}
+
+function reloadView(){
+    let button = new tvOS.element.button('好',function () {
+		App.reload({});
+	});
+    var alert = new tvOS.template.alert('请问要重新加载应用程序吗？','按下此按钮将会将应用程序全部重新初始化，所有未保存的内容将会丢失。',button,'此操作不可逆');
+    alert.presentModal();
+}
+
 function testView(testInfo){
     let button = new tvOS.element.button('测试',function () {
         // var alert3 = new tvOS.template.alert('333333'||'测试标题',['描述1','description2'],[button,button2],['footTexts1','footTexts2']);
@@ -1212,84 +1357,196 @@ function testView(testInfo){
     var alert = new tvOS.template.alert(testInfo||'测试标题',['描述1','description2'],[button,button2],['footTexts1','footTexts2']);
     return alert;
 }
-function playDMAV(id=14356253,page=1,data=null) {
-    var _play = function (data,page) {
-        let part = data.part[page-1];
-        if(part){
-            // let timeMap = [];
-            var video_url = '';
 
-            if(part.playData.durl.length>1){
-                part.playData.durl.forEach(function (durl) {
-                    if(video_url)video_url+=";";
-                    video_url += `%${durl.length/1000}%${durl.url}`;
-                });
-                video_url = 'edl://'+video_url;
-            }else{
-                video_url = part.playData.durl[0].url;
-            }
+function getQualityStr(id)
+{
+	switch(id){
+		case "0": {
+			return "流畅";
+			break;
+		}
+		case "1": {
+			return "清晰";
+			break;
+		}
+		case "2": {
+			return "高清";
+			break;
+		}
+		case "3": {
+			return "1080P";
+			break;
+		}
+		case "4": {
+			return "1080P+";
+			break;
+		}
+		default: {
+			return "1080P";
+			break;
+		}
+	}
+}
 
+function getQualityApiValue(id)
+{
+	switch(id){
+		case "0": {
+			return 15;
+			break;
+		}
+		case "1": {
+			return 32;
+			break;
+		}
+		case "2": {
+			return 64;
+			break;
+		}
+		case "3": {
+			return 80;
+			break;
+		}
+		case "3": {
+			return 112;
+			break;
+		}
+		default: {
+			return 80;
+			break;
+		}
+	}
+}
 
-            let videoList = new DMPlaylist();
-            let video = new DMMediaItem('video', video_url);
-            video.url = video_url;
-            video.artworkImageURL = data.wb_img;
-            video.options = {headers:{
-                "User-Agent": ua,
-                "referer": data.wb_full_url
-            }};
-            video.title = `P${part.page}:${part.name} - ${data.wb_desc}`;
-            video.description = data.wb_summary;
-            videoList.push(video);
-            console.log(videoList);
-            if(nowPlayer)nowPlayer.stop();
-            let myPlayer = new DMPlayer();
-            nowPlayer = myPlayer;
-            console.log(myPlayer);
-            myPlayer.playlist = videoList;
-            // myPlayer.addEventListener('timeBoundaryDidCross', (listener, extraInfo) => {
-            //     console.log("bound: " + listener.boundary);
-            // }, {});
-
-            // myPlayer.addEventListener('timeDidChange', function(listener,extraInfo) {
-            //     console.log("time: " + listener.time);
-            // },{interval: 1});
-            // myPlayer.addEventListener('stateDidChange', function(listener, extraInfo) {
-            //     console.log("state: " + listener.state);
-            // },{});
-            // myPlayer.addDanMu(msg="This is a test", color=0xFF0000, fontSize=25, style=0);
-            myPlayer.play()
-        }
-    }
-    if(data && data.part && data.part[page-1] && data.part[page-1].playData){
-        _play(data,page);
-        return;
-    }
-
-    getAvData(id,page,function (data) {
-        setTimeout(function () {
-            console.log(data);
-            _play(data,page);
-        },1)
+function changeVideoQuality(callback=function () {}) {
+    let xml = `<document>
+   <descriptiveAlertTemplate>
+      <title>选择清晰度</title>
+      <description>在以下清晰度中选择一项，将会优先使用选择的清晰度播放。</description>
+      <row>
+         <button id="qBtn_low">
+            <text>流畅</text>
+         </button>
+		 <button id="qBtn_medium">
+            <text>清晰</text>
+         </button>
+		 <button id="qBtn_high">
+            <text>高清</text>
+         </button>
+		 <button id="qBtn_ultra">
+            <text>1080P</text>
+         </button>
+      </row>
+   </descriptiveAlertTemplate>
+</document>`;
+    let parser = new DOMParser();
+    let parsed = parser.parseFromString(xml.replace(new RegExp('&', 'g'), '&amp;'), "application/xml");
+	
+    parsed.getElementById("qBtn_low").addEventListener("select",function (e) {
+		saveUserSettings("Video_Quality", "0");
+		callback(true);
+        navigationDocument.dismissModal();
     });
-
+	parsed.getElementById("qBtn_medium").addEventListener("select",function (e) {
+		saveUserSettings("Video_Quality", "1");
+		callback(true);
+        navigationDocument.dismissModal();
+    });
+	parsed.getElementById("qBtn_high").addEventListener("select",function (e) {
+		saveUserSettings("Video_Quality", "2");
+		callback(true);
+        navigationDocument.dismissModal();
+    });
+	parsed.getElementById("qBtn_ultra").addEventListener("select",function (e) {
+		saveUserSettings("Video_Quality", "3");
+		callback(true);
+        navigationDocument.dismissModal();
+    });
+    navigationDocument.presentModal(parsed);
 }
 
 
+function getAvData(id,page,cd){
+    
+    var url = `https://www.bilibili.com/video/av${id}/?p=${page}`;
+
+    console.log('get av data', id, page, cd);
+    
+    ajax.get(url,function (html) {
+       console.log(html);
+
+	   var isNoInfo = false;
+	   try{
+			var playinfoJson = html
+			.match(/__playinfo__=(.*?)<\/script>/g)
+			.map(m => m.replace(/^__playinfo__=(.*?)<\/script>$/, '$1'))[0];
+
+			var playinfo = JSON.parse(playinfoJson);
+		}catch(exception) {
+			isNoInfo = true;
+		}
 
 
+       var InitialStateJson = html
+       .match(/__INITIAL_STATE__=(.*?)};/g)
+       .map(m => m.replace(/^__INITIAL_STATE__=(.*?)};$/, '$1}'))[0];
+
+       var InitialState = JSON.parse(InitialStateJson);
+
+	   
+	   if(InitialState.videoData == undefined)
+	   {
+			const data = {
+				isBangumi: true,
+				seasonID: InitialState.ssId
+			}
+		   cd(data);
+		   return;
+	   }
+	   
+       var videoData = InitialState.videoData;
+       var upData = InitialState.upData;
+
+        
+       const part = videoData.pages.map((v, i) => {
+
+        v.name = v.part;
+        if(v.page == page && !isNoInfo){
+            v.playData = playinfo.data;
+        }
+        return v;
+       });
+
+       const cardrich = upData;
+       const data = {
+        aid: id,
+        wb_full_url: url,
+        wb_img: videoData.pic,
+        wb_desc: videoData.title,
+        wb_summary: videoData.desc,
+        part: part,
+        cardrich: cardrich,
+		gt_InitialState: InitialState
+       }
+
+        console.log('data',data);
+
+       cd(data);
 
 
+    });
+
+
+}
+
+function reload() {
+    App.reload({});
+}
 
 App.onError = function (message, sourceURL, line){
     // console.log(message, sourceURL, line);
     displayError("发生错误",`${message}\r\n\r\n${sourceURL} : ${line}`);
 };
-
-
-
-
-
 
 evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
     if(success){
@@ -1333,3 +1590,126 @@ evaluateScripts([tvBaseURL+'/tvOS2.js'], function (success) {
         displayError("加载外部JS文件出现错误!",tvBaseURL+'/tvOS2.js');
     }
 });
+
+function playVideo(infoData, page, quality=80)
+{
+	biliApiRequest(infoData.part[page].cid, quality, false, false, function (detail){
+		openVideoWindow(infoData.aid, detail, infoData.wb_img, page, infoData.wb_desc, infoData.wb_desc);
+	});	
+}
+
+function playBangumi(sid, videoInfo, quality=80)
+{
+	biliepRequest(sid, 1, function (epIndex){
+		var epcid = "";
+		epIndex.result.forEach(function (ep){
+			
+			console.log("EP信息");
+			console.log(ep);
+			
+			var tempIndex = parseInt(ep.index);
+			var tempTargetIndex = parseInt(videoInfo.index);
+			
+			if(tempIndex == tempTargetIndex)
+			{
+				epcid = ep.cid;
+			}
+		});
+		
+		if(epcid === "")
+		{
+			Alert("无法加载此番剧","调用接口时返回了异常数据");
+			return;
+		}
+		
+		biliApiRequest(epcid, quality, true, false, function (detail){
+			openVideoWindow(videoInfo.av_id, detail, videoInfo.cover, videoInfo.index, videoInfo.index_title, `第 ${videoInfo.index} 话`, true);
+		});	
+	});	
+}
+
+function openVideoWindow(aid, detail, imageURL, page, title, desc, isBangumi = null)
+{
+		let videoList = new DMPlaylist();
+		let video = new DMMediaItem('video', detail.durl[0].url);
+		video.url = detail.durl[0].url;
+		video.artworkImageURL = imageURL;
+		video.options = {headers:{
+			"User-Agent": ua,
+			"referer": "https://www.bilibili.com/video/av" + aid
+		}};
+		video.title = `P${page} - ${title}`;
+		if(isBangumi)
+		{
+			video.title = `第 ${page} 话 - ${title}`;
+		}
+		video.description = desc;
+		videoList.push(video);
+		if(nowPlayer)nowPlayer.stop();
+		let myPlayer = new DMPlayer();
+		nowPlayer = myPlayer;
+		myPlayer.playlist = videoList;
+		// myPlayer.addEventListener('timeBoundaryDidCross', (listener, extraInfo) => {
+		//     console.log("bound: " + listener.boundary);
+		// }, {});
+	
+		// myPlayer.addEventListener('timeDidChange', function(listener,extraInfo) {
+		//     console.log("time: " + listener.time);
+		// },{interval: 1});
+		myPlayer.addEventListener('stateDidChange', function(listener, extraInfo) {
+			console.log("state: " + listener.state);
+		},{});
+		// myPlayer.addDanMu(msg="This is a test", color=0xFF0000, fontSize=25, style=0);
+		myPlayer.play()	
+}
+
+var SEC1 = '94aba54af9065f71de72f5508f1cd42e';
+var appkey = '84956560bc028eb7';
+var api_url = 'http://interface.bilibili.com/v2/playurl?';
+var bangumi_api_url = 'http://bangumi.bilibili.com/player/web_api/playurl?';
+
+function biliApiRequest(cid, quality, bangumi = null, bangumi_movie = null, rd)
+{
+	var ts = (new Date()).getTime().toString();
+	if(bangumi)
+	{
+		var params_str = 'appkey=' + appkey + '&cid=' + cid + '&module=bangumi&otype=json&qn=' + quality + '&quality=' + quality + '&season_type=1&type=';
+		var chksum = genMD5(params_str+SEC1);
+		var genApiUrl = bangumi_api_url + params_str + '&sign=' + chksum;
+		
+		var resultData = null;
+		ajax.get(genApiUrl,function (html) {
+			resultData = JSON.parse(html);
+			rd(resultData);
+		});
+	}
+	else
+	{
+		var params_str = 'appkey=' + appkey + '&cid=' + cid + '&otype=json&qn=' + quality + '&quality=' + quality + '&type=';
+		var chksum = genMD5(params_str+SEC1);
+		var genApiUrl = api_url + params_str + '&sign=' + chksum;
+		
+		var resultData = null;
+		ajax.get(genApiUrl,function (html) {
+			resultData = JSON.parse(html);
+			rd(resultData);
+		});
+	}
+}
+
+function biliepRequest(sid, stype=1, rd)
+{
+	var ts = (new Date()).getTime().toString();
+	ajax.get("https://bangumi.bilibili.com/web_api/get_ep_list?season_id=" + sid + "&season_type=" + stype,function (html) {
+			resultData = JSON.parse(html);
+			rd(resultData);
+	});
+}
+
+function genMD5(value)
+{
+	var MD5 = function(d){result = M(V(Y(X(d),8*d.length)));return result.toLowerCase()};function M(d){for(var _,m="0123456789ABCDEF",f="",r=0;r<d.length;r++)_=d.charCodeAt(r),f+=m.charAt(_>>>4&15)+m.charAt(15&_);return f}function X(d){for(var _=Array(d.length>>2),m=0;m<_.length;m++)_[m]=0;for(m=0;m<8*d.length;m+=8)_[m>>5]|=(255&d.charCodeAt(m/8))<<m%32;return _}function V(d){for(var _="",m=0;m<32*d.length;m+=8)_+=String.fromCharCode(d[m>>5]>>>m%32&255);return _}function Y(d,_){d[_>>5]|=128<<_%32,d[14+(_+64>>>9<<4)]=_;for(var m=1732584193,f=-271733879,r=-1732584194,i=271733878,n=0;n<d.length;n+=16){var h=m,t=f,g=r,e=i;f=md5_ii(f=md5_ii(f=md5_ii(f=md5_ii(f=md5_hh(f=md5_hh(f=md5_hh(f=md5_hh(f=md5_gg(f=md5_gg(f=md5_gg(f=md5_gg(f=md5_ff(f=md5_ff(f=md5_ff(f=md5_ff(f,r=md5_ff(r,i=md5_ff(i,m=md5_ff(m,f,r,i,d[n+0],7,-680876936),f,r,d[n+1],12,-389564586),m,f,d[n+2],17,606105819),i,m,d[n+3],22,-1044525330),r=md5_ff(r,i=md5_ff(i,m=md5_ff(m,f,r,i,d[n+4],7,-176418897),f,r,d[n+5],12,1200080426),m,f,d[n+6],17,-1473231341),i,m,d[n+7],22,-45705983),r=md5_ff(r,i=md5_ff(i,m=md5_ff(m,f,r,i,d[n+8],7,1770035416),f,r,d[n+9],12,-1958414417),m,f,d[n+10],17,-42063),i,m,d[n+11],22,-1990404162),r=md5_ff(r,i=md5_ff(i,m=md5_ff(m,f,r,i,d[n+12],7,1804603682),f,r,d[n+13],12,-40341101),m,f,d[n+14],17,-1502002290),i,m,d[n+15],22,1236535329),r=md5_gg(r,i=md5_gg(i,m=md5_gg(m,f,r,i,d[n+1],5,-165796510),f,r,d[n+6],9,-1069501632),m,f,d[n+11],14,643717713),i,m,d[n+0],20,-373897302),r=md5_gg(r,i=md5_gg(i,m=md5_gg(m,f,r,i,d[n+5],5,-701558691),f,r,d[n+10],9,38016083),m,f,d[n+15],14,-660478335),i,m,d[n+4],20,-405537848),r=md5_gg(r,i=md5_gg(i,m=md5_gg(m,f,r,i,d[n+9],5,568446438),f,r,d[n+14],9,-1019803690),m,f,d[n+3],14,-187363961),i,m,d[n+8],20,1163531501),r=md5_gg(r,i=md5_gg(i,m=md5_gg(m,f,r,i,d[n+13],5,-1444681467),f,r,d[n+2],9,-51403784),m,f,d[n+7],14,1735328473),i,m,d[n+12],20,-1926607734),r=md5_hh(r,i=md5_hh(i,m=md5_hh(m,f,r,i,d[n+5],4,-378558),f,r,d[n+8],11,-2022574463),m,f,d[n+11],16,1839030562),i,m,d[n+14],23,-35309556),r=md5_hh(r,i=md5_hh(i,m=md5_hh(m,f,r,i,d[n+1],4,-1530992060),f,r,d[n+4],11,1272893353),m,f,d[n+7],16,-155497632),i,m,d[n+10],23,-1094730640),r=md5_hh(r,i=md5_hh(i,m=md5_hh(m,f,r,i,d[n+13],4,681279174),f,r,d[n+0],11,-358537222),m,f,d[n+3],16,-722521979),i,m,d[n+6],23,76029189),r=md5_hh(r,i=md5_hh(i,m=md5_hh(m,f,r,i,d[n+9],4,-640364487),f,r,d[n+12],11,-421815835),m,f,d[n+15],16,530742520),i,m,d[n+2],23,-995338651),r=md5_ii(r,i=md5_ii(i,m=md5_ii(m,f,r,i,d[n+0],6,-198630844),f,r,d[n+7],10,1126891415),m,f,d[n+14],15,-1416354905),i,m,d[n+5],21,-57434055),r=md5_ii(r,i=md5_ii(i,m=md5_ii(m,f,r,i,d[n+12],6,1700485571),f,r,d[n+3],10,-1894986606),m,f,d[n+10],15,-1051523),i,m,d[n+1],21,-2054922799),r=md5_ii(r,i=md5_ii(i,m=md5_ii(m,f,r,i,d[n+8],6,1873313359),f,r,d[n+15],10,-30611744),m,f,d[n+6],15,-1560198380),i,m,d[n+13],21,1309151649),r=md5_ii(r,i=md5_ii(i,m=md5_ii(m,f,r,i,d[n+4],6,-145523070),f,r,d[n+11],10,-1120210379),m,f,d[n+2],15,718787259),i,m,d[n+9],21,-343485551),m=safe_add(m,h),f=safe_add(f,t),r=safe_add(r,g),i=safe_add(i,e)}return Array(m,f,r,i)}function md5_cmn(d,_,m,f,r,i){return safe_add(bit_rol(safe_add(safe_add(_,d),safe_add(f,i)),r),m)}function md5_ff(d,_,m,f,r,i,n){return md5_cmn(_&m|~_&f,d,_,r,i,n)}function md5_gg(d,_,m,f,r,i,n){return md5_cmn(_&f|m&~f,d,_,r,i,n)}function md5_hh(d,_,m,f,r,i,n){return md5_cmn(_^m^f,d,_,r,i,n)}function md5_ii(d,_,m,f,r,i,n){return md5_cmn(m^(_|~f),d,_,r,i,n)}function safe_add(d,_){var m=(65535&d)+(65535&_);return(d>>16)+(_>>16)+(m>>16)<<16|65535&m}function bit_rol(d,_){return d<<_|d>>>32-_}
+
+	var result = MD5(value);
+	return result;
+}

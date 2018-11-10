@@ -9,11 +9,9 @@
 /* Begin PBXBuildFile section */
 		16055A651F285264000F3AF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16055A641F285264000F3AF7 /* AppDelegate.swift */; };
 		16055A691F285264000F3AF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16055A681F285264000F3AF7 /* Assets.xcassets */; };
-		C130C9FA213641900077492A /* BILWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = C130C9F9213641900077492A /* BILWebView.m */; };
 		DC12AD871FE04B2E00041E95 /* MHURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC12AD861FE04B2E00041E95 /* MHURLProtocol.swift */; };
 		DCC008111FC095DE005F223C /* DanMuPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC8A10751FC0841E0021FF00 /* DanMuPlayer.framework */; };
 		DCC008121FC095DE005F223C /* DanMuPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DC8A10751FC0841E0021FF00 /* DanMuPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		DCE10F721FA725EC00DF6AAC /* biliModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE10F711FA725EC00DF6AAC /* biliModel.swift */; };
 		DCF7B9FD1FC2A2C600FA6AA0 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = DCF7B9FC1FC2A2C500FA6AA0 /* LICENSE */; };
 /* End PBXBuildFile section */
 
@@ -53,8 +51,6 @@
 		16055A641F285264000F3AF7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		16055A681F285264000F3AF7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		16055A6A1F285264000F3AF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C130C9F8213641900077492A /* BILWebView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BILWebView.h; sourceTree = "<group>"; };
-		C130C9F9213641900077492A /* BILWebView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BILWebView.m; sourceTree = "<group>"; };
 		DC12AD861FE04B2E00041E95 /* MHURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MHURLProtocol.swift; sourceTree = "<group>"; };
 		DC4769251FBC31AA00EC6FDD /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		DC4769271FBC31B500EC6FDD /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -69,7 +65,6 @@
 		DCC007C51FC092A6005F223C /* SGPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SGPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCC007C61FC092A6005F223C /* SGPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SGPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCC007C71FC092A6005F223C /* SGPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SGPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DCE10F711FA725EC00DF6AAC /* biliModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = biliModel.swift; sourceTree = "<group>"; };
 		DCEDB1041FBF48AF006DA75A /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		DCEDB1061FBF48BA006DA75A /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		DCEDB1081FBF48C4006DA75A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -121,9 +116,6 @@
 			children = (
 				DC8A106E1FC0841D0021FF00 /* DanMuPlayer.xcodeproj */,
 				16055A641F285264000F3AF7 /* AppDelegate.swift */,
-				DCE10F711FA725EC00DF6AAC /* biliModel.swift */,
-				C130C9F8213641900077492A /* BILWebView.h */,
-				C130C9F9213641900077492A /* BILWebView.m */,
 				16055A681F285264000F3AF7 /* Assets.xcassets */,
 				16055A6A1F285264000F3AF7 /* Info.plist */,
 				16055A661F285264000F3AF7 /* Supporting Files */,
@@ -209,7 +201,7 @@
 				TargetAttributes = {
 					16055A601F285264000F3AF7 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = J8HDJ8AK6D;
+						DevelopmentTeam = N8JMN6858M;
 						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
 					};
@@ -267,8 +259,6 @@
 			files = (
 				DC12AD871FE04B2E00041E95 /* MHURLProtocol.swift in Sources */,
 				16055A651F285264000F3AF7 /* AppDelegate.swift in Sources */,
-				DCE10F721FA725EC00DF6AAC /* biliModel.swift in Sources */,
-				C130C9FA213641900077492A /* BILWebView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,7 +384,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = J8HDJ8AK6D;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N8JMN6858M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/biliATV",
@@ -402,8 +394,9 @@
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/DanMuPlayer/DanMuPlayer\"";
 				INFOPLIST_FILE = "$(SRCROOT)/biliATV/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.SuiBianGaiGai.biliATV;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SuiBianGaiGai.biliATV1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "biliATV/Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -416,7 +409,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = J8HDJ8AK6D;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N8JMN6858M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/biliATV",
@@ -424,8 +419,9 @@
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/DanMuPlayer/DanMuPlayer\"";
 				INFOPLIST_FILE = "$(SRCROOT)/biliATV/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.SuiBianGaiGai.biliATV;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SuiBianGaiGai.biliATV1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "biliATV/Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};

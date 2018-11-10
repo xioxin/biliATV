@@ -20,7 +20,7 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
     
     var window: UIWindow?
     var appController: TVApplicationController?
-    var wProxy: webProxy!
+//    var wProxy: webProxy!
 //    var player:SGPlayer!
 
 //    var vlc = VLCVideoView();
@@ -35,8 +35,8 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
     
     // tvBaseURL points to a server on your local machine. To create a local server for testing purposes, use the following command inside your project folder from the Terminal app: ruby -run -ehttpd . -p9001. See NSAppTransportSecurity for information on using a non-secure server.
 //    static let tvBaseURL = "https://raw.githubusercontent.com/xioxin/biliATV/master/TVML"
-    static let tvBaseURL = "https://coding.net/u/xin/p/biliATV/git/raw/master/TVML"
-//    static let tvBaseURL = "http://192.168.1.5:80/biliATV/TVML"
+//    static let tvBaseURL = "https://coding.net/u/xin/p/biliATV/git/raw/master/TVML"
+    static let tvBaseURL = "https://raw.githubusercontent.com/xioxin/biliATV/dev/TVML"
     
     static let tvBootURL = "\(AppDelegate.tvBaseURL)/application.js"
 
@@ -65,6 +65,26 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.main.bounds)
 
+//
+        var cookieProperties = [HTTPCookiePropertyKey: String]()
+        cookieProperties[HTTPCookiePropertyKey.name] = "CURRENT_QUALITY" as String
+        cookieProperties[HTTPCookiePropertyKey.value] = "112" as String
+        cookieProperties[HTTPCookiePropertyKey.domain] = ".bilibili.com" as String
+        cookieProperties[HTTPCookiePropertyKey.path] = "/" as String
+        let cookie = HTTPCookie(properties: cookieProperties)
+        HTTPCookieStorage.shared.setCookie(cookie!)
+        
+        
+//
+//        var cookieProperties2 = [HTTPCookiePropertyKey: String]()
+//        cookieProperties2[HTTPCookiePropertyKey.name] = "CURRENT_FNVAL" as String
+//        cookieProperties2[HTTPCookiePropertyKey.value] = "8" as String
+//        cookieProperties2[HTTPCookiePropertyKey.domain] = "https://www.bilibili.com" as String
+//        cookieProperties2[HTTPCookiePropertyKey.path] = "/" as String
+        
+//        let cookie2 = HTTPCookie(properties: cookieProperties2)
+//
+//        HTTPCookieStorage.shared.setCookie(cookie2!)
         // Create the TVApplicationControllerContext for this application and set the properties that will be passed to the `App.onLaunch` function in JavaScript.
         let appControllerContext = TVApplicationControllerContext()
 
@@ -94,9 +114,9 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
         UserDefaults.standard.register(defaults: ["UserAgent": ua])
         UserDefaults.standard.synchronize()
         
-        wProxy = webProxy.init()
+//        wProxy = webProxy.init()
         
-        self.window!.addSubview(wProxy.webview)
+//        self.window!.addSubview(wProxy.webview)
         
         return true
     }
@@ -171,20 +191,20 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
 //        DMPlayer
         DMPlayer.setup(jsContext, controller: appController.navigationController)
       
-        let getAvData : @convention(block) (Int,Int,JSValue ) -> Void = {
-            (aid : Int,page:Int, callback: JSValue ) -> Void in
-            
-            
-//            self.Scallback = callback;
-            self.wProxy.bili.getAvData(aid,page: page){
-                    data in
-                let _data = data;
-                let dataDic = _data._dic;
-                callback.context.objectForKeyedSubscript("setTimeout").call(withArguments: [
-                    callback,0,dataDic])
-                }
-            }
+//        let getAvData : @convention(block) (Int,Int,JSValue ) -> Void = {
+//            (aid : Int,page:Int, callback: JSValue ) -> Void in
         
+            
+////            self.Scallback = callback;
+//            self.wProxy.bili.getAvData(aid,page: page){
+//                    data in
+//                let _data = data;
+//                let dataDic = _data._dic;
+//                callback.context.objectForKeyedSubscript("setTimeout").call(withArguments: [
+//                    callback,0,dataDic])
+//                }
+//            }
+//
         
         let saveUserCookie : @convention(block) () -> Void = {
             () -> Void in
@@ -194,6 +214,9 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
             if let cookies: Array = HTTPCookieStorage.shared.cookies(for: NSURL(string: "https://www.bilibili.com")! as URL)
             {
                 let data: Data = NSKeyedArchiver.archivedData(withRootObject: cookies)
+                
+                print(data)
+                
                 UserDefaults.standard.set(data, forKey: "UserCookie")
                 
                 print("cookie保存成功")
@@ -218,6 +241,7 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
                     for cookie in cookies {
                         HTTPCookieStorage.shared.setCookie(cookie)
                         print("getUserCookie 已设置 \(cookie.name)")
+                        print(cookie);
                     }
                 }else{
                     print("getUserCookie 数据长度为0")
@@ -228,14 +252,27 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
             
         }
         
+        let saveUserSettings : @convention(block) (String, String) -> Void = {
+            (configKey: String, configValue: String) -> Void in
+            UserDefaults.standard.set(configValue, forKey: configKey);
+        }
+        
+        let getUserSettings : @convention(block) (String) -> String = {
+            (configKey: String) -> String in
+
+            let configValue = UserDefaults.standard.string(forKey: configKey);
+            return configValue ?? "";
+        }
         
         
-        
-       
-         self.tvJsContext.setObject(unsafeBitCast(getAvData, to: AnyObject.self), forKeyedSubscript: "getAvData" as (NSCopying & NSObjectProtocol))
+//
+//
+//
+//      self.tvJsContext.setObject(unsafeBitCast(getAvData, to: AnyObject.self), forKeyedSubscript: "getAvData" as (NSCopying & NSObjectProtocol))
         self.tvJsContext.setObject(unsafeBitCast(saveUserCookie, to: AnyObject.self), forKeyedSubscript: "saveUserCookie" as (NSCopying & NSObjectProtocol))
         self.tvJsContext.setObject(unsafeBitCast(getUserCookie, to: AnyObject.self), forKeyedSubscript: "getUserCookie" as (NSCopying & NSObjectProtocol))
-        
+        self.tvJsContext.setObject(unsafeBitCast(saveUserSettings, to: AnyObject.self), forKeyedSubscript: "saveUserSettings"as (NSCopying & NSObjectProtocol))
+        self.tvJsContext.setObject(unsafeBitCast(getUserSettings, to: AnyObject.self), forKeyedSubscript: "getUserSettings"as (NSCopying & NSObjectProtocol))
         
         
         self.tvJsContext.evaluateScript("var ua = '\(ua)';");
@@ -245,37 +282,37 @@ class AppDelegate: UIViewController, UIApplicationDelegate, TVApplicationControl
 
     }
 }
-
-@objc class webProxy: NSObject {
-    var webview:BILWebView!
-    var bili:biliModel!
-    
-    override init() {
-        webview = BILWebView.init()
-        
-        bili = biliModel(webview)
-        let cacheHack:urlCacheHack = urlCacheHack.init()
-        cacheHack.setModel(bili)
-        URLCache.shared = cacheHack
-        
-        URLProtocol.registerClass(MHURLProtocol.self)
-        
-        super.init()
-        
-        webview.setDelegate(self);
-    }
-    
-    @objc public func webViewDidStartLoad(_ webView: BILWebView){
-        return bili!.webViewDidStartLoad(webview)
-    }
-    
-    @objc public func webViewDidFinishLoad(_ webview: BILWebView){
-        return bili!.webViewDidFinishLoad(webview)
-    }
-    
-    @objc public func webView(_ webView: BILWebView, didFailLoadWithError error: Error){
-        return bili!.webViewDidFinishLoad(webview)
-    }
-}
+//
+//@objc class webProxy: NSObject {
+//    var webview:BILWebView!
+//    var bili:biliModel!
+//
+//    override init() {
+//        webview = BILWebView.init()
+//
+//        bili = biliModel(webview)
+//        let cacheHack:urlCacheHack = urlCacheHack.init()
+//        cacheHack.setModel(bili)
+//        URLCache.shared = cacheHack
+//
+//        URLProtocol.registerClass(MHURLProtocol.self)
+//
+//        super.init()
+//
+//        webview.setDelegate(self);
+//    }
+//
+//    @objc public func webViewDidStartLoad(_ webView: BILWebView){
+//        return bili!.webViewDidStartLoad(webview)
+//    }
+//
+//    @objc public func webViewDidFinishLoad(_ webview: BILWebView){
+//        return bili!.webViewDidFinishLoad(webview)
+//    }
+//
+//    @objc public func webView(_ webView: BILWebView, didFailLoadWithError error: Error){
+//        return bili!.webViewDidFinishLoad(webview)
+//    }
+//}
 
 
